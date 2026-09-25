@@ -2,6 +2,14 @@
 
 Concise history. Not a full commit log — one line per meaningful change.
 
+## 2026-09-25
+- Listing-page banners: new `components/ui/page-banner.tsx` on collection, search (`/search`, titled "All Products" with no query) and new-arrivals pages; category image + fallback copy per product family via `features/collections/utils.ts` (moved `getCategoryImage` there from `site/brand.ts`, which re-exports it). Homepage gained `ProductShowcase` grids (`features/products/product-showcase.tsx`): "Amazing Deals" (Vendure collection slug `amazing-deals`, `site/brand.ts`) and "All Products"; both hide when empty. Footer: policy links column, DripFunnel "Powered by" strip, static about/policy pages (`site/legal`).
+- SK Classics rebrand + homepage redesign modelled on skclassical.com: maroon/gold/ivory tokens and Cormorant Garamond display serif (`globals.css`, `locale-layout.tsx`); SK logo in header/footer; hero banner carousel from `public/images/banners`; category tiles using brand imagery in `public/images/categories` (sourced from the brand's own site/public assets); brand story, promise strip, and restyled CTA; footer rebuilt with brand contact details (`src/site/brand.ts`); removed Vendure/Next.js dev links and broken `/vendure.svg`, `/next.svg`, `/dripfunnel-logo.png` references. Translations updated for en/de/hi/tel.
+- Collections: added `getRootCollections` (root-only filter) and `utils.ts` (`getCollectionHref` for empty-slug parents, `formatCollectionName`); nav, mobile nav, footer, and home now show only root collections. `collection/[slug]` `generateStaticParams` now drops empty and duplicate slugs.
+- Env: channel token/site name switched to SK Classics; dev port 3001 → 9001; `.env.local` sets `VENDURE_SHOP_API_URL` to `ecom-api` because `store-dev` has no SK Classical channel.
+- New Arrivals page `/new-arrivals`: new `GetNewArrivalsQuery` (additive; `products` sorted by `createdAt DESC`), linked from the desktop More menu and the mobile nav. `ProductCardView` was extracted from `ProductCard` so non-search product lists can reuse the card.
+- Build unblocked once products were added to the SK Classical channel (7 products, 6 search-indexed); `npm run build` passes. New Arrivals skips variant-less products, since they are not search-indexed and get no prerendered product page.
+
 ## 2026-09-04
 - CI: enabled, then same-day disabled (commented out), the CloudFront cache-invalidation step in the S3 deploy workflow (`.github/workflows/deploy-s3.yml`).
 

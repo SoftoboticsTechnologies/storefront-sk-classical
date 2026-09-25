@@ -29,18 +29,20 @@ function toSearchParamsRecord(searchParams: URLSearchParams): {[key: string]: st
     return record;
 }
 
-function fetchCollectionProducts(collectionSlug: string, searchParamsString: string, locale: string): Promise<SearchProductsResult> {
+function fetchCollectionProducts(collectionSlug: string, collectionSlugs: string[] | undefined, searchParamsString: string, locale: string): Promise<SearchProductsResult> {
     const record = toSearchParamsRecord(new URLSearchParams(searchParamsString));
 
     return getActiveCurrencyCode().then((currencyCode) =>
         query(SearchProductsQuery, {
-            input: buildSearchInput({searchParams: record, collectionSlug}),
+            input: buildSearchInput({searchParams: record, collectionSlug, collectionSlugs}),
         }, {languageCode: locale, currencyCode})
     );
 }
 
 interface CollectionResultsProps {
     collectionSlug: string;
+    /** Sub-collection slugs to list together — set for a grouping-only parent's page. */
+    collectionSlugs?: string[];
     /**
      * Default (unfiltered, page 1) listing already fetched server-side at
      * build time — used as the initial result so the statically-exported
@@ -51,8 +53,10 @@ interface CollectionResultsProps {
     initialProducts?: ResultOf<typeof SearchProductsQuery>;
 }
 
-export function CollectionResults({collectionSlug, initialProducts}: CollectionResultsProps) {
+export function CollectionResults({collectionSlug, collectionSlugs, initialProducts}: CollectionResultsProps) {
     const locale = useLocale();
+    // Stable dependency for the effect below (a new array arrives on every render).
+    const collectionSlugsKey = collectionSlugs?.join(',') ?? '';
     // Defaults to '' (no filters/sort/page) so the first render — including
     // the statically-exported HTML — matches the build-time `initialProducts`
     // default listing. SearchParamsSync reports the real value post-hydration
@@ -66,8 +70,9 @@ export function CollectionResults({collectionSlug, initialProducts}: CollectionR
 
     useEffect(() => {
         if (!hasSyncedParams) return;
-        setResultPromise(fetchCollectionProducts(collectionSlug, searchParamsString, locale));
-    }, [collectionSlug, searchParamsString, locale, hasSyncedParams]);
+        const slugs = collectionSlugsKey ? collectionSlugsKey.split(',') : undefined;
+        setResultPromise(fetchCollectionProducts(collectionSlug, slugs, searchParamsString, locale));
+    }, [collectionSlug, collectionSlugsKey, searchParamsString, locale, hasSyncedParams]);
 
     const page = getCurrentPage(toSearchParamsRecord(new URLSearchParams(searchParamsString)));
 

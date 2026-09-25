@@ -17,6 +17,11 @@
     "greeting": "Hallo, {name}",
     "shoppingCart": "Warenkorb",
     "switchLanguage": "Sprache wechseln",
-    "switchCurrency": "Währung wechseln"
+    "switchCurrency": "Währung wechseln",
+    "home": "Startseite",
+    "shop": "Shop",
+    "more": "Mehr",
+    "newArrivals": "Neuheiten",
+    "allProducts": "Alle Produkte"
   }
 }

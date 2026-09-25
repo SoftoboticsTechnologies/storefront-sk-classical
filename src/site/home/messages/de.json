@@ -1,46 +1,63 @@
 {
   "Hero": {
-    "eyebrow": "Neue Kollektion",
-    "titlePrefix": "Entdecke",
-    "titleFallback": "Entdecke hochwertige Produkte",
-    "subtitle": "Sorgfältig kuratierte Produkte, präsentiert mit der Sorgfalt, die sie verdienen.",
-    "shopNow": "Jetzt einkaufen",
-    "viewAllProducts": "Alle Produkte anzeigen"
+    "region": "Ausgewählte Kollektionen",
+    "previous": "Vorherige Folie",
+    "next": "Nächste Folie",
+    "goToSlide": "Zu Folie {n}",
+    "slideCostume": "Bharatanatyam-Kostümset für Damen aus Seidenmischung in Kastanienrot und Gold — jetzt shoppen",
+    "slideGhungroo": "5-reihige Ghungroo-Fußkette aus Messing und Samt in Kastanienrot mit verstellbarem Riemen — jetzt shoppen",
+    "slideJada": "Traditionelles Jada-Set für Damen mit Kunstperlen, mehrfarbig — jetzt shoppen"
   },
   "Home": {
-    "pageTitle": "Ihr One-Stop-Shop",
-    "description": "Entdecken Sie hochwertige Produkte zu wettbewerbsfähigen Preisen. Jetzt einkaufen und die besten Angebote für Elektronik, Mode, Haushaltswaren und mehr finden.",
-    "ogDescription": "Entdecken Sie hochwertige Produkte zu wettbewerbsfähigen Preisen. Jetzt die besten Angebote sichern.",
-    "whyShopWithUs": "Warum bei uns einkaufen",
+    "pageTitle": "Kostüme, Ghungroo & Schmuck für klassischen Tanz",
+    "description": "Authentische Bharatanatyam-Kostüme, Ghungroo, Tempelschmuck und Tanzaccessoires von Shri Kalaivani — gefertigt für die klassische Bühne.",
+    "ogDescription": "Authentische Bharatanatyam-Kostüme, Ghungroo, Tempelschmuck und Tanzaccessoires.",
+    "whyShopWithUs": "Das SK-Classics-Versprechen",
     "features": {
-      "highQuality": {
-        "title": "Hohe Qualität",
-        "description": "Sorgfältig ausgewählte Premiumprodukte für Sie"
+      "authentic": {
+        "title": "Echtes Handwerk",
+        "description": "Traditionelle Designs mit Details im Tempelstil"
       },
-      "bestPrices": {
-        "title": "Beste Preise",
-        "description": "Wettbewerbsfähige Preise für alle unsere Produkte"
+      "stageReady": {
+        "title": "Bühnenbereit",
+        "description": "Für Probe, Vorführung und Auftritt gemacht"
       },
-      "fastDelivery": {
-        "title": "Schnelle Lieferung",
-        "description": "Schneller und zuverlässiger Versand weltweit"
+      "secureCheckout": {
+        "title": "Sicherer Checkout",
+        "description": "Sicher bezahlen über vertrauenswürdige Zahlungspartner"
+      },
+      "support": {
+        "title": "Persönliche Beratung",
+        "description": "Sprechen Sie uns per Telefon oder WhatsApp an"
       }
     },
     "categoryDiscovery": {
-      "title": "Nach Kategorie einkaufen"
-    },
-    "editorialBanner": {
-      "eyebrow": "Redaktionstipp",
-      "cta": "Kollektion entdecken",
-      "fallbackDescription": "Eine kuratierte Auswahl unserer Favoriten, ausgewählt für ihre Qualität und ihr Design."
+      "eyebrow": "Nach Kategorie",
+      "title": "Gefertigt für die klassische Bühne",
+      "explore": "Entdecken"
     },
     "shopByCategory": {
-      "title": "Unsere Kollektionen entdecken"
+      "eyebrow": "Das Sortiment",
+      "title": "Finden Sie genau das Richtige"
+    },
+    "brandStory": {
+      "eyebrow": "Unsere Geschichte",
+      "title": "Tradition in jedem Faden,",
+      "titleAccent": "Anmut in jeder Bewegung.",
+      "body1": "Shri Kalaivani kleidet klassische Tänzerinnen und Tänzer in die Farben und das Handwerk der Tempelbühne — edle Seide, klangvolle Ghungroo und glänzender Schmuck.",
+      "body2": "Vom ersten Übungssari bis zum kompletten Arangetram-Ensemble wird jedes Stück so ausgewählt, dass es die Kunstform ehrt und auf der Bühne so schön wirkt, wie es aussieht.",
+      "cta": "Kollektion entdecken",
+      "imageAlt": "Bharatanatyam-Tänzerin in rot-weiß-goldenem Kostüm mit Tempelschmuck"
     },
     "ctaBanner": {
-      "title": "Werde Teil der Community",
-      "subtitle": "Erstellen Sie ein Konto für einen schnelleren Checkout, Bestellverfolgung und frühzeitigen Zugang zu Neuheiten.",
+      "eyebrow": "Willkommen bei SK Classics",
+      "title": "Ihre Bühne, wunderschön vorbereitet",
+      "subtitle": "Erstellen Sie ein Konto für schnelleren Checkout, Sendungsverfolgung und gespeicherte Adressen.",
       "cta": "Konto erstellen"
+    },
+    "deals": {
+      "eyebrow": "Zeitlich begrenzte Angebote",
+      "title": "Tolle Angebote"
     }
   }
 }

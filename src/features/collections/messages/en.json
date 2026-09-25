@@ -2,6 +2,17 @@
   "Collection": {
     "home": "Home",
     "collectionNotFound": "Collection Not Found",
-    "browseCollectionAt": "Browse our {name} collection at {siteName}"
+    "browseCollectionAt": "Browse our {name} collection at {siteName}",
+    "banner": {
+      "eyebrow": "Collection",
+      "cta": "Browse products",
+      "costumes": "Stage-ready Bharatanatyam costumes and practice sarees in rich silks with traditional temple borders.",
+      "ghungroo": "Resonant brass ghungroo in 3, 4 and 5 lines, made for practice, recital and performance.",
+      "jewellery": "Temple jewellery, ornament sets and jhumkas that complete every classical look.",
+      "accessories": "Hair flowers, jada sets and finishing touches for the classical stage.",
+      "default": "Browse our {name} range at {siteName}."
+    },
+    "subcategories": "Subcategories",
+    "allIn": "All {name}"
   }
 }

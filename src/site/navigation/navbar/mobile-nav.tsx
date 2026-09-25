@@ -2,7 +2,7 @@
 
 import {useState} from 'react';
 import { Link } from '@/platform/i18n/navigation';
-import {Menu, Search, ShoppingBag, User, Package, MapPin} from 'lucide-react';
+import {Menu, Search, ShoppingBag, Sparkles, User, Package, MapPin} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {SearchOverlay} from '@/site/navigation/navbar/search-overlay';
 import {
@@ -20,6 +20,7 @@ import {
     AccordionContent,
 } from '@/components/ui/accordion';
 import {useTranslations} from 'next-intl';
+import {formatCollectionName, getCollectionHref} from '@/features/collections/utils';
 
 interface Collection {
     id: string;
@@ -49,7 +50,7 @@ export function MobileNav({collections}: MobileNavProps) {
     return (
         <>
         <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger render={<Button variant="ghost" size="icon" className="md:hidden" />}>
+            <SheetTrigger render={<Button variant="ghost" size="icon" className="xl:hidden" />}>
                 <Menu className="size-5" />
                 <span className="sr-only">{t('openMenu')}</span>
             </SheetTrigger>
@@ -84,6 +85,19 @@ export function MobileNav({collections}: MobileNavProps) {
                             <ShoppingBag className="h-5 w-5" />
                             {t('shopAll')}
                         </SheetClose>
+                        <SheetClose
+                            render={
+                                <Link
+                                    href="/new-arrivals"
+                                    className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-md hover:bg-accent transition-colors"
+                                />
+                            }
+                            nativeButton={false}
+                            onClick={handleLinkClick}
+                        >
+                            <Sparkles className="h-5 w-5" />
+                            {t('newArrivals')}
+                        </SheetClose>
                     </div>
 
                     {/* Collections */}
@@ -98,10 +112,10 @@ export function MobileNav({collections}: MobileNavProps) {
                                     if (children.length === 0) {
                                         return (
                                             <SheetClose
-                                                key={collection.slug}
+                                                key={collection.id}
                                                 render={
                                                     <Link
-                                                        href={`/collection/${collection.slug}`}
+                                                        href={getCollectionHref(collection)}
                                                         prefetch={false}
                                                         className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-md hover:bg-accent transition-colors"
                                                     />
@@ -109,33 +123,35 @@ export function MobileNav({collections}: MobileNavProps) {
                                                 nativeButton={false}
                                                 onClick={handleLinkClick}
                                             >
-                                                {collection.name}
+                                                {formatCollectionName(collection.name)}
                                             </SheetClose>
                                         );
                                     }
 
                                     return (
-                                        <Accordion key={collection.slug}>
-                                            <AccordionItem value={collection.slug}>
+                                        <Accordion key={collection.id}>
+                                            <AccordionItem value={collection.id}>
                                                 <AccordionTrigger className="px-3 py-2.5 hover:no-underline">
-                                                    {collection.name}
+                                                    {formatCollectionName(collection.name)}
                                                 </AccordionTrigger>
                                                 <AccordionContent>
                                                     <div className="flex flex-col gap-0.5 pl-3">
-                                                        <SheetClose
-                                                            render={
-                                                                <Link
-                                                                    href={`/collection/${collection.slug}`}
-                                                                    prefetch={false}
-                                                                    className="px-3 py-2 text-sm rounded-md hover:bg-accent transition-colors"
-                                                                />
-                                                            }
-                                                            nativeButton={false}
-                                                            onClick={handleLinkClick}
-                                                        >
-                                                            {t('viewAll')}
-                                                        </SheetClose>
-                                                        {children.map((child) => (
+                                                        {collection.slug && (
+                                                            <SheetClose
+                                                                render={
+                                                                    <Link
+                                                                        href={`/collection/${collection.slug}`}
+                                                                        prefetch={false}
+                                                                        className="px-3 py-2 text-sm rounded-md hover:bg-accent transition-colors"
+                                                                    />
+                                                                }
+                                                                nativeButton={false}
+                                                                onClick={handleLinkClick}
+                                                            >
+                                                                {t('viewAll')}
+                                                            </SheetClose>
+                                                        )}
+                                                        {children.filter((child) => child.slug).map((child) => (
                                                             <SheetClose
                                                                 key={child.slug}
                                                                 render={
@@ -148,7 +164,7 @@ export function MobileNav({collections}: MobileNavProps) {
                                                                 nativeButton={false}
                                                                 onClick={handleLinkClick}
                                                             >
-                                                                {child.name}
+                                                                {formatCollectionName(child.name)}
                                                             </SheetClose>
                                                         ))}
                                                     </div>

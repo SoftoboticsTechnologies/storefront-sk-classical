@@ -11,7 +11,6 @@ interface ProductCardProps {
 }
 
 export function ProductCard({product: productProp, preload}: ProductCardProps) {
-    const t = useTranslations('Product');
     const product = readFragment(ProductCardFragment, productProp);
     const priceWithTax = product.priceWithTax;
     const initialPrice = priceWithTax
@@ -21,8 +20,31 @@ export function ProductCard({product: productProp, preload}: ProductCardProps) {
         : undefined;
 
     return (
+        <ProductCardView
+            slug={product.slug}
+            name={product.productName}
+            imageUrl={product.productAsset?.preview}
+            initialPrice={initialPrice}
+            preload={preload}
+        />
+    );
+}
+
+interface ProductCardViewProps {
+    slug: string;
+    name: string;
+    imageUrl?: string;
+    initialPrice?: {min: number; max: number; currencyCode: string};
+    preload?: boolean;
+}
+
+/** Card markup shared by search-result cards and other product lists (e.g. New Arrivals). */
+export function ProductCardView({slug, name, imageUrl, initialPrice, preload}: ProductCardViewProps) {
+    const t = useTranslations('Product');
+
+    return (
         <Link
-            href={`/product/${product.slug}`}
+            href={`/product/${slug}`}
             // Next.js 16's default Link prefetch (client segment cache) requests
             // RSC payload paths that don't match what static export writes to
             // disk for this route family — a confirmed upstream bug affecting
@@ -34,10 +56,10 @@ export function ProductCard({product: productProp, preload}: ProductCardProps) {
             className="group block bg-card rounded-xl overflow-hidden border border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
         >
             <div className="aspect-square relative bg-muted overflow-hidden">
-                {product.productAsset ? (
+                {imageUrl ? (
                     <Image
-                        src={product.productAsset.preview}
-                        alt={product.productName}
+                        src={imageUrl}
+                        alt={name}
                         fill
                         preload={preload}
                         className="object-cover group-hover:scale-105 group-hover:opacity-90 transition-all duration-500"
@@ -51,10 +73,10 @@ export function ProductCard({product: productProp, preload}: ProductCardProps) {
             </div>
             <div className="p-4 space-y-2">
                 <h3 className="font-medium leading-snug line-clamp-2 group-hover:text-primary transition-colors">
-                    {product.productName}
+                    {name}
                 </h3>
                 <p className="text-lg font-bold tracking-tight">
-                    <ProductCardPrice slug={product.slug} initial={initialPrice} />
+                    <ProductCardPrice slug={slug} initial={initialPrice} />
                 </p>
             </div>
         </Link>

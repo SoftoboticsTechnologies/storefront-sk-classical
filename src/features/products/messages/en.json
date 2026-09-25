@@ -47,6 +47,14 @@
         "question": "Do you offer international shipping?",
         "answer": "Yes! We ship to over 50 countries worldwide. International shipping rates and delivery times vary by location. You can see the exact cost at checkout before completing your purchase."
       }
+    },
+    "newArrivals": {
+      "eyebrow": "Just In",
+      "title": "New Arrivals",
+      "description": "The latest costumes, ghungroo, jewellery and accessories added to our collection.",
+      "metaDescription": "Shop the newest arrivals at {siteName}.",
+      "empty": "New pieces are on their way — check back soon.",
+      "cta": "Browse products"
     }
   }
 }

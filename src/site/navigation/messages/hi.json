@@ -17,6 +17,11 @@
     "greeting": "नमस्ते, {name}",
     "shoppingCart": "शॉपिंग कार्ट",
     "switchLanguage": "भाषा बदलें",
-    "switchCurrency": "मुद्रा बदलें"
+    "switchCurrency": "मुद्रा बदलें",
+    "home": "होम",
+    "shop": "शॉप",
+    "more": "और",
+    "newArrivals": "नए उत्पाद",
+    "allProducts": "सभी उत्पाद"
   }
 }

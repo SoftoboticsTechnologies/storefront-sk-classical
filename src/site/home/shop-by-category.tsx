@@ -1,63 +1,50 @@
-import Image from "next/image";
 import { Link } from '@/platform/i18n/navigation';
 import {getTranslations} from 'next-intl/server';
 import {getRouteLocale} from '@/platform/i18n/server';
-import {getTopCollections} from '@/features/collections/data';
+import {getRootCollections} from '@/features/collections/data';
+import {formatCollectionName, getCollectionHref} from '@/features/collections/utils';
+import {SectionHeading} from '@/site/home/section-heading';
 
+/** Subcategory index: every root collection with its linkable children as chips. */
 export async function ShopByCategory() {
     const locale = await getRouteLocale();
     const t = await getTranslations({locale, namespace: 'Home'});
-    const collections = await getTopCollections(locale);
+    const collections = await getRootCollections(locale);
+    const groups = collections
+        .map((collection) => ({collection, children: (collection.children ?? []).filter((child) => child.slug)}))
+        .filter((group) => group.children.length > 0);
 
-    if (collections.length === 0) {
+    if (groups.length === 0) {
         return null;
     }
 
     return (
-        <section className="py-12 md:py-16 bg-muted/30">
+        <section className="py-16 md:py-24 bg-secondary/60">
             <div className="container mx-auto px-4">
-                <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-8">
-                    {t('shopByCategory.title')}
-                </h2>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {collections.map((collection) => (
-                        <div key={collection.slug} className="bg-card rounded-xl border border-border overflow-hidden">
-                            <Link
-                                href={`/collection/${collection.slug}`}
-                                // See product-card.tsx: default prefetch hits a Next.js 16
-                                // static-export bug (vercel/next.js#85374).
-                                prefetch={false}
-                                className="group relative block aspect-16/9 bg-muted overflow-hidden"
-                            >
-                                {collection.featuredAsset?.preview ? (
-                                    <Image
-                                        src={collection.featuredAsset.preview}
-                                        alt=""
-                                        fill
-                                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                    />
-                                ) : null}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                                <span className="absolute bottom-4 left-4 text-lg font-semibold text-white">
-                                    {collection.name}
-                                </span>
-                            </Link>
-                            {collection.children && collection.children.length > 0 && (
-                                <ul className="p-4 flex flex-wrap gap-x-4 gap-y-2">
-                                    {collection.children.map((child) => (
-                                        <li key={child.slug}>
-                                            <Link
-                                                href={`/collection/${child.slug}`}
-                                                prefetch={false}
-                                                className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                                            >
-                                                {child.name}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
+                <SectionHeading eyebrow={t('shopByCategory.eyebrow')} title={t('shopByCategory.title')} />
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {groups.map(({collection, children}) => (
+                        <div key={collection.id} className="rounded-lg border border-gold/30 bg-card p-6">
+                            <h3 className="font-serif text-2xl font-semibold mb-4">
+                                <Link href={getCollectionHref(collection)} prefetch={false} className="hover:text-primary transition-colors">
+                                    {formatCollectionName(collection.name)}
+                                </Link>
+                            </h3>
+                            <ul className="flex flex-wrap gap-2">
+                                {children.map((child) => (
+                                    <li key={child.id}>
+                                        <Link
+                                            href={`/collection/${child.slug}`}
+                                            // See product-card.tsx: default prefetch hits a Next.js 16
+                                            // static-export bug (vercel/next.js#85374).
+                                            prefetch={false}
+                                            className="inline-block rounded-full border border-border px-3.5 py-1.5 text-sm text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                                        >
+                                            {formatCollectionName(child.name)}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     ))}
                 </div>

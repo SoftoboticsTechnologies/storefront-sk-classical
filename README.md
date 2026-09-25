@@ -82,7 +82,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
+Open [http://localhost:9001](http://localhost:9001) with your browser to see the result.
 
 `npm run dev` (or `npm start`) is the live local development server: save a
 storefront change and Next.js refreshes it without rebuilding `out/`. The S3

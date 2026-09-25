@@ -1,6 +1,7 @@
 import {query} from '@/platform/vendure/api';
 import {ResultOf} from '@/platform/vendure/graphql';
 import {GetTopCollectionsQuery} from './graphql';
+import {getCollectionPathSlug} from './utils';
 
 // Page size used while enumerating the full catalog at build time.
 const COLLECTION_PAGE_SIZE = 100;
@@ -33,4 +34,30 @@ export async function getTopCollections(locale: string): Promise<TopCollection[]
     }
 
     return items;
+}
+
+/**
+ * Resolves a `/collection/[slug]` param to a grouping-only parent (empty
+ * Vendure slug) whose page slug is derived from its name. Real slugs always
+ * win, so this returns undefined whenever a collection owns `slug`.
+ */
+export async function getGroupCollection(locale: string, slug: string): Promise<TopCollection | undefined> {
+    const collections = await getTopCollections(locale);
+    if (collections.some((collection) => collection.slug === slug)) {
+        return undefined;
+    }
+    return collections.find((collection) => !collection.slug && getCollectionPathSlug(collection) === slug);
+}
+
+/**
+ * Root collections only. `getTopCollections` returns every collection flat
+ * (children appear both nested and as their own items), so drop anything that
+ * is listed as another collection's child.
+ */
+export async function getRootCollections(locale: string): Promise<TopCollection[]> {
+    const collections = await getTopCollections(locale);
+    const childIds = new Set(
+        collections.flatMap((collection) => collection.children?.map((child) => child.id) ?? []),
+    );
+    return collections.filter((collection) => !childIds.has(collection.id));
 }

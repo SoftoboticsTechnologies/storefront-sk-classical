@@ -17,6 +17,10 @@
     "resultsFor": "Suchergebnisse für \"{query}\"",
     "resultsTitle": "Suchergebnisse für \"{query}\"",
     "metaDescription": "Produkte für \"{query}\" bei {siteName} finden",
-    "metaCatalogDescription": "Durchsuchen Sie unseren Produktkatalog bei {siteName}"
+    "metaCatalogDescription": "Durchsuchen Sie unseren Produktkatalog bei {siteName}",
+    "allProducts": "Alle Produkte",
+    "bannerEyebrow": "Shop",
+    "bannerCta": "Produkte ansehen",
+    "bannerDescription": "Kostüme, Ghungroo, Tempelschmuck und Accessoires – alles für die klassische Bühne an einem Ort."
   }
 }

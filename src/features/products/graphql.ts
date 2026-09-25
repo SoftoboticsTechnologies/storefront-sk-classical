@@ -74,3 +74,26 @@ export const GetProductDetailQuery = graphql(`
         }
     }
 `);
+
+// Newest products first. Search has no date sort, so this uses the product
+// list, which can sort by `createdAt`.
+export const GetNewArrivalsQuery = graphql(`
+    query GetNewArrivals($take: Int) {
+        products(options: {take: $take, sort: {createdAt: DESC}}) {
+            items {
+                id
+                name
+                slug
+                featuredAsset {
+                    id
+                    preview
+                }
+                variants {
+                    id
+                    priceWithTax
+                    currencyCode
+                }
+            }
+        }
+    }
+`);

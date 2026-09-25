@@ -1,46 +1,63 @@
 {
   "Hero": {
-    "eyebrow": "New Collection",
-    "titlePrefix": "Discover",
-    "titleFallback": "Discover Quality Products",
-    "subtitle": "Thoughtfully curated products, presented with the care they deserve.",
-    "shopNow": "Shop Now",
-    "viewAllProducts": "View All Products"
+    "region": "Featured collections",
+    "previous": "Previous slide",
+    "next": "Next slide",
+    "goToSlide": "Go to slide {n}",
+    "slideCostume": "Maroon and gold silk blend Bharatanatyam costume set for women — shop now",
+    "slideGhungroo": "Maroon brass velvet 5-line ghungroo anklet with adjustable strap — shop now",
+    "slideJada": "Multicolour alloy artificial pearl traditional jada set for women — shop now"
   },
   "Home": {
-    "pageTitle": "Your One-Stop Shop",
-    "description": "Discover high-quality products at competitive prices. Shop now for the best deals on electronics, fashion, home goods, and more.",
-    "ogDescription": "Discover high-quality products at competitive prices. Shop now for the best deals.",
-    "whyShopWithUs": "Why Shop With Us",
+    "pageTitle": "Classical Dance Costumes, Ghungroo & Jewellery",
+    "description": "Shop authentic Bharatanatyam costumes, ghungroo, temple jewellery and dance accessories from Shri Kalaivani — crafted for the classical stage.",
+    "ogDescription": "Authentic Bharatanatyam costumes, ghungroo, temple jewellery and dance accessories.",
+    "whyShopWithUs": "The SK Classics promise",
     "features": {
-      "highQuality": {
-        "title": "High Quality",
-        "description": "Premium products carefully selected for you"
+      "authentic": {
+        "title": "Authentic Craft",
+        "description": "Traditional designs with temple-style detailing"
       },
-      "bestPrices": {
-        "title": "Best Prices",
-        "description": "Competitive pricing on all our products"
+      "stageReady": {
+        "title": "Stage Ready",
+        "description": "Made for rehearsal, recital and performance"
       },
-      "fastDelivery": {
-        "title": "Fast Delivery",
-        "description": "Quick and reliable shipping worldwide"
+      "secureCheckout": {
+        "title": "Secure Checkout",
+        "description": "Pay safely through trusted payment partners"
+      },
+      "support": {
+        "title": "Personal Support",
+        "description": "Talk to us on phone or WhatsApp"
       }
     },
     "categoryDiscovery": {
-      "title": "Shop by Category"
-    },
-    "editorialBanner": {
-      "eyebrow": "Editor's Pick",
-      "cta": "Explore the collection",
-      "fallbackDescription": "A curated edit of our favorite pieces, chosen for their quality and design."
+      "eyebrow": "Shop by Category",
+      "title": "Crafted for the Classical Stage",
+      "explore": "Explore"
     },
     "shopByCategory": {
-      "title": "Browse Our Collections"
+      "eyebrow": "Explore the Range",
+      "title": "Find Exactly What You Need"
+    },
+    "brandStory": {
+      "eyebrow": "Our Story",
+      "title": "Tradition in every thread,",
+      "titleAccent": "grace in every move.",
+      "body1": "Shri Kalaivani dresses classical dancers in the colours and craft of the temple stage — rich silks, resonant ghungroo and gleaming ornaments.",
+      "body2": "From a first practice saree to a full arangetram ensemble, every piece is chosen to honour the art form and to perform as beautifully as it looks.",
+      "cta": "Explore the collection",
+      "imageAlt": "Bharatanatyam dancer in a red, white and gold costume with temple jewellery"
     },
     "ctaBanner": {
-      "title": "Join the Community",
-      "subtitle": "Create an account for a faster checkout, order tracking, and early access to new arrivals.",
+      "eyebrow": "Join SK Classics",
+      "title": "Your stage, beautifully prepared",
+      "subtitle": "Create an account for faster checkout, order tracking and saved addresses.",
       "cta": "Create Account"
+    },
+    "deals": {
+      "eyebrow": "Limited-time offers",
+      "title": "Amazing Deals"
     }
   }
 }

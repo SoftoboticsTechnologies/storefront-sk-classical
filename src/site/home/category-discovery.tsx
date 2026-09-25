@@ -1,50 +1,62 @@
 import Image from "next/image";
+import {ArrowRight} from "lucide-react";
 import { Link } from '@/platform/i18n/navigation';
 import {getTranslations} from 'next-intl/server';
 import {getRouteLocale} from '@/platform/i18n/server';
-import {getTopCollections} from '@/features/collections/data';
+import {getRootCollections} from '@/features/collections/data';
+import {formatCollectionName, getCollectionHref} from '@/features/collections/utils';
+import {getCategoryImage} from '@/site/brand';
+import {SectionHeading} from '@/site/home/section-heading';
 
 export async function CategoryDiscovery() {
     const locale = await getRouteLocale();
     const t = await getTranslations({locale, namespace: 'Home'});
-    const collections = await getTopCollections(locale);
+    const collections = await getRootCollections(locale);
 
     if (collections.length === 0) {
         return null;
     }
 
     return (
-        <section className="py-12 md:py-16">
+        <section className="py-16 md:py-24">
             <div className="container mx-auto px-4">
-                <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-8">
-                    {t('categoryDiscovery.title')}
-                </h2>
-                <div className="flex gap-6 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-4 lg:grid-cols-6 md:gap-6">
-                    {collections.map((collection) => (
-                        <Link
-                            key={collection.slug}
-                            href={`/collection/${collection.slug}`}
-                            // See product-card.tsx: default prefetch hits a Next.js 16
-                            // static-export bug (vercel/next.js#85374).
-                            prefetch={false}
-                            className="group flex flex-col items-center gap-3 shrink-0 w-24 md:w-auto"
-                        >
-                            <div className="relative size-24 rounded-full overflow-hidden bg-muted border border-border transition-shadow group-hover:shadow-lg">
-                                {collection.featuredAsset?.preview ? (
+                <SectionHeading eyebrow={t('categoryDiscovery.eyebrow')} title={t('categoryDiscovery.title')} />
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                    {collections.map((collection) => {
+                        const image = getCategoryImage(collection);
+                        return (
+                            <Link
+                                key={collection.id}
+                                href={getCollectionHref(collection)}
+                                // See product-card.tsx: default prefetch hits a Next.js 16
+                                // static-export bug (vercel/next.js#85374).
+                                prefetch={false}
+                                className="group relative block aspect-3/4 overflow-hidden rounded-lg bg-muted ring-1 ring-gold/25"
+                            >
+                                {image && (
                                     <Image
-                                        src={`${collection.featuredAsset.preview}?preset=thumb`}
+                                        src={image.src}
                                         alt=""
                                         fill
-                                        className="object-cover transition-transform duration-300 group-hover:scale-110"
-                                        sizes="96px"
+                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                        style={image.position ? {objectPosition: image.position} : undefined}
+                                        sizes="(max-width: 1024px) 50vw, 25vw"
                                     />
-                                ) : null}
-                            </div>
-                            <span className="text-sm font-medium text-center line-clamp-1 group-hover:text-primary transition-colors">
-                                {collection.name}
-                            </span>
-                        </Link>
-                    ))}
+                                )}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent" />
+                                <div className="absolute inset-2 rounded-md border border-transparent transition-colors duration-500 group-hover:border-gold/60" />
+                                <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 text-center">
+                                    <h3 className="font-serif text-2xl md:text-3xl font-semibold text-white">
+                                        {formatCollectionName(collection.name)}
+                                    </h3>
+                                    <span className="mt-2 inline-flex items-center gap-1.5 text-[0.7rem] md:text-xs uppercase tracking-[0.2em] text-gold">
+                                        {t('categoryDiscovery.explore')}
+                                        <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
+                                    </span>
+                                </div>
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
         </section>

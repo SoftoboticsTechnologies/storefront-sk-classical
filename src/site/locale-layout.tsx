@@ -2,7 +2,7 @@ import type {Metadata, Viewport} from "next";
 import Script from "next/script";
 import {locale as rootLocale} from "next/root-params";
 import {hasLocale, NextIntlClientProvider} from "next-intl";
-import {Geist, Geist_Mono} from "next/font/google";
+import {Cormorant_Garamond, Geist, Geist_Mono} from "next/font/google";
 import {getMessages, getTranslations, setRequestLocale} from "next-intl/server";
 import {notFound} from "next/navigation";
 import {routing} from "@/platform/i18n/routing";
@@ -11,14 +11,21 @@ import {getRouteLocale} from "@/platform/i18n/server";
 import {Toaster} from "@/components/ui/sonner";
 import {Navbar} from '@/site/navigation/navbar';
 import {Footer} from "@/site/footer";
-import {AnnouncementBar} from "@/site/announcement-bar";
 import {ThemeProvider} from "@/site/providers/theme-provider";
 import {AuthProvider} from "@/features/authentication/auth-context";
+import {AnnouncementBar} from "@/site/announcement-bar";
 import {SITE_NAME, SITE_URL} from "@/config/metadata";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
     subsets: ["latin"],
+});
+
+const cormorant = Cormorant_Garamond({
+    variable: "--font-cormorant",
+    subsets: ["latin"],
+    weight: ["400", "500", "600", "700"],
+    style: ["normal", "italic"],
 });
 
 const geistMono = Geist_Mono({
@@ -50,6 +57,15 @@ export async function generateMetadata(): Promise<Metadata> {
         twitter: {
             card: "summary_large_image",
         },
+        // favicon.svg is omitted on purpose: it embeds a ~1.4 MB raster.
+        icons: {
+            icon: [
+                {url: "/favicon/favicon.ico", sizes: "any"},
+                {url: "/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png"},
+            ],
+            apple: {url: "/favicon/apple-touch-icon.png", sizes: "180x180"},
+        },
+        manifest: "/favicon/site.webmanifest",
         robots: {
             index: true,
             follow: true,
@@ -74,8 +90,8 @@ export const viewport: Viewport = {
     initialScale: 1,
     maximumScale: 5,
     themeColor: [
-        {media: "(prefers-color-scheme: light)", color: "#ffffff"},
-        {media: "(prefers-color-scheme: dark)", color: "#000000"},
+        {media: "(prefers-color-scheme: light)", color: "#fbf8f1"},
+        {media: "(prefers-color-scheme: dark)", color: "#1c1210"},
     ],
 };
 
@@ -92,11 +108,12 @@ export default async function LocaleLayout({children}: {children: React.ReactNod
     return (
         <html lang={locale} data-scroll-behavior="smooth" suppressHydrationWarning>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
+                className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} antialiased flex flex-col min-h-screen`}
             >
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <ThemeProvider>
                         <AuthProvider>
+                            {/* Scrolls away; only the nav row below is sticky. */}
                             <AnnouncementBar />
                             <Navbar />
                             {children}

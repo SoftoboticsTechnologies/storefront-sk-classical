@@ -17,6 +17,11 @@
     "greeting": "Hi, {name}",
     "shoppingCart": "Shopping Cart",
     "switchLanguage": "Switch language",
-    "switchCurrency": "Switch currency"
+    "switchCurrency": "Switch currency",
+    "home": "Home",
+    "shop": "Shop",
+    "more": "More",
+    "newArrivals": "New Arrivals",
+    "allProducts": "All Products"
   }
 }

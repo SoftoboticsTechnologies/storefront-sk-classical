@@ -6,23 +6,25 @@
     "browseProducts": "Browse Products",
     "popularCollections": "Popular Collections"
   },
-  "AnnouncementBar": {
-    "message1": "Secure checkout",
-    "message2": "Curated collections",
-    "message3": "Worldwide shipping"
-  },
   "Footer": {
-    "description": "A modern, headless e-commerce storefront built with Vendure and Next.js. Fast, flexible, and ready for production.",
-    "categories": "Categories",
-    "customer": "Customer",
+    "description": "Shri Kalaivani Costumes offers authentic Indian ethnic wear, jewelry, and devotional items. From sarees to lehengas, kurtas to pooja garlands and accessories.",
+    "categories": "Shop",
+    "customer": "Customer Care",
     "shopAll": "Shop All",
-    "orders": "Orders",
-    "account": "Account",
-    "vendure": "Vendure",
-    "github": "GitHub",
-    "documentation": "Documentation",
-    "sourceCode": "Source Code",
-    "copyright": "DripFunnel. All rights reserved.",
-    "poweredBy": "Powered by"
+    "orders": "My Orders",
+    "account": "My Account",
+    "cart": "Cart",
+    "contact": "Get in Touch",
+    "whatsapp": "Chat on WhatsApp",
+    "copyright": "{siteName}. All rights reserved.",
+    "tagline": "Grace in every movement",
+    "poweredBy": "Powered By",
+    "policies": "Policies",
+    "aboutUs": "About Us",
+    "privacyPolicy": "Privacy Policy",
+    "returnPolicy": "Return Policy",
+    "shippingPolicy": "Shipping Policy",
+    "terms": "Terms & Conditions",
+    "paymentMethods": "Payment methods"
   }
 }

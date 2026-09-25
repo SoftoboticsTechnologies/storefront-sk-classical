@@ -6,23 +6,25 @@
     "browseProducts": "उत्पाद ब्राउज़ करें",
     "popularCollections": "लोकप्रिय संग्रह"
   },
-  "AnnouncementBar": {
-    "message1": "सुरक्षित चेकआउट",
-    "message2": "क्यूरेटेड संग्रह",
-    "message3": "विश्वव्यापी शिपिंग"
-  },
   "Footer": {
-    "description": "Vendure और Next.js के साथ बनाया गया एक आधुनिक, हेडलेस ई-कॉमर्स स्टोरफ्रंट। तेज़, लचीला, और उत्पादन के लिए तैयार।",
-    "categories": "श्रेणियां",
-    "customer": "ग्राहक",
-    "shopAll": "सभी खरीदें",
-    "orders": "ऑर्डर",
-    "account": "खाता",
-    "vendure": "Vendure",
-    "github": "GitHub",
-    "documentation": "दस्तावेज़ीकरण",
-    "sourceCode": "सोर्स कोड",
-    "copyright": "DripFunnel। सर्वाधिकार सुरक्षित।",
-    "poweredBy": "द्वारा संचालित"
+    "description": "श्री कलैवाणी कॉस्ट्यूम्स प्रामाणिक भारतीय पारंपरिक परिधान, आभूषण और पूजा सामग्री प्रस्तुत करता है। साड़ियों से लहंगों तक, कुर्तों से पूजा मालाओं और एक्सेसरीज़ तक।",
+    "categories": "शॉप",
+    "customer": "ग्राहक सेवा",
+    "shopAll": "सभी उत्पाद",
+    "orders": "मेरे ऑर्डर",
+    "account": "मेरा खाता",
+    "cart": "कार्ट",
+    "contact": "संपर्क करें",
+    "whatsapp": "WhatsApp पर चैट करें",
+    "copyright": "{siteName}. सर्वाधिकार सुरक्षित।",
+    "tagline": "हर मुद्रा में लालित्य",
+    "poweredBy": "संचालित द्वारा",
+    "policies": "नीतियाँ",
+    "aboutUs": "हमारे बारे में",
+    "privacyPolicy": "गोपनीयता नीति",
+    "returnPolicy": "वापसी नीति",
+    "shippingPolicy": "शिपिंग नीति",
+    "terms": "नियम और शर्तें",
+    "paymentMethods": "भुगतान के तरीके"
   }
 }

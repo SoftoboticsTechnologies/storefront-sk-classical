@@ -17,6 +17,10 @@
     "resultsFor": "Search results for \"{query}\"",
     "resultsTitle": "Search results for \"{query}\"",
     "metaDescription": "Find products matching \"{query}\" at {siteName}",
-    "metaCatalogDescription": "Search our product catalog at {siteName}"
+    "metaCatalogDescription": "Search our product catalog at {siteName}",
+    "allProducts": "All Products",
+    "bannerEyebrow": "Shop",
+    "bannerCta": "Browse products",
+    "bannerDescription": "Costumes, ghungroo, temple jewellery and accessories — everything for the classical stage in one place."
   }
 }

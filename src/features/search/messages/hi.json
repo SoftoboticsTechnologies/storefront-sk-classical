@@ -17,6 +17,10 @@
     "resultsFor": "\"{query}\" के लिए खोज परिणाम",
     "resultsTitle": "\"{query}\" के लिए खोज परिणाम",
     "metaDescription": "{siteName} पर \"{query}\" से मेल खाते उत्पाद खोजें",
-    "metaCatalogDescription": "{siteName} पर हमारा उत्पाद कैटलॉग खोजें"
+    "metaCatalogDescription": "{siteName} पर हमारा उत्पाद कैटलॉग खोजें",
+    "allProducts": "सभी उत्पाद",
+    "bannerEyebrow": "शॉप",
+    "bannerCta": "उत्पाद देखें",
+    "bannerDescription": "पोशाकें, घुंघरू, मंदिर आभूषण और एक्सेसरीज़ — शास्त्रीय मंच की हर चीज़ एक ही जगह।"
   }
 }

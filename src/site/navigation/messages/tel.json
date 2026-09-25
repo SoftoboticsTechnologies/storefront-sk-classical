@@ -17,6 +17,11 @@
     "greeting": "నమస్కారం, {name}",
     "shoppingCart": "షాపింగ్ కార్ట్",
     "switchLanguage": "భాషను మార్చండి",
-    "switchCurrency": "కరెన్సీని మార్చండి"
+    "switchCurrency": "కరెన్సీని మార్చండి",
+    "home": "హోమ్",
+    "shop": "షాప్",
+    "more": "మరిన్ని",
+    "newArrivals": "కొత్తవి",
+    "allProducts": "అన్ని ఉత్పత్తులు"
   }
 }

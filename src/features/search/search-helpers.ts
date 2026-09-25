@@ -1,6 +1,7 @@
 export interface SearchInputParams {
     term?: string;
     collectionSlug?: string;
+    collectionSlugs?: string[];
     take: number;
     skip: number;
     groupByProduct: boolean;
@@ -11,9 +12,11 @@ export interface SearchInputParams {
 interface BuildSearchInputOptions {
     searchParams: { [key: string]: string | string[] | undefined };
     collectionSlug?: string;
+    /** Several collections at once (e.g. every child of a grouping-only parent). Takes precedence over `collectionSlug`. */
+    collectionSlugs?: string[];
 }
 
-export function buildSearchInput({ searchParams, collectionSlug }: BuildSearchInputOptions): SearchInputParams {
+export function buildSearchInput({ searchParams, collectionSlug, collectionSlugs }: BuildSearchInputOptions): SearchInputParams {
     const page = Number(searchParams.page) || 1;
     const take = 12;
     const skip = (page - 1) * take;
@@ -52,7 +55,7 @@ export function buildSearchInput({ searchParams, collectionSlug }: BuildSearchIn
 
     return {
         ...(searchTerm && { term: searchTerm }),
-        ...(collectionSlug && { collectionSlug }),
+        ...(collectionSlugs?.length ? { collectionSlugs } : collectionSlug && { collectionSlug }),
         take,
         skip,
         groupByProduct: true,

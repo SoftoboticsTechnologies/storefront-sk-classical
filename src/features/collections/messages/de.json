@@ -2,6 +2,17 @@
   "Collection": {
     "home": "Startseite",
     "collectionNotFound": "Kategorie nicht gefunden",
-    "browseCollectionAt": "Entdecken Sie unsere {name}-Kollektion bei {siteName}"
+    "browseCollectionAt": "Entdecken Sie unsere {name}-Kollektion bei {siteName}",
+    "banner": {
+      "eyebrow": "Kollektion",
+      "cta": "Produkte ansehen",
+      "costumes": "Bühnenfertige Bharatanatyam-Kostüme und Übungssaris aus edler Seide mit traditionellen Tempelbordüren.",
+      "ghungroo": "Klangvolle Messing-Ghungroo mit 3, 4 und 5 Reihen – für Übung, Auftritt und Bühne.",
+      "jewellery": "Tempelschmuck, Schmucksets und Jhumkas, die jeden klassischen Look vollenden.",
+      "accessories": "Haarblumen, Jada-Sets und der letzte Schliff für die klassische Bühne.",
+      "default": "Entdecken Sie unser {name}-Sortiment bei {siteName}."
+    },
+    "subcategories": "Unterkategorien",
+    "allIn": "Alle {name}"
   }
 }

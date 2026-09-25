@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/navigation-menu';
 import {cn} from '@/lib/utils';
 
-export function NavbarLink({href, ...rest}: ComponentProps<typeof Link>) {
+export function NavbarLink({href, className, ...rest}: ComponentProps<typeof Link>) {
     const selectedLayoutSegment = useSelectedLayoutSegment();
     const pathname = selectedLayoutSegment ? `/${selectedLayoutSegment}` : '/';
     const isActive = pathname === href;
@@ -17,7 +17,7 @@ export function NavbarLink({href, ...rest}: ComponentProps<typeof Link>) {
     return (
         <NavigationMenuLink render={<Link
                 aria-current={isActive ? 'page' : undefined}
-                className={cn(navigationMenuTriggerStyle(), 'bg-transparent')}
+                className={cn(navigationMenuTriggerStyle(), 'bg-transparent', className)}
                 href={href}
                 {...rest}
             />} active={isActive} />

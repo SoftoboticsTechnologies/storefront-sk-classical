@@ -6,23 +6,25 @@
     "browseProducts": "Produkte durchsuchen",
     "popularCollections": "Beliebte Kategorien"
   },
-  "AnnouncementBar": {
-    "message1": "Sicherer Checkout",
-    "message2": "Kuratierte Kollektionen",
-    "message3": "Weltweiter Versand"
-  },
   "Footer": {
-    "description": "Ein moderner, Headless-E-Commerce-Shop, erstellt mit Vendure und Next.js. Schnell, flexibel und produktionsbereit.",
-    "categories": "Kategorien",
-    "customer": "Kunde",
+    "description": "Shri Kalaivani Costumes bietet authentische indische Ethno-Mode, Schmuck und Andachtsartikel. Von Saris bis Lehengas, von Kurtas bis zu Pooja-Girlanden und Accessoires.",
+    "categories": "Shop",
+    "customer": "Kundenservice",
     "shopAll": "Alle Produkte",
-    "orders": "Bestellungen",
-    "account": "Konto",
-    "vendure": "Vendure",
-    "github": "GitHub",
-    "documentation": "Dokumentation",
-    "sourceCode": "Quellcode",
-    "copyright": "DripFunnel. Alle Rechte vorbehalten.",
-    "poweredBy": "Powered by"
+    "orders": "Meine Bestellungen",
+    "account": "Mein Konto",
+    "cart": "Warenkorb",
+    "contact": "Kontakt",
+    "whatsapp": "Per WhatsApp chatten",
+    "copyright": "{siteName}. Alle Rechte vorbehalten.",
+    "tagline": "Anmut in jeder Bewegung",
+    "poweredBy": "Bereitgestellt von",
+    "policies": "Richtlinien",
+    "aboutUs": "Über uns",
+    "privacyPolicy": "Datenschutz",
+    "returnPolicy": "Rückgaberichtlinie",
+    "shippingPolicy": "Versandrichtlinie",
+    "terms": "AGB",
+    "paymentMethods": "Zahlungsmethoden"
   }
 }

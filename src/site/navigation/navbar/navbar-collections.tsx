@@ -1,6 +1,8 @@
 import Image from 'next/image';
+import {getTranslations} from 'next-intl/server';
 import {getRouteLocale} from '@/platform/i18n/server';
-import {getTopCollections} from '@/features/collections/data';
+import {getRootCollections} from '@/features/collections/data';
+import {formatCollectionName, getCollectionHref} from '@/features/collections/utils';
 import {NavigationLink} from '@/site/navigation/navigation-link';
 import {
     NavigationMenu,
@@ -12,39 +14,102 @@ import {
 } from '@/components/ui/navigation-menu';
 import {NavbarLink} from '@/site/navigation/navbar/navbar-link';
 
+const itemClass = "px-2.5 2xl:px-4 uppercase tracking-[0.08em] 2xl:tracking-[0.12em] text-sm font-semibold";
+const triggerClass = `bg-transparent hover:bg-transparent focus:bg-transparent data-popup-open:bg-transparent data-open:bg-transparent hover:text-primary ${itemClass}`;
+const panelLinkClass = "uppercase tracking-[0.08em] text-sm font-semibold";
+
 export async function NavbarCollections() {
     const locale = await getRouteLocale();
+    const t = await getTranslations({locale, namespace: 'Navigation'});
 
-    const collections = await getTopCollections(locale);
+    const collections = await getRootCollections(locale);
 
     return (
         <NavigationMenu>
             <NavigationMenuList>
+                <NavigationMenuItem>
+                    <NavbarLink href="/" className={itemClass}>
+                        {t('home')}
+                    </NavbarLink>
+                </NavigationMenuItem>
+
+                {collections.length > 0 && (
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger className={triggerClass}>
+                            {t('shop')}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                            <div className="grid w-[min(52rem,90vw)] grid-cols-4 gap-6 p-2">
+                                {collections.map((collection) => (
+                                    <div key={collection.id} className="space-y-1">
+                                        <NavigationMenuLink
+                                            render={<NavigationLink href={getCollectionHref(collection)} prefetch={false} />}
+                                            className="font-serif text-lg font-semibold text-primary dark:text-gold"
+                                        >
+                                            {formatCollectionName(collection.name)}
+                                        </NavigationMenuLink>
+                                        {(collection.children ?? []).filter((child) => child.slug).map((child) => (
+                                            <NavigationMenuLink
+                                                key={child.id}
+                                                render={<NavigationLink href={`/collection/${child.slug}`} prefetch={false} />}
+                                                className={panelLinkClass}
+                                            >
+                                                {formatCollectionName(child.name)}
+                                            </NavigationMenuLink>
+                                        ))}
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="mt-2 border-t border-gold/30 px-2 pt-2">
+                                <NavigationMenuLink
+                                    render={<NavigationLink href="/search" />}
+                                    className={panelLinkClass}
+                                >
+                                    {t('allProducts')}
+                                </NavigationMenuLink>
+                            </div>
+                        </NavigationMenuContent>
+                    </NavigationMenuItem>
+                )}
+
                 {collections.map((collection) => {
-                    const children = collection.children ?? [];
+                    const children = (collection.children ?? []).filter((child) => child.slug);
                     if (children.length === 0) {
                         return (
-                            <NavigationMenuItem key={collection.slug}>
-                                <NavbarLink href={`/collection/${collection.slug}`} prefetch={false}>
-                                    {collection.name}
+                            <NavigationMenuItem key={collection.id}>
+                                <NavbarLink href={getCollectionHref(collection)} prefetch={false} className={itemClass}>
+                                    {formatCollectionName(collection.name)}
                                 </NavbarLink>
                             </NavigationMenuItem>
                         );
                     }
 
                     return (
-                        <NavigationMenuItem key={collection.slug}>
-                            <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-popup-open:bg-transparent data-open:bg-transparent">
-                                {collection.name}
+                        <NavigationMenuItem key={collection.id}>
+                            <NavigationMenuTrigger className={triggerClass}>
+                                {formatCollectionName(collection.name)}
                             </NavigationMenuTrigger>
                             <NavigationMenuContent>
                                 <ul className="grid w-56 gap-1">
+                                    {/* Parent page first, then its subcategories. Grouping-only
+                                        parents with no Vendure slug have no page to link to. */}
+                                    {collection.slug && (
+                                        <li className="mb-1 border-b border-gold/30 pb-1">
+                                            <NavigationMenuLink
+                                                render={<NavigationLink href={`/collection/${collection.slug}`} prefetch={false} />}
+                                                className={`${panelLinkClass} text-primary dark:text-gold`}
+                                            >
+                                                {t('viewAll')} {formatCollectionName(collection.name)}
+                                            </NavigationMenuLink>
+                                        </li>
+                                    )}
                                     {children.map((child) => (
-                                        <li key={child.slug}>
+                                        <li key={child.id}>
                                             <NavigationMenuLink
                                                 render={
                                                     <NavigationLink href={`/collection/${child.slug}`} prefetch={false} />
                                                 }
+                                                className={panelLinkClass}
                                             >
                                                 {child.featuredAsset?.preview && (
                                                     <Image
@@ -55,7 +120,7 @@ export async function NavbarCollections() {
                                                         className="rounded-sm object-cover"
                                                     />
                                                 )}
-                                                {child.name}
+                                                {formatCollectionName(child.name)}
                                             </NavigationMenuLink>
                                         </li>
                                     ))}
@@ -64,6 +129,26 @@ export async function NavbarCollections() {
                         </NavigationMenuItem>
                     );
                 })}
+
+                <NavigationMenuItem>
+                    <NavigationMenuTrigger className={triggerClass}>
+                        {t('more')}
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                        <ul className="grid w-48 gap-1">
+                            <li>
+                                <NavigationMenuLink render={<NavigationLink href="/new-arrivals" />} className={panelLinkClass}>
+                                    {t('newArrivals')}
+                                </NavigationMenuLink>
+                            </li>
+                            <li>
+                                <NavigationMenuLink render={<NavigationLink href="/search" />} className={panelLinkClass}>
+                                    {t('allProducts')}
+                                </NavigationMenuLink>
+                            </li>
+                        </ul>
+                    </NavigationMenuContent>
+                </NavigationMenuItem>
             </NavigationMenuList>
         </NavigationMenu>
     );

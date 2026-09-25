@@ -17,6 +17,15 @@ export function SearchTerm() {
     )
 }
 
+/** Heading text only (for use inside a page banner's own `<h1>`). */
+export function SearchTermText() {
+    const searchParams = useSearchParams();
+    const searchTerm = searchParams.get('q') ?? '';
+    const t = useTranslations('Search');
+
+    return <>{searchTerm ? t('resultsFor', {query: searchTerm}) : t('allProducts')}</>;
+}
+
 export function SearchTermSkeleton() {
     return (
         <div className="mb-6">
