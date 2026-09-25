@@ -156,8 +156,11 @@ export default async function ProductDetailPage({
         notFound();
     }
 
-    // Get the primary collection (prefer deepest nested / most specific)
-    const primaryCollection = product.collections?.find(c => c.parent?.id) ?? product.collections?.[0];
+    // Get the primary collection (prefer deepest nested / most specific).
+    // Grouping-only parents can have an empty slug, which the related-products
+    // query rejects ("Either the Collection id or slug must be provided").
+    const linkableCollections = product.collections?.filter(c => c.slug) ?? [];
+    const primaryCollection = linkableCollections.find(c => c.parent?.id) ?? linkableCollections[0];
 
     // Hide options that belong to a shared option group but have no variant on
     // this product (Vendure 3.6 shared/global option groups).

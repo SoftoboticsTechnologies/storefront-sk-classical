@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
     // hosting resolve clean URLs correctly. next/link honors this
     // automatically once set.
     trailingSlash: true,
+    // Dev-only badge; bottom-left is taken by the floating WhatsApp button.
+    devIndicators: {
+        position: 'bottom-right',
+    },
     outputFileTracingRoot: __dirname,
     turbopack: {
         root: __dirname,

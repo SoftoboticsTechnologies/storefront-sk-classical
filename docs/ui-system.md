@@ -21,6 +21,12 @@ Replaces the neutral slate palette in `globals.css` (same token names, so every 
 - Idioms: uppercase `tracking-[0.2em]` eyebrows and nav labels; `.ornament-divider` (gold hairlines around a `Diamond` icon) under section titles via `site/home/section-heading.tsx`.
 - Brand config lives in `src/site/brand.ts` (logo paths, contact details, category tile images) and `src/site/brand-logo.tsx` (theme-aware logo). Web-sized logos are `public/logo/sk-logo-{black,white}.webp` — the original PNGs are ~500 KB and images are served unoptimized.
 
+## Responsive conventions (2026-09-25)
+- Product grids (`product-grid.tsx`, New Arrivals) are 2-up on phones (`grid-cols-2 gap-3`), and `ProductCardView` shrinks its padding and type below `sm`. Product carousels show 2 cards on phones (`basis-1/2`) and keep their arrows inside the edges (`left-2`/`right-2`); the shadcn default `-left-12` overflowed the viewport.
+- Below `xl`, the pinned nav row shows the hamburger plus `mobile-category-strip.tsx` (horizontally scrollable root-collection chips + New Arrivals).
+- Footer: 2 columns on phones, 3 on tablets, 5 on desktop; brand, contact and payment logos span the full row below `lg`.
+- Verified with no horizontal overflow at 360/768/1024/1280 across home, collection, product, new arrivals, search and cart.
+
 ## Target direction
 Introduce a brand accent color (light + dark oklch pair) into the existing `@theme` block rather than a parallel token system. Keep radius/spacing scale as-is unless a specific component needs it — don't invent a second scale.
 

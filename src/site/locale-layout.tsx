@@ -11,6 +11,7 @@ import {getRouteLocale} from "@/platform/i18n/server";
 import {Toaster} from "@/components/ui/sonner";
 import {Navbar} from '@/site/navigation/navbar';
 import {Footer} from "@/site/footer";
+import {FloatingWhatsApp} from "@/site/floating-whatsapp";
 import {ThemeProvider} from "@/site/providers/theme-provider";
 import {AuthProvider} from "@/features/authentication/auth-context";
 import {AnnouncementBar} from "@/site/announcement-bar";
@@ -118,6 +119,7 @@ export default async function LocaleLayout({children}: {children: React.ReactNod
                             <Navbar />
                             {children}
                             <Footer/>
+                            <FloatingWhatsApp/>
                             <Toaster/>
                         </AuthProvider>
                     </ThemeProvider>

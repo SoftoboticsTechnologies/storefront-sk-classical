@@ -2,7 +2,7 @@ import Image from 'next/image';
 import {getTranslations} from 'next-intl/server';
 import {getRouteLocale} from '@/platform/i18n/server';
 import {getRootCollections} from '@/features/collections/data';
-import {formatCollectionName, getCollectionHref} from '@/features/collections/utils';
+import {formatCollectionName, getCollectionHref, getCollectionPathSlug} from '@/features/collections/utils';
 import {NavigationLink} from '@/site/navigation/navigation-link';
 import {
     NavigationMenu,
@@ -92,11 +92,11 @@ export async function NavbarCollections() {
                             <NavigationMenuContent>
                                 <ul className="grid w-56 gap-1">
                                     {/* Parent page first, then its subcategories. Grouping-only
-                                        parents with no Vendure slug have no page to link to. */}
-                                    {collection.slug && (
+                                        parents (no Vendure slug) get a name-derived page. */}
+                                    {getCollectionPathSlug(collection) && (
                                         <li className="mb-1 border-b border-gold/30 pb-1">
                                             <NavigationMenuLink
-                                                render={<NavigationLink href={`/collection/${collection.slug}`} prefetch={false} />}
+                                                render={<NavigationLink href={getCollectionHref(collection)} prefetch={false} />}
                                                 className={`${panelLinkClass} text-primary dark:text-gold`}
                                             >
                                                 {t('viewAll')} {formatCollectionName(collection.name)}

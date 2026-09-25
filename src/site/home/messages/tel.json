@@ -38,7 +38,9 @@
     },
     "shopByCategory": {
       "eyebrow": "పూర్తి శ్రేణి",
-      "title": "మీకు కావలసినది సరిగ్గా కనుగొనండి"
+      "title": "మీకు కావలసినది సరిగ్గా కనుగొనండి",
+      "styles": "{count} వర్గాలు",
+      "shopAll": "అన్ని {name} చూడండి"
     },
     "brandStory": {
       "eyebrow": "మా కథ",

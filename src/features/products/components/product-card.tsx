@@ -63,19 +63,19 @@ export function ProductCardView({slug, name, imageUrl, initialPrice, preload}: P
                         fill
                         preload={preload}
                         className="object-cover group-hover:scale-105 group-hover:opacity-90 transition-all duration-500"
-                        sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                        sizes="(max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                     />
                 ) : (
-                    <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                    <div className="w-full h-full flex items-center justify-center text-xs sm:text-sm text-muted-foreground">
                         {t('noImage')}
                     </div>
                 )}
             </div>
-            <div className="p-4 space-y-2">
-                <h3 className="font-medium leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+            <div className="p-3 sm:p-4 space-y-1.5 sm:space-y-2">
+                <h3 className="text-sm sm:text-base font-medium leading-snug line-clamp-2 group-hover:text-primary transition-colors">
                     {name}
                 </h3>
-                <p className="text-lg font-bold tracking-tight">
+                <p className="text-base sm:text-lg font-bold tracking-tight">
                     <ProductCardPrice slug={slug} initial={initialPrice} />
                 </p>
             </div>

@@ -38,7 +38,9 @@
     },
     "shopByCategory": {
       "eyebrow": "पूरी रेंज देखें",
-      "title": "जो चाहिए, वही पाएँ"
+      "title": "जो चाहिए, वही पाएँ",
+      "styles": "{count} श्रेणियाँ",
+      "shopAll": "सभी {name} देखें"
     },
     "brandStory": {
       "eyebrow": "हमारी कहानी",

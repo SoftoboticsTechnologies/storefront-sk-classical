@@ -23,16 +23,19 @@ export function ProductCarousel({title, products, preloadFirstProduct}: ProductC
                     }}
                     className="w-full"
                 >
-                    <CarouselContent className="-ml-2 md:-ml-4">
+                    <CarouselContent className="-ml-3 md:-ml-4">
                         {products.map((product, index) => (
                             <CarouselItem key={readFragment(ProductCardFragment, product).productId}
-                                          className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                                          className="pl-3 md:pl-4 basis-1/2 md:basis-1/3 xl:basis-1/4">
                                 <ProductCard product={product} preload={preloadFirstProduct && index === 0}/>
                             </CarouselItem>
                         ))}
                     </CarouselContent>
-                    <CarouselPrevious className="hidden md:flex"/>
-                    <CarouselNext className="hidden md:flex"/>
+                    {/* Inside the edges: the shadcn default (-left/-right-12) sits past the
+                        viewport whenever the carousel spans the full container, causing
+                        horizontal page scroll. */}
+                    <CarouselPrevious className="hidden md:flex left-2 bg-background/90 shadow-md"/>
+                    <CarouselNext className="hidden md:flex right-2 bg-background/90 shadow-md"/>
                 </Carousel>
             </div>
         </section>

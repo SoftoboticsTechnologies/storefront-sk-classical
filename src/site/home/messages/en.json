@@ -38,7 +38,9 @@
     },
     "shopByCategory": {
       "eyebrow": "Explore the Range",
-      "title": "Find Exactly What You Need"
+      "title": "Find Exactly What You Need",
+      "styles": "{count, plural, one {# style} other {# styles}}",
+      "shopAll": "Shop all {name}"
     },
     "brandStory": {
       "eyebrow": "Our Story",

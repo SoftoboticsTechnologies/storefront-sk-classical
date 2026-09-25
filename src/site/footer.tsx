@@ -46,8 +46,9 @@ export async function Footer() {
         <footer className="mt-auto bg-[#2a0a0e] text-white/75">
             <div className="h-1 bg-gradient-to-r from-transparent via-gold to-transparent opacity-70" />
             <div className="container mx-auto px-6 md:px-10 lg:px-12 pt-14 pb-10">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.2fr] gap-10">
-                    <div className="lg:row-span-2">
+                {/* Phones: link columns pair up (2-col), tablets: 3-col, desktop: 5-col. */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.2fr] gap-x-6 gap-y-10 lg:gap-10">
+                    <div className="col-span-2 md:col-span-3 lg:col-span-1 lg:row-span-2">
                         <NavigationLink href="/" className="inline-block mb-3">
                             {/* Footer is always dark, so always use the white artwork. */}
                             <Image src={BRAND.logo.dark} alt={SITE_NAME} width={BRAND.logo.width} height={BRAND.logo.height} className="h-20 w-auto" />
@@ -132,7 +133,7 @@ export async function Footer() {
                         </ul>
                     </nav>
 
-                    <div className="lg:row-span-2">
+                    <div className="col-span-2 md:col-span-3 lg:col-span-1 lg:row-span-2">
                         <p className={headingClass}>{t('contact')}</p>
                         <ul className="space-y-3 text-sm">
                             <li>
@@ -170,7 +171,7 @@ export async function Footer() {
                     {/* Fills the space under the three link columns on desktop. */}
                     <ul
                         aria-label={t('paymentMethods')}
-                        className="sm:col-span-2 lg:col-start-2 lg:col-span-3 lg:row-start-2 self-end flex flex-wrap items-center gap-2"
+                        className="col-span-2 md:col-span-3 lg:col-start-2 lg:col-span-3 lg:row-start-2 self-end flex flex-wrap items-center gap-2"
                     >
                         {PAYMENT_LOGOS.map(({src, name}) => (
                             <li key={name} className="flex h-7 items-center rounded bg-white px-2.5 shadow-sm">

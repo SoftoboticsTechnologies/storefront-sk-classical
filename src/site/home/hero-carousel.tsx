@@ -7,7 +7,7 @@ import {Link} from '@/platform/i18n/navigation';
 import {Carousel, CarouselContent, CarouselItem, type CarouselApi} from "@/components/ui/carousel";
 import {cn} from "@/lib/utils";
 
-const AUTOPLAY_MS = 6000;
+const AUTOPLAY_MS = 4500;
 
 export interface HeroSlide {
     src: string;
@@ -37,12 +37,15 @@ export function HeroCarousel({slides, labels}: HeroCarouselProps) {
         };
     }, [api]);
 
+    // One timer per slide: keying on `selected` restarts the countdown after any
+    // change (auto or manual), so every slide gets the full interval.
     useEffect(() => {
         if (!api || paused || slides.length < 2) return;
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        const id = window.setInterval(() => api.scrollNext(), AUTOPLAY_MS);
-        return () => window.clearInterval(id);
-    }, [api, paused, slides.length]);
+        // Reduced-motion users still advance, but jump instead of sliding.
+        const jump = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const id = window.setTimeout(() => api.scrollNext(jump), AUTOPLAY_MS);
+        return () => window.clearTimeout(id);
+    }, [api, paused, selected, slides.length]);
 
     const scrollTo = useCallback((index: number) => api?.scrollTo(index), [api]);
 
@@ -51,8 +54,7 @@ export function HeroCarousel({slides, labels}: HeroCarouselProps) {
             aria-roledescription="carousel"
             aria-label={labels.region}
             className="relative bg-foreground"
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
+            // Keeps rotating under the mouse; only keyboard focus pauses it.
             onFocusCapture={() => setPaused(true)}
             onBlurCapture={() => setPaused(false)}
         >

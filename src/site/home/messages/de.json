@@ -38,7 +38,9 @@
     },
     "shopByCategory": {
       "eyebrow": "Das Sortiment",
-      "title": "Finden Sie genau das Richtige"
+      "title": "Finden Sie genau das Richtige",
+      "styles": "{count, plural, one {# Kategorie} other {# Kategorien}}",
+      "shopAll": "Alle {name} ansehen"
     },
     "brandStory": {
       "eyebrow": "Unsere Geschichte",

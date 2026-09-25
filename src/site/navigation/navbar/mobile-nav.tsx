@@ -20,7 +20,7 @@ import {
     AccordionContent,
 } from '@/components/ui/accordion';
 import {useTranslations} from 'next-intl';
-import {formatCollectionName, getCollectionHref} from '@/features/collections/utils';
+import {formatCollectionName, getCollectionHref, getCollectionPathSlug} from '@/features/collections/utils';
 
 interface Collection {
     id: string;
@@ -136,11 +136,11 @@ export function MobileNav({collections}: MobileNavProps) {
                                                 </AccordionTrigger>
                                                 <AccordionContent>
                                                     <div className="flex flex-col gap-0.5 pl-3">
-                                                        {collection.slug && (
+                                                        {getCollectionPathSlug(collection) && (
                                                             <SheetClose
                                                                 render={
                                                                     <Link
-                                                                        href={`/collection/${collection.slug}`}
+                                                                        href={getCollectionHref(collection)}
                                                                         prefetch={false}
                                                                         className="px-3 py-2 text-sm rounded-md hover:bg-accent transition-colors"
                                                                     />
