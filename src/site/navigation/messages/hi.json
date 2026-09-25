@@ -1,0 +1,22 @@
+{
+  "Navigation": {
+    "openMenu": "मेनू खोलें",
+    "menu": "मेनू",
+    "searchProducts": "उत्पाद खोजें...",
+    "shopAll": "सभी खरीदें",
+    "viewAll": "सभी देखें",
+    "collections": "संग्रह",
+    "searchSuggestions": "सुझाव",
+    "searchNoResults": "\"{term}\" के लिए कोई उत्पाद नहीं मिला",
+    "account": "खाता",
+    "profile": "प्रोफ़ाइल",
+    "orders": "ऑर्डर",
+    "addresses": "पते",
+    "signIn": "साइन इन करें",
+    "signOut": "साइन आउट करें",
+    "greeting": "नमस्ते, {name}",
+    "shoppingCart": "शॉपिंग कार्ट",
+    "switchLanguage": "भाषा बदलें",
+    "switchCurrency": "मुद्रा बदलें"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "Collection": {
+    "home": "హోమ్",
+    "collectionNotFound": "సేకరణ కనుగొనబడలేదు",
+    "browseCollectionAt": "{siteName} వద్ద మా {name} సేకరణను బ్రౌజ్ చేయండి"
+  }
+}

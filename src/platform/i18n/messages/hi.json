@@ -1,0 +1,25 @@
+{
+  "Common": {
+    "loading": "लोड हो रहा है...",
+    "sending": "भेजा जा रहा है...",
+    "sku": "SKU",
+    "siteDescription": "{siteName} पर सर्वोत्तम उत्पाद खरीदें। गुणवत्तापूर्ण उत्पाद, प्रतिस्पर्धी कीमतें, और तेज़ डिलीवरी।"
+  },
+  "Errors": {
+    "fieldsRequired": "सभी फ़ील्ड आवश्यक हैं",
+    "passwordsMismatch": "पासवर्ड मेल नहीं खाते",
+    "unexpectedError": "एक अप्रत्याशित त्रुटि हुई। कृपया पुनः प्रयास करें।",
+    "emailPasswordRequired": "ईमेल पता और पासवर्ड आवश्यक हैं",
+    "verifyEmailFirst": "साइन इन करने से पहले कृपया अपना ईमेल पता सत्यापित करें।",
+    "invalidCredentials": "अमान्य ईमेल या पासवर्ड।",
+    "emailRequired": "ईमेल पता आवश्यक है",
+    "firstLastNameRequired": "पहला नाम और उपनाम आवश्यक हैं",
+    "passwordEmailRequired": "पासवर्ड और नया ईमेल पता आवश्यक हैं",
+    "invalidEmail": "कृपया एक वैध ईमेल पता दर्ज करें",
+    "failedUpdateCustomer": "ग्राहक जानकारी अपडेट करने में विफल",
+    "newPasswordMustDiffer": "नया पासवर्ड वर्तमान पासवर्ड से अलग होना चाहिए",
+    "failedPasswordReset": "पासवर्ड रीसेट का अनुरोध करने में विफल",
+    "verificationTokenRequired": "सत्यापन टोकन आवश्यक है",
+    "failedAddToCart": "आइटम को कार्ट में जोड़ने में विफल"
+  }
+}

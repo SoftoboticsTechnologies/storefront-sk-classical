@@ -1,0 +1,26 @@
+{
+  "OrderStatus": {
+    "AddingItems": "వస్తువులు జోడించబడుతున్నాయి",
+    "ArrangingPayment": "చెల్లింపు ఏర్పాటు చేయబడుతోంది",
+    "PaymentAuthorized": "చెల్లింపు అధీకృతం చేయబడింది",
+    "PaymentSettled": "చెల్లింపు పరిష్కరించబడింది",
+    "PartiallyShipped": "పాక్షికంగా పంపబడింది",
+    "Shipped": "పంపబడింది",
+    "PartiallyDelivered": "పాక్షికంగా డెలివరీ చేయబడింది",
+    "Delivered": "డెలివరీ చేయబడింది",
+    "Cancelled": "రద్దు చేయబడింది"
+  },
+  "OrderConfirmation": {
+    "pageTitle": "ఆర్డర్ నిర్ధారణ",
+    "orderConfirmed": "ఆర్డర్ నిర్ధారించబడింది!",
+    "thankYou": "మీ ఆర్డర్‌కు ధన్యవాదాలు. మీ ఆర్డర్ నంబర్",
+    "emailConfirmation": "మేము మీ ఆర్డర్ వివరాలు మరియు ట్రాకింగ్ సమాచారంతో మీకు ఇమెయిల్ పంపుతాము.",
+    "orderSummary": "ఆర్డర్ సారాంశం",
+    "qty": "పరిమాణం: {quantity}",
+    "total": "మొత్తం",
+    "shippingAddress": "షిప్పింగ్ చిరునామా",
+    "continueShopping": "షాపింగ్ కొనసాగించండి",
+    "viewOrders": "ఆర్డర్‌లను వీక్షించండి",
+    "processingPayment": "మీ చెల్లింపును పూర్తి చేస్తోంది... ఈ పేజీ స్వయంచాలకంగా నవీకరించబడుతుంది."
+  }
+}

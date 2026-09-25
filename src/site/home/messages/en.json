@@ -1,0 +1,46 @@
+{
+  "Hero": {
+    "eyebrow": "New Collection",
+    "titlePrefix": "Discover",
+    "titleFallback": "Discover Quality Products",
+    "subtitle": "Thoughtfully curated products, presented with the care they deserve.",
+    "shopNow": "Shop Now",
+    "viewAllProducts": "View All Products"
+  },
+  "Home": {
+    "pageTitle": "Your One-Stop Shop",
+    "description": "Discover high-quality products at competitive prices. Shop now for the best deals on electronics, fashion, home goods, and more.",
+    "ogDescription": "Discover high-quality products at competitive prices. Shop now for the best deals.",
+    "whyShopWithUs": "Why Shop With Us",
+    "features": {
+      "highQuality": {
+        "title": "High Quality",
+        "description": "Premium products carefully selected for you"
+      },
+      "bestPrices": {
+        "title": "Best Prices",
+        "description": "Competitive pricing on all our products"
+      },
+      "fastDelivery": {
+        "title": "Fast Delivery",
+        "description": "Quick and reliable shipping worldwide"
+      }
+    },
+    "categoryDiscovery": {
+      "title": "Shop by Category"
+    },
+    "editorialBanner": {
+      "eyebrow": "Editor's Pick",
+      "cta": "Explore the collection",
+      "fallbackDescription": "A curated edit of our favorite pieces, chosen for their quality and design."
+    },
+    "shopByCategory": {
+      "title": "Browse Our Collections"
+    },
+    "ctaBanner": {
+      "title": "Join the Community",
+      "subtitle": "Create an account for a faster checkout, order tracking, and early access to new arrivals.",
+      "cta": "Create Account"
+    }
+  }
+}

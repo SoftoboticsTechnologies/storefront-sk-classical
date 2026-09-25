@@ -1,0 +1,22 @@
+{
+  "Sort": {
+    "nameAsc": "పేరు: A నుండి Z",
+    "nameDesc": "పేరు: Z నుండి A",
+    "priceAsc": "ధర: తక్కువ నుండి ఎక్కువ",
+    "priceDesc": "ధర: ఎక్కువ నుండి తక్కువ",
+    "placeholder": "క్రమబద్ధీకరించండి"
+  },
+  "Filters": {
+    "title": "ఫిల్టర్‌లు",
+    "clearAll": "అన్నీ క్లియర్ చేయండి",
+    "filtersButton": "ఫిల్టర్‌లు"
+  },
+  "Search": {
+    "title": "శోధించండి",
+    "pageTitle": "ఉత్పత్తులను శోధించండి",
+    "resultsFor": "\"{query}\" కోసం శోధన ఫలితాలు",
+    "resultsTitle": "\"{query}\" కోసం శోధన ఫలితాలు",
+    "metaDescription": "{siteName} వద్ద \"{query}\"కు సరిపోలే ఉత్పత్తులను కనుగొనండి",
+    "metaCatalogDescription": "{siteName} వద్ద మా ఉత్పత్తి కేటలాగ్‌ను శోధించండి"
+  }
+}

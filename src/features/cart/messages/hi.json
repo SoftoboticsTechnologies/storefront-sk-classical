@@ -1,0 +1,22 @@
+{
+  "Cart": {
+    "title": "शॉपिंग कार्ट",
+    "empty": "आपका कार्ट खाली है",
+    "emptyMessage": "शुरू करने के लिए अपने कार्ट में कुछ आइटम जोड़ें",
+    "continueShopping": "खरीदारी जारी रखें",
+    "each": "प्रत्येक",
+    "orderSummary": "ऑर्डर सारांश",
+    "subtotal": "उप-योग",
+    "shipping": "शिपिंग",
+    "calculatedAtCheckout": "चेकआउट पर गणना की जाएगी",
+    "total": "कुल",
+    "proceedToCheckout": "चेकआउट पर जाएं",
+    "secureCheckout": "सुरक्षित चेकआउट",
+    "promotionCode": "प्रोमोशन कोड",
+    "enterDiscountCode": "नीचे अपना डिस्काउंट कोड दर्ज करें",
+    "remove": "हटाएं",
+    "enterCode": "कोड दर्ज करें",
+    "apply": "लागू करें",
+    "sku": "SKU: {sku}"
+  }
+}

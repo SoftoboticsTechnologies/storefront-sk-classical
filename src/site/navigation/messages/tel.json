@@ -1,0 +1,22 @@
+{
+  "Navigation": {
+    "openMenu": "మెనూను తెరవండి",
+    "menu": "మెనూ",
+    "searchProducts": "ఉత్పత్తులను శోధించండి...",
+    "shopAll": "అన్నీ కొనండి",
+    "viewAll": "అన్నీ చూడండి",
+    "collections": "సేకరణలు",
+    "searchSuggestions": "సూచనలు",
+    "searchNoResults": "\"{term}\" కోసం ఉత్పత్తులు కనుగొనబడలేదు",
+    "account": "ఖాతా",
+    "profile": "ప్రొఫైల్",
+    "orders": "ఆర్డర్‌లు",
+    "addresses": "చిరునామాలు",
+    "signIn": "సైన్ ఇన్ చేయండి",
+    "signOut": "సైన్ అవుట్ చేయండి",
+    "greeting": "నమస్కారం, {name}",
+    "shoppingCart": "షాపింగ్ కార్ట్",
+    "switchLanguage": "భాషను మార్చండి",
+    "switchCurrency": "కరెన్సీని మార్చండి"
+  }
+}

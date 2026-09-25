@@ -1,0 +1,28 @@
+{
+  "NotFound": {
+    "title": "पेज नहीं मिला",
+    "message": "आप जिस पेज की तलाश कर रहे हैं वह मौजूद नहीं है, हटा दिया गया है, या अस्थायी रूप से अनुपलब्ध है।",
+    "goHome": "होम पर जाएं",
+    "browseProducts": "उत्पाद ब्राउज़ करें",
+    "popularCollections": "लोकप्रिय संग्रह"
+  },
+  "AnnouncementBar": {
+    "message1": "सुरक्षित चेकआउट",
+    "message2": "क्यूरेटेड संग्रह",
+    "message3": "विश्वव्यापी शिपिंग"
+  },
+  "Footer": {
+    "description": "Vendure और Next.js के साथ बनाया गया एक आधुनिक, हेडलेस ई-कॉमर्स स्टोरफ्रंट। तेज़, लचीला, और उत्पादन के लिए तैयार।",
+    "categories": "श्रेणियां",
+    "customer": "ग्राहक",
+    "shopAll": "सभी खरीदें",
+    "orders": "ऑर्डर",
+    "account": "खाता",
+    "vendure": "Vendure",
+    "github": "GitHub",
+    "documentation": "दस्तावेज़ीकरण",
+    "sourceCode": "सोर्स कोड",
+    "copyright": "DripFunnel। सर्वाधिकार सुरक्षित।",
+    "poweredBy": "द्वारा संचालित"
+  }
+}

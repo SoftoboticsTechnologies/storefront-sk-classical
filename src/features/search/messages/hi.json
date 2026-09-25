@@ -1,0 +1,22 @@
+{
+  "Sort": {
+    "nameAsc": "नाम: A से Z",
+    "nameDesc": "नाम: Z से A",
+    "priceAsc": "मूल्य: कम से अधिक",
+    "priceDesc": "मूल्य: अधिक से कम",
+    "placeholder": "इसके अनुसार क्रमबद्ध करें"
+  },
+  "Filters": {
+    "title": "फ़िल्टर",
+    "clearAll": "सभी साफ़ करें",
+    "filtersButton": "फ़िल्टर"
+  },
+  "Search": {
+    "title": "खोजें",
+    "pageTitle": "उत्पाद खोजें",
+    "resultsFor": "\"{query}\" के लिए खोज परिणाम",
+    "resultsTitle": "\"{query}\" के लिए खोज परिणाम",
+    "metaDescription": "{siteName} पर \"{query}\" से मेल खाते उत्पाद खोजें",
+    "metaCatalogDescription": "{siteName} पर हमारा उत्पाद कैटलॉग खोजें"
+  }
+}

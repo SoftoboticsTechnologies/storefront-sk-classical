@@ -1,0 +1,28 @@
+{
+  "NotFound": {
+    "title": "Page Not Found",
+    "message": "The page you are looking for does not exist, has been moved, or is temporarily unavailable.",
+    "goHome": "Go to Home",
+    "browseProducts": "Browse Products",
+    "popularCollections": "Popular Collections"
+  },
+  "AnnouncementBar": {
+    "message1": "Secure checkout",
+    "message2": "Curated collections",
+    "message3": "Worldwide shipping"
+  },
+  "Footer": {
+    "description": "A modern, headless e-commerce storefront built with Vendure and Next.js. Fast, flexible, and ready for production.",
+    "categories": "Categories",
+    "customer": "Customer",
+    "shopAll": "Shop All",
+    "orders": "Orders",
+    "account": "Account",
+    "vendure": "Vendure",
+    "github": "GitHub",
+    "documentation": "Documentation",
+    "sourceCode": "Source Code",
+    "copyright": "DripFunnel. All rights reserved.",
+    "poweredBy": "Powered by"
+  }
+}

@@ -1,0 +1,4 @@
+schema:
+  - https://ecom-admin.dripfunnel.com/shop-api:
+      headers:
+        vendure-token: __default_channel__

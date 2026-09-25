@@ -1,0 +1,26 @@
+{
+  "OrderStatus": {
+    "AddingItems": "आइटम जोड़े जा रहे हैं",
+    "ArrangingPayment": "भुगतान की व्यवस्था हो रही है",
+    "PaymentAuthorized": "भुगतान अधिकृत",
+    "PaymentSettled": "भुगतान निपटाया गया",
+    "PartiallyShipped": "आंशिक रूप से भेजा गया",
+    "Shipped": "भेजा गया",
+    "PartiallyDelivered": "आंशिक रूप से वितरित",
+    "Delivered": "वितरित",
+    "Cancelled": "रद्द किया गया"
+  },
+  "OrderConfirmation": {
+    "pageTitle": "ऑर्डर पुष्टि",
+    "orderConfirmed": "ऑर्डर की पुष्टि हो गई!",
+    "thankYou": "आपके ऑर्डर के लिए धन्यवाद। आपका ऑर्डर नंबर है",
+    "emailConfirmation": "हम आपको आपके ऑर्डर विवरण और ट्रैकिंग जानकारी के साथ एक ईमेल भेजेंगे।",
+    "orderSummary": "ऑर्डर सारांश",
+    "qty": "मात्रा: {quantity}",
+    "total": "कुल",
+    "shippingAddress": "शिपिंग पता",
+    "continueShopping": "खरीदारी जारी रखें",
+    "viewOrders": "ऑर्डर देखें",
+    "processingPayment": "आपका भुगतान पूरा किया जा रहा है... यह पृष्ठ अपने आप अपडेट हो जाएगा।"
+  }
+}

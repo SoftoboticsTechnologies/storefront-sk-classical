@@ -1,0 +1,7 @@
+{
+  "Collection": {
+    "home": "होम",
+    "collectionNotFound": "संग्रह नहीं मिला",
+    "browseCollectionAt": "{siteName} पर हमारा {name} संग्रह देखें"
+  }
+}
