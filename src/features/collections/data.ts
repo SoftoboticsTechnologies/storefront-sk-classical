@@ -61,3 +61,17 @@ export async function getRootCollections(locale: string): Promise<TopCollection[
     );
     return collections.filter((collection) => !childIds.has(collection.id));
 }
+
+/**
+ * Collection slugs whose products make up a `/collection/[slug]` page: the
+ * collection itself for a real slug, or every child for a grouping-only parent
+ * (same resolution as the collection page). Empty when nothing matches.
+ */
+export async function getCollectionProductSlugs(locale: string, slug: string): Promise<string[]> {
+    const collections = await getTopCollections(locale);
+    if (collections.some((collection) => collection.slug === slug)) {
+        return [slug];
+    }
+    const group = await getGroupCollection(locale, slug);
+    return (group?.children ?? []).map((child) => child.slug).filter(Boolean);
+}

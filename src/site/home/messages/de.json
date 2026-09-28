@@ -39,7 +39,6 @@
     "shopByCategory": {
       "eyebrow": "Das Sortiment",
       "title": "Finden Sie genau das Richtige",
-      "styles": "{count, plural, one {# Kategorie} other {# Kategorien}}",
       "shopAll": "Alle {name} ansehen"
     },
     "brandStory": {
@@ -67,6 +66,20 @@
       "body": "Ghungroo, die bei jedem Adavu klar erklingen, Tempelschmuck und Haarschmuck — der letzte Schliff für einen klassischen Bühnenauftritt.",
       "cta": "Alle Accessoires ansehen",
       "imageAlt": "Bharatanatyam-Tänzerin von hinten mit Jada-Zopfschmuck, Blumen-Veni und Tempelschmuck"
+    },
+    "jewellery": {
+      "eyebrow": "Tempelschmuck",
+      "title": "Schmuck für die Bühne",
+      "body": "Halsketten mit Kemp-Steinen, Jhumkas und komplette Bharatanatyam-Schmucksets im Tempelstil — gefertigt, um bei jeder Geste das Licht einzufangen.",
+      "cta": "Allen Schmuck ansehen",
+      "imageAlt": "Halskette und passende Ohrringe im Tempelstil mit roten und grünen Kemp-Steinen und Perlen"
+    },
+    "ghungroo": {
+      "eyebrow": "Der Rhythmus des Tanzes",
+      "title": "Ghungroo",
+      "body": "Messing-Fußglöckchen auf weichen Samtpolstern mit 3, 4 und 5 Reihen — für einen klaren Klang bei jedem Schritt.",
+      "cta": "Alle Ghungroo ansehen",
+      "imageAlt": "Paar Messing-Ghungroo-Fußglöckchen auf roten Samtpolstern mit Schnallenriemen"
     }
   }
 }

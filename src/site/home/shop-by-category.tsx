@@ -59,9 +59,6 @@ export async function ShopByCategory() {
                                     <span className="absolute left-6 top-5 font-serif text-lg italic text-gold/90" aria-hidden="true">
                                         {String(index + 1).padStart(2, '0')}
                                     </span>
-                                    <span className="absolute right-6 top-5 rounded-full border border-white/25 bg-black/25 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm">
-                                        {t('shopByCategory.styles', {count: children.length})}
-                                    </span>
 
                                     <div className="absolute inset-x-0 bottom-0 px-6 pb-6">
                                         <h3 className="font-serif text-[1.75rem] font-semibold leading-tight text-white">{name}</h3>

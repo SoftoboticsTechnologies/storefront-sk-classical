@@ -35,6 +35,15 @@ export const DEALS_COLLECTION_SLUG = 'amazing-deals';
  */
 export const ACCESSORIES_COLLECTION_SLUG = 'bharatanatyam-accessories';
 
+/**
+ * Collection page slugs behind the Jewellery and Ghungroo homepage sections.
+ * Both are grouping-only parents in Vendure (no slug of their own), so these
+ * are their name-derived page slugs and the sections list every child
+ * collection's products; a real Vendure slug takes over if one is added.
+ */
+export const JEWELLERY_COLLECTION_SLUG = 'jewellery';
+export const GHUNGROO_COLLECTION_SLUG = 'ghungroo';
+
 // Category imagery lives with the collections feature (it also themes collection
 // page banners); re-exported here for existing site imports.
 export {getCategoryImage} from '@/features/collections/utils';

@@ -16,13 +16,16 @@ import {cn} from '@/lib/utils';
  * the collection doesn't exist yet) yields an empty list so the section
  * simply hides instead of breaking the static build.
  */
-async function getShowcaseProducts(take: number, collectionSlug?: string) {
+async function getShowcaseProducts(take: number, collectionSlug?: string, collectionSlugs?: string[]) {
     const locale = await getRouteLocale();
     const currencyCode = await getActiveCurrencyCode();
 
     try {
         const result = await query(SearchProductsQuery, {
-            input: {take, skip: 0, groupByProduct: true, ...(collectionSlug ? {collectionSlug} : {})},
+            input: {
+                take, skip: 0, groupByProduct: true,
+                ...(collectionSlugs?.length ? {collectionSlugs} : collectionSlug ? {collectionSlug} : {}),
+            },
         }, {languageCode: locale, currencyCode});
         return result.data.search.items;
     } catch (error) {
@@ -40,6 +43,8 @@ interface ProductShowcaseProps {
      * call to action, so the "View all" button is omitted.
      */
     aside?: React.ReactNode;
+    /** Which side of the grid the `aside` panel sits on from `md` up. */
+    asideSide?: 'start' | 'end';
     /**
      * Full-bleed decoration rendered at the very top / bottom of the section.
      * The vertical padding then moves inside them, so pass a `className`
@@ -48,6 +53,8 @@ interface ProductShowcaseProps {
     leading?: React.ReactNode;
     trailing?: React.ReactNode;
     collectionSlug?: string;
+    /** Several collections at once (e.g. every child of a grouping-only parent); wins over `collectionSlug`. */
+    collectionSlugs?: string[];
     take?: number;
     /** "View all" target; defaults to the collection page, or /search for all products. */
     viewAllHref?: string;
@@ -55,10 +62,10 @@ interface ProductShowcaseProps {
 }
 
 /** Product grid section for the homepage. Renders nothing when there are no products. */
-export async function ProductShowcase({heading, aside, leading, trailing, collectionSlug, take = 8, viewAllHref, className}: ProductShowcaseProps) {
+export async function ProductShowcase({heading, aside, asideSide = 'start', leading, trailing, collectionSlug, collectionSlugs, take = 8, viewAllHref, className}: ProductShowcaseProps) {
     const locale = await getRouteLocale();
     const t = await getTranslations({locale, namespace: 'Product'});
-    const products = await getShowcaseProducts(take, collectionSlug);
+    const products = await getShowcaseProducts(take, collectionSlug, collectionSlugs);
 
     if (products.length === 0) {
         return null;
@@ -77,7 +84,7 @@ export async function ProductShowcase({heading, aside, leading, trailing, collec
                 {heading}
                 {aside ? (
                     <div className="grid gap-6 md:grid-cols-2 lg:gap-10 items-start">
-                        <div className="md:sticky md:top-24">{aside}</div>
+                        <div className={cn("md:sticky md:top-24", asideSide === 'end' && "md:order-last")}>{aside}</div>
                         <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
                             {cards}
                         </div>

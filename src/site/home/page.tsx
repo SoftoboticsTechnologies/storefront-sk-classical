@@ -7,11 +7,11 @@ import {BrandStory} from "@/site/home/brand-story";
 import {ShopByCategory} from "@/site/home/shop-by-category";
 import {BenefitsSection} from "@/site/home/benefits-section";
 import {CtaBanner} from "@/site/home/cta-banner";
-import {AccessoriesSection} from "@/site/home/accessories-section";
+import {CategorySpotlight} from "@/site/home/category-spotlight";
 import {FeaturedProducts, TrendingProducts} from '@/features/products/featured-products';
 import {ProductShowcase} from '@/features/products/product-showcase';
 import {SectionHeading} from "@/site/home/section-heading";
-import {DEALS_COLLECTION_SLUG} from "@/site/brand";
+import {ACCESSORIES_COLLECTION_SLUG, DEALS_COLLECTION_SLUG, GHUNGROO_COLLECTION_SLUG, JEWELLERY_COLLECTION_SLUG} from "@/site/brand";
 import {getRootCollections} from '@/features/collections/data';
 import {SITE_NAME, SITE_URL, buildCanonicalUrl} from "@/config/metadata";
 import {getTranslations} from 'next-intl/server';
@@ -71,6 +71,15 @@ export default async function Home() {
                 />
             </Suspense>
 
+            <Suspense>
+                <CategorySpotlight
+                    collectionSlug={JEWELLERY_COLLECTION_SLUG}
+                    messageKey="jewellery"
+                    image={{src: '/images/categories/jewellery.webp'}}
+                    bannerSide="end"
+                />
+            </Suspense>
+
             {primary && (
                 <Suspense>
                     <FeaturedProducts collectionSlug={primary}/>
@@ -78,7 +87,20 @@ export default async function Home() {
             )}
 
             <Suspense>
-                <AccessoriesSection/>
+                <CategorySpotlight
+                    collectionSlug={ACCESSORIES_COLLECTION_SLUG}
+                    messageKey="accessories"
+                    image={{src: '/images/categories/accessories.webp', position: 'center 25%'}}
+                />
+            </Suspense>
+
+            <Suspense>
+                <CategorySpotlight
+                    collectionSlug={GHUNGROO_COLLECTION_SLUG}
+                    messageKey="ghungroo"
+                    image={{src: '/images/categories/ghungroo.webp'}}
+                    bannerSide="end"
+                />
             </Suspense>
 
             <BrandStory/>

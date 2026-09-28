@@ -39,7 +39,6 @@
     "shopByCategory": {
       "eyebrow": "Explore the Range",
       "title": "Find Exactly What You Need",
-      "styles": "{count, plural, one {# style} other {# styles}}",
       "shopAll": "Shop all {name}"
     },
     "brandStory": {
@@ -67,6 +66,20 @@
       "body": "Ghungroo that ring true with every adavu, temple ornaments and hair adornments — the finishing touches that complete a classical look on stage.",
       "cta": "Shop all accessories",
       "imageAlt": "Bharatanatyam dancer seen from behind wearing a jada braid ornament, flower veni and temple jewellery"
+    },
+    "jewellery": {
+      "eyebrow": "Temple Jewellery",
+      "title": "Jewellery for the Stage",
+      "body": "Kemp-stone necklaces, jhumkas and full Bharatanatyam ornament sets in the temple style — crafted to catch the light with every expression.",
+      "cta": "Shop all jewellery",
+      "imageAlt": "Temple-style necklace and matching earrings set with red and green kemp stones and pearl drops"
+    },
+    "ghungroo": {
+      "eyebrow": "The Rhythm of Dance",
+      "title": "Ghungroo",
+      "body": "Brass ankle bells on soft velvet pads in 3, 4 and 5 lines — made to ring clear with every step of your footwork.",
+      "cta": "Shop all ghungroo",
+      "imageAlt": "Pair of brass ghungroo ankle bells on red velvet pads with buckle straps"
     }
   }
 }
