@@ -15,18 +15,14 @@ on:
         required: false
         type: string
 
-permissions:
-  id-token: write
-  contents: read
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     env:
       AWS_REGION: ${{ vars.AWS_REGION }}
-      AWS_BUCKET: ${{ vars.SPA_BUCKET_NAME }}
-      CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.SPA_CF_DISTRIBUTION_ID }}
+      AWS_BUCKET: ${{ vars.AWS_BUCKET }}
+      CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
       # NEXT_PUBLIC_* build-time vars (Vendure API URL/channel token, site
       # URL/name, Stripe publishable key) are NOT injected here — they come
       # from the committed .env.production (tracked in git, loaded
@@ -56,17 +52,15 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ env.AWS_REGION }}
-          # OIDC role assumption, not static keys — this repo has none. The
-          # role trust policy (df-store's `src/server/aws/iam.ts`) scopes it
-          # to exactly this repo's `main` branch.
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Sync static export to S3
         run: |
           aws s3 sync out "s3://${AWS_BUCKET}" --delete
 
-      - name: Invalidate CloudFront cache
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id "${CLOUDFRONT_DISTRIBUTION_ID}" \
-            --paths "/*"
+      # - name: Invalidate CloudFront cache
+      #   run: |
+      #     aws cloudfront create-invalidation \
+      #       --distribution-id "${CLOUDFRONT_DISTRIBUTION_ID}" \
+      #       --paths "/*"
