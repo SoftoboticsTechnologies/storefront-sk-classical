@@ -35,7 +35,7 @@ export async function AccessoriesSection() {
                         style={{objectPosition: 'center 25%'}}
                         sizes="(max-width: 768px) 100vw, 50vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#4a0f16] from-25% via-[#4a0f16]/60 via-50% to-transparent" aria-hidden="true"/>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#4a0f16] from-30% via-[#4a0f16]/80 via-55% to-transparent to-90%" aria-hidden="true"/>
                     <div className="kolam-pattern absolute inset-0 opacity-20" aria-hidden="true"/>
                     {/* Gold temple-arch outline framing the dancer. */}
                     <div className="absolute inset-3 sm:inset-4 rounded-t-[999px] rounded-b-xl border border-gold/70" aria-hidden="true"/>

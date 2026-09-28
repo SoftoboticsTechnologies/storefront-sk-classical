@@ -54,6 +54,12 @@ export default async function Home() {
         <div className="min-h-screen mt-16">
             <HeroSection/>
 
+            {secondary && (
+                <Suspense>
+                    <TrendingProducts collectionSlug={secondary}/>
+                </Suspense>
+            )}
+
             <BenefitsSection/>
 
             <CategoryDiscovery/>
@@ -76,12 +82,6 @@ export default async function Home() {
             </Suspense>
 
             <BrandStory/>
-
-            {secondary && (
-                <Suspense>
-                    <TrendingProducts collectionSlug={secondary}/>
-                </Suspense>
-            )}
 
             <ShopByCategory/>
 

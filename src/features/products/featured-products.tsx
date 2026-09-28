@@ -61,24 +61,20 @@ async function CollectionCarouselSection({collectionSlug, title, preloadFirstPro
     }
 
     return (
-        <div>
-            <ProductCarousel
-                title={title}
-                products={products}
-                preloadFirstProduct={preloadFirstProduct}
-            />
-            <div className="container mx-auto px-4 -mt-6 mb-8">
-                <div className="flex justify-center">
-                    <Link
-                        href="/search"
-                        className="group inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline underline-offset-4 transition-colors"
-                    >
-                        {t('viewAllProducts')}
-                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-                    </Link>
-                </div>
-            </div>
-        </div>
+        <ProductCarousel
+            title={title}
+            products={products}
+            preloadFirstProduct={preloadFirstProduct}
+            action={
+                <Link
+                    href="/search"
+                    className="group inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline underline-offset-4 transition-colors"
+                >
+                    {t('viewAllProducts')}
+                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                </Link>
+            }
+        />
     )
 }
 

@@ -1,6 +1,7 @@
 'use client';
 
 import {ProductCard} from "@/features/products/components/product-card";
+import type {ReactNode} from "react";
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious,} from "@/components/ui/carousel";
 import {FragmentOf, readFragment} from "@/platform/vendure/graphql";
 import {ProductCardFragment} from '@/features/products/graphql';
@@ -9,13 +10,18 @@ interface ProductCarouselClientProps {
     title: string;
     products: Array<FragmentOf<typeof ProductCardFragment>>;
     preloadFirstProduct?: boolean;
+    /** Rendered at the right of the heading row, e.g. a "View all" link. */
+    action?: ReactNode;
 }
 
-export function ProductCarousel({title, products, preloadFirstProduct}: ProductCarouselClientProps) {
+export function ProductCarousel({title, products, preloadFirstProduct, action}: ProductCarouselClientProps) {
     return (
         <section className="py-12 md:py-16">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl md:text-4xl font-bold mb-8">{title}</h2>
+                <div className="mb-8 flex items-end justify-between gap-4">
+                    <h2 className="text-3xl md:text-4xl font-bold">{title}</h2>
+                    {action && <div className="shrink-0 pb-1">{action}</div>}
+                </div>
                 <Carousel
                     opts={{
                         align: "start",
