@@ -60,6 +60,13 @@
     "deals": {
       "eyebrow": "Limited-time offers",
       "title": "Amazing Deals"
+    },
+    "accessories": {
+      "eyebrow": "Adorn the Dancer",
+      "title": "Bharatanatyam Accessories",
+      "body": "Ghungroo that ring true with every adavu, temple ornaments and hair adornments — the finishing touches that complete a classical look on stage.",
+      "cta": "Shop all accessories",
+      "imageAlt": "Bharatanatyam dancer seen from behind wearing a jada braid ornament, flower veni and temple jewellery"
     }
   }
 }

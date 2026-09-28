@@ -55,6 +55,7 @@
       "metaDescription": "Shop the newest arrivals at {siteName}.",
       "empty": "New pieces are on their way — check back soon.",
       "cta": "Browse products"
-    }
+    },
+    "viewDetails": "View details"
   }
 }

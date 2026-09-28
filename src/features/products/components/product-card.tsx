@@ -4,6 +4,7 @@ import {ProductCardFragment} from '@/features/products/graphql';
 import {ProductCardPrice} from '@/features/products/product-price-client';
 import { Link } from '@/platform/i18n/navigation';
 import {useTranslations} from 'next-intl';
+import {ArrowRight, Diamond} from 'lucide-react';
 
 interface ProductCardProps {
     product: FragmentOf<typeof ProductCardFragment>;
@@ -53,16 +54,17 @@ export function ProductCardView({slug, name, imageUrl, initialPrice, preload}: P
             // App Router falls back to a full navigation), but disabling
             // prefetch here avoids it outright. Revisit once Next ships a fix.
             prefetch={false}
-            className="group block bg-card rounded-xl overflow-hidden border border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            className="group relative flex h-full flex-col rounded-2xl border border-gold/25 bg-card p-1.5 sm:p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_22px_40px_-24px_rgb(74_15_22/0.55)]"
         >
-            <div className="aspect-square relative bg-muted overflow-hidden">
+            {/* Temple-arch image frame with an inset gold hairline. */}
+            <div className="relative aspect-4/5 overflow-hidden rounded-t-[999px] rounded-b-xl bg-secondary ring-1 ring-gold/30">
                 {imageUrl ? (
                     <Image
                         src={imageUrl}
                         alt={name}
                         fill
                         preload={preload}
-                        className="object-cover group-hover:scale-105 group-hover:opacity-90 transition-all duration-500"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
                         sizes="(max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                     />
                 ) : (
@@ -70,14 +72,25 @@ export function ProductCardView({slug, name, imageUrl, initialPrice, preload}: P
                         {t('noImage')}
                     </div>
                 )}
+                <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-1.5 sm:inset-2 rounded-t-[999px] rounded-b-lg border border-gold/45 transition-colors duration-300 group-hover:border-gold"
+                />
             </div>
-            <div className="p-3 sm:p-4 space-y-1.5 sm:space-y-2">
-                <h3 className="text-sm sm:text-base font-medium leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+            <div className="flex flex-1 flex-col items-center px-1.5 pt-3 pb-2 sm:px-3 sm:pt-4 sm:pb-3 text-center">
+                <h3 className="font-serif text-base sm:text-lg font-semibold leading-snug line-clamp-2 transition-colors group-hover:text-primary">
                     {name}
                 </h3>
-                <p className="text-base sm:text-lg font-bold tracking-tight">
+                <div className="ornament-divider w-full max-w-28 my-2" aria-hidden="true">
+                    <Diamond className="size-2 fill-current" />
+                </div>
+                <p className="text-base sm:text-lg font-semibold tracking-tight text-primary">
                     <ProductCardPrice slug={slug} initial={initialPrice} />
                 </p>
+                <span className="mt-auto pt-2 inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground transition-colors group-hover:text-primary">
+                    {t('viewDetails')}
+                    <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" />
+                </span>
             </div>
         </Link>
     );

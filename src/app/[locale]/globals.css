@@ -176,3 +176,22 @@
 iframe[src*="razorpay"] {
   color-scheme: light;
 }
+
+/* Temple-saree border band: a row of gold gopuram teeth on maroon under a gold
+   zari line. Add .temple-border-flip for the mirrored band closing a section. */
+.temple-border {
+  height: 12px;
+  border-top: 2px solid var(--gold);
+  background:
+    conic-gradient(from 135deg at 50% 0, var(--gold) 90deg, transparent 0) bottom / 16px 8px repeat-x,
+    #4a0f16;
+}
+.temple-border-flip {
+  transform: scaleY(-1);
+}
+
+/* Faint kolam dot grid for festive section grounds. */
+.kolam-pattern {
+  background-image: radial-gradient(color-mix(in oklch, var(--gold) 35%, transparent) 1px, transparent 1.6px);
+  background-size: 22px 22px;
+}

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {Mail, MapPin, Phone} from "lucide-react";
+import {ChevronRight, Mail, MapPin, Phone} from "lucide-react";
 import {getRouteLocale} from '@/platform/i18n/server';
 import {getRootCollections} from '@/features/collections/data';
 import {formatCollectionName, getCollectionHref} from '@/features/collections/utils';
@@ -80,17 +80,42 @@ export async function Footer() {
                     <div>
                         <p className={headingClass}>{t('categories')}</p>
                         <ul className="space-y-2.5 text-sm">
-                            {collections.map((collection) => (
-                                <li key={collection.id}>
-                                    <NavigationLink
-                                        href={getCollectionHref(collection)}
-                                        prefetch={false}
-                                        className={linkClass}
-                                    >
-                                        {formatCollectionName(collection.name)}
-                                    </NavigationLink>
-                                </li>
-                            ))}
+                            {collections.map((collection) => {
+                                const children = (collection.children ?? []).filter((child) => child.slug);
+                                return (
+                                    // CSS-only dropdown (hover / keyboard focus) so the footer stays a
+                                    // Server Component. Touch devices just follow the parent link.
+                                    <li key={collection.id} className="group/shop relative w-fit">
+                                        <NavigationLink
+                                            href={getCollectionHref(collection)}
+                                            prefetch={false}
+                                            className={`${linkClass} inline-flex items-center gap-1`}
+                                        >
+                                            {formatCollectionName(collection.name)}
+                                            {children.length > 0 && (
+                                                <ChevronRight className="size-3.5 text-gold transition-transform group-hover/shop:translate-x-0.5" aria-hidden="true" />
+                                            )}
+                                        </NavigationLink>
+                                        {children.length > 0 && (
+                                            <div className="invisible absolute left-full -top-3 z-20 pl-3 opacity-0 transition-opacity duration-150 group-hover/shop:visible group-hover/shop:opacity-100 group-focus-within/shop:visible group-focus-within/shop:opacity-100">
+                                                <ul className="min-w-48 space-y-1 rounded-md border border-gold/30 bg-[#3a1016] p-3 shadow-xl">
+                                                    {children.map((child) => (
+                                                        <li key={child.id}>
+                                                            <NavigationLink
+                                                                href={`/collection/${child.slug}`}
+                                                                prefetch={false}
+                                                                className={`${linkClass} block py-1 whitespace-nowrap`}
+                                                            >
+                                                                {formatCollectionName(child.name)}
+                                                            </NavigationLink>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </div>
 
@@ -115,6 +140,11 @@ export async function Footer() {
                             <li>
                                 <NavigationLink href="/cart" className={linkClass}>
                                     {t('cart')}
+                                </NavigationLink>
+                            </li>
+                            <li>
+                                <NavigationLink href="/faq" className={linkClass}>
+                                    {t('faq')}
                                 </NavigationLink>
                             </li>
                         </ul>

@@ -60,6 +60,13 @@
     "deals": {
       "eyebrow": "Zeitlich begrenzte Angebote",
       "title": "Tolle Angebote"
+    },
+    "accessories": {
+      "eyebrow": "Schmuck für die Tänzerin",
+      "title": "Bharatanatyam-Accessoires",
+      "body": "Ghungroo, die bei jedem Adavu klar erklingen, Tempelschmuck und Haarschmuck — der letzte Schliff für einen klassischen Bühnenauftritt.",
+      "cta": "Alle Accessoires ansehen",
+      "imageAlt": "Bharatanatyam-Tänzerin von hinten mit Jada-Zopfschmuck, Blumen-Veni und Tempelschmuck"
     }
   }
 }

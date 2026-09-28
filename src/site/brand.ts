@@ -29,6 +29,12 @@ export const BRAND = {
  */
 export const DEALS_COLLECTION_SLUG = 'amazing-deals';
 
+/**
+ * Vendure collection behind the homepage "Bharatanatyam Accessories" section;
+ * like the deals grid, it hides itself while the collection has no products.
+ */
+export const ACCESSORIES_COLLECTION_SLUG = 'bharatanatyam-accessories';
+
 // Category imagery lives with the collections feature (it also themes collection
 // page banners); re-exported here for existing site imports.
 export {getCategoryImage} from '@/features/collections/utils';

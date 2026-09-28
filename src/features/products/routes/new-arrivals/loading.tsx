@@ -8,9 +8,9 @@ export default function NewArrivalsLoading() {
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
                 {Array.from({length: 8}).map((_, i) => (
-                    <div key={i} className="bg-card rounded-xl overflow-hidden border border-border">
-                        <div className="aspect-square bg-muted animate-pulse" />
-                        <div className="p-4 space-y-2">
+                    <div key={i} className="bg-card rounded-2xl border border-gold/25 p-1.5 sm:p-2">
+                        <div className="aspect-4/5 rounded-t-[999px] rounded-b-xl bg-muted animate-pulse" />
+                        <div className="flex flex-col items-center p-3 sm:p-4 space-y-2">
                             <div className="h-5 bg-muted animate-pulse rounded w-3/4" />
                             <div className="h-6 bg-muted animate-pulse rounded w-1/2" />
                         </div>

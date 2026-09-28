@@ -7,6 +7,7 @@ import {BrandStory} from "@/site/home/brand-story";
 import {ShopByCategory} from "@/site/home/shop-by-category";
 import {BenefitsSection} from "@/site/home/benefits-section";
 import {CtaBanner} from "@/site/home/cta-banner";
+import {AccessoriesSection} from "@/site/home/accessories-section";
 import {FeaturedProducts, TrendingProducts} from '@/features/products/featured-products';
 import {ProductShowcase} from '@/features/products/product-showcase';
 import {SectionHeading} from "@/site/home/section-heading";
@@ -69,6 +70,10 @@ export default async function Home() {
                     <FeaturedProducts collectionSlug={primary}/>
                 </Suspense>
             )}
+
+            <Suspense>
+                <AccessoriesSection/>
+            </Suspense>
 
             <BrandStory/>
 

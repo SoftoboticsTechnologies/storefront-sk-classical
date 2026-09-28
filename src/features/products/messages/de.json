@@ -55,6 +55,7 @@
       "metaDescription": "Entdecken Sie die neuesten Produkte bei {siteName}.",
       "empty": "Neue Stücke sind unterwegs — schauen Sie bald wieder vorbei.",
       "cta": "Produkte ansehen"
-    }
+    },
+    "viewDetails": "Details ansehen"
   }
 }
