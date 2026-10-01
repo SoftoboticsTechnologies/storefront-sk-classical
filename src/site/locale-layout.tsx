@@ -15,6 +15,7 @@ import {FloatingWhatsApp} from "@/site/floating-whatsapp";
 import {ThemeProvider} from "@/site/providers/theme-provider";
 import {AuthProvider} from "@/features/authentication/auth-context";
 import {AnnouncementBar} from "@/site/announcement-bar";
+import {SiteChrome} from "@/site/site-chrome";
 import {SITE_NAME, SITE_URL} from "@/config/metadata";
 
 const geistSans = Geist({
@@ -120,11 +121,18 @@ export default async function LocaleLayout({children}: {children: React.ReactNod
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <ThemeProvider>
                         <AuthProvider>
-                            {/* Scrolls away; only the nav row below is sticky. */}
-                            <AnnouncementBar />
-                            <Navbar />
-                            {children}
-                            <Footer/>
+                            <SiteChrome
+                                header={
+                                    <>
+                                        {/* Scrolls away; only the nav row below is sticky. */}
+                                        <AnnouncementBar />
+                                        <Navbar />
+                                    </>
+                                }
+                                footer={<Footer/>}
+                            >
+                                {children}
+                            </SiteChrome>
                             <FloatingWhatsApp/>
                             <Toaster/>
                         </AuthProvider>

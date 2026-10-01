@@ -47,7 +47,7 @@ export async function Footer() {
     return (
         <footer className="mt-auto bg-[#2a0a0e] text-white/75">
             <div className="h-1 bg-gradient-to-r from-transparent via-gold to-transparent opacity-70" />
-            <div className="container mx-auto px-6 md:px-10 lg:px-12 pt-14 pb-10">
+            <div className="container mx-auto px-4 md:px-6 lg:px-8 pt-10 sm:pt-14 pb-8 sm:pb-10">
                 {/* Phones: link columns pair up (2-col), tablets/small laptops: 3-col, wide desktop: 5-col
                     (below xl the 5th column is too narrow for the phone number and email). */}
                 <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-[1.4fr_1fr_1fr_1fr_1.2fr] gap-x-6 gap-y-10 xl:gap-10">
@@ -235,7 +235,7 @@ export async function Footer() {
 
             {/* Copyright / powered-by strip always stays the last row of the page. */}
             <div className="border-t border-white/10">
-                <div className="container mx-auto px-6 md:px-10 lg:px-12 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/70">
+                <div className="container mx-auto px-4 md:px-6 lg:px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left text-xs text-white/70">
                     <p>&copy; {COPYRIGHT_YEAR} {t('copyright', {siteName: SITE_NAME})}</p>
                     <div className="flex items-center gap-3">
                         <span className="hidden sm:block h-3.5 w-px bg-white/30" aria-hidden="true" />

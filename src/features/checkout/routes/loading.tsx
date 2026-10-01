@@ -9,7 +9,7 @@ export default function CheckoutLoading() {
                 {/* Checkout Steps */}
                 <div className="lg:col-span-2 space-y-6">
                     {/* Step Indicator */}
-                    <div className="flex items-center justify-between mb-8">
+                    <div className="hidden sm:flex items-center justify-between mb-8">
                         {Array.from({ length: 4 }).map((_, i) => (
                             <div key={i} className="flex items-center">
                                 <Skeleton className="h-8 w-8 rounded-full" />
