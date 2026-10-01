@@ -1,3 +1,5 @@
+import {STORE_WHATSAPP_HREF} from '@/config/contact';
+
 /**
  * Static brand details for SK Classics (Shri Kalaivani), taken from the
  * brand's existing site. Presentation only — nothing commerce-related lives here.
@@ -12,9 +14,14 @@ export const BRAND = {
     contact: {
         phone: '+91 88888 20222',
         phoneHref: 'tel:+918888820222',
-        whatsappHref: 'https://wa.me/918888820222',
+        whatsappHref: STORE_WHATSAPP_HREF,
         email: 'sagar.annadate@gmail.com',
-        address: 'Shop No 1, opp SBI Bank, Next to Lilavati Soc., Maharashtra, Thane, 400605',
+        // Shop name as shown on its address / Google listing; first line of the address.
+        storeName: 'Shri Kalaivani Costumes',
+        address: 'Shop 1, Opp SBI Bank, Next to Lilawati Soc, Datta Wadi, Kharegaon, Kalwa, Thane, Maharashtra 400605',
+        // The shop's Google business listing (link from the owner); backs "Find Store"
+        // in the top bar and the footer address link.
+        mapsHref: 'https://g.co/kgs/atUZCw',
     },
     social: {
         facebook: 'https://www.facebook.com/shrikalaivani.dresses/',

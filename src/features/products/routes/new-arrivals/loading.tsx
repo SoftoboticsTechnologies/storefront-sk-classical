@@ -1,6 +1,6 @@
 export default function NewArrivalsLoading() {
     return (
-        <div className="container mx-auto px-4 py-8 mt-16">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8 mt-16">
             <div className="flex flex-col items-center gap-4 py-8 md:py-12">
                 <div className="h-3 w-28 bg-muted animate-pulse rounded" />
                 <div className="h-10 w-64 bg-muted animate-pulse rounded" />

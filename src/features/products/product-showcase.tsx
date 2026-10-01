@@ -80,7 +80,7 @@ export async function ProductShowcase({heading, aside, asideSide = 'start', lead
     return (
         <section className={className ?? "py-16 md:py-20"}>
             {leading}
-            <div className={cn("container mx-auto px-4", (leading || trailing) && "py-14 md:py-20")}>
+            <div className={cn("container mx-auto px-4 md:px-6 lg:px-8", (leading || trailing) && "py-14 md:py-20")}>
                 {heading}
                 {aside ? (
                     <div className="grid gap-6 md:grid-cols-2 lg:gap-10 items-start">

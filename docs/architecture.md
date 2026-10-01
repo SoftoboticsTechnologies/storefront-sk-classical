@@ -38,7 +38,7 @@ Feature route implementations use Next.js-generated `PageProps` and `LayoutProps
 
 ## Routes (`src/app/[locale]/`)
 
-`page.tsx` (home), `product/[slug]/[[...variant]]` (optional catch-all segment is a variant SKU — see Rendering strategy below), `collection/[slug]`, `search`, `cart`, `checkout`, `order-confirmation/[code]`, `account` (+ `addresses`, `orders`, `orders/[code]`, `profile`, `verify-email`), `sign-in`, `register`, `forgot-password`, `reset-password`, `verify`, `verify-pending`, `not-found`, plus `app/api/revalidate/route.ts`. Every major route pairs with a `loading.tsx` skeleton — preserve this when adding routes.
+`page.tsx` (home), `product/[slug]/[[...variant]]` (optional catch-all segment is a variant SKU — see Rendering strategy below), `collection/[slug]`, `search`, `cart`, `wishlist`, `checkout`, `order-confirmation/[code]`, `account` (+ `addresses`, `orders`, `orders/[code]`, `profile`, `verify-email`), `sign-in`, `register`, `forgot-password`, `reset-password`, `verify`, `verify-pending`, `not-found`, plus `app/api/revalidate/route.ts`. Every major route pairs with a `loading.tsx` skeleton — preserve this when adding routes.
 
 ## Rendering strategy
 

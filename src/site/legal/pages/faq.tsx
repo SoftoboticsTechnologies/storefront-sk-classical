@@ -5,7 +5,7 @@ import {SITE_NAME, buildCanonicalUrl} from '@/config/metadata';
 import {BRAND} from '@/site/brand';
 import {FAQ_GROUPS, FAQ_PAGE} from '@/site/legal/faq';
 import {NavigationLink} from '@/site/navigation/navigation-link';
-import {WhatsAppIcon} from '@/site/whatsapp-icon';
+import {WhatsAppIcon} from '@/components/icons/whatsapp-icon';
 
 export function generateMetadata(): Metadata {
     return {
@@ -40,7 +40,7 @@ export default function FaqPage() {
                 dangerouslySetInnerHTML={{__html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c')}}
             />
             <div className="border-b border-gold/30 bg-muted/40">
-                <div className="container mx-auto px-4 py-12 md:py-16 text-center">
+                <div className="container mx-auto px-4 md:px-6 lg:px-8 py-12 md:py-16 text-center">
                     <h1 className="font-serif text-3xl md:text-4xl font-semibold text-primary text-balance">
                         {FAQ_PAGE.title}
                     </h1>

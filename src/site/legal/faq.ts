@@ -104,7 +104,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
             {
                 id: 'contact',
                 question: 'How can I reach you?',
-                answer: `Call us 24x7 or message us on WhatsApp at ${contact.phone}, or email ${contact.email}. You can also visit us at ${contact.address}.`,
+                answer: `Call us 24x7 or message us on WhatsApp at ${contact.phone}, or email ${contact.email}. You can also visit us at ${contact.storeName}, ${contact.address}.`,
             },
         ],
     },

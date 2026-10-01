@@ -58,7 +58,7 @@ export function OrderConfirmation() {
 
     if (isLoading) {
         return (
-            <div className="container mx-auto px-4 py-16 text-center">
+            <div className="container mx-auto px-4 md:px-6 lg:px-8 py-16 text-center">
                 <Loader2 className="h-6 w-6 animate-spin mx-auto text-muted-foreground" />
             </div>
         );
@@ -66,7 +66,7 @@ export function OrderConfirmation() {
 
     if (!order) {
         return (
-            <div className="container mx-auto px-4 py-16">
+            <div className="container mx-auto px-4 md:px-6 lg:px-8 py-16">
                 <div className="max-w-3xl mx-auto">
                     <PaymentProcessingBanner code={code} onOrderUpdate={setOrder} />
                 </div>
@@ -75,7 +75,7 @@ export function OrderConfirmation() {
     }
 
     return (
-        <div className="container mx-auto px-4 py-16">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 py-16">
             <div className="max-w-3xl mx-auto">
                 {order.state === 'ArrangingPayment' && (
                     <PaymentProcessingBanner code={code} onOrderUpdate={setOrder} />

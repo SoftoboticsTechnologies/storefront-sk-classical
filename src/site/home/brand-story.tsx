@@ -10,7 +10,7 @@ export async function BrandStory() {
 
     return (
         <section className="py-16 md:py-24 overflow-hidden">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 md:px-6 lg:px-8">
                 <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
                     <div className="relative mx-auto w-full max-w-md">
                         <div className="absolute inset-0 rounded-lg border border-gold/50 translate-x-2 translate-y-2 md:translate-x-4 md:translate-y-4" aria-hidden="true" />

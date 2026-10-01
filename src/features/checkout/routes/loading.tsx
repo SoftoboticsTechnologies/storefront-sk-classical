@@ -2,10 +2,10 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function CheckoutLoading() {
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8">
             <Skeleton className="h-9 w-32 mb-8" />
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Checkout Steps */}
                 <div className="lg:col-span-2 space-y-6">
                     {/* Step Indicator */}

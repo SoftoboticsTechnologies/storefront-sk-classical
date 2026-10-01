@@ -1,0 +1,20 @@
+{
+  "Wishlist": {
+    "title": "Wunschliste",
+    "add": "Zur Wunschliste hinzufügen",
+    "remove": "Von der Wunschliste entfernen",
+    "empty": "Ihre Wunschliste ist leer",
+    "emptyMessage": "Tippen Sie bei einem Produkt auf das Herz, um es hier zu speichern.",
+    "continueShopping": "Weiter einkaufen",
+    "note": "Nur auf diesem Gerät gespeichert.",
+    "addToCart": "In den Warenkorb",
+    "adding": "Wird hinzugefügt...",
+    "addedToCart": "Hinzugefügt",
+    "outOfStock": "Nicht verfügbar",
+    "selectOptions": "Optionen wählen",
+    "addedToCartMessage": "In den Warenkorb gelegt",
+    "addedToCartDescription": "{name} wurde Ihrem Warenkorb hinzugefügt",
+    "errorTitle": "Fehler",
+    "errorAddToCart": "Artikel konnte nicht zum Warenkorb hinzugefügt werden"
+  }
+}

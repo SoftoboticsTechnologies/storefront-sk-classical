@@ -134,6 +134,13 @@
     font-family: var(--font-cormorant), Georgia, serif;
     letter-spacing: 0.005em;
   }
+  /* Product page details column: Nunito Sans throughout, headings included. */
+  .font-pdp,
+  .font-pdp h1,
+  .font-pdp h2 {
+    font-family: var(--font-nunito-sans), ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: normal;
+  }
 }
 
 @keyframes fade-up {
@@ -149,6 +156,46 @@
 
 .animate-fade-up {
   animation: fade-up 0.4s ease-out both;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fade-in 0.35s ease-out both;
+}
+
+/* Product-page trust marker icons: a truck that nudges forward, a pulsing
+   payment icon, and a slowly turning returns icon. */
+@keyframes slide-x {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+@keyframes pulse-scale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+.animate-slide-x {
+  animation: slide-x 1.2s ease-in-out infinite;
+}
+.animate-pulse-scale {
+  animation: pulse-scale 1.4s ease-in-out infinite;
+}
+/* Own keyframes: Tailwind v4 only emits `spin` when `animate-spin` is used. */
+@keyframes rotate-360 {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: rotate-360 3.2s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-slide-x,
+  .animate-pulse-scale,
+  .animate-spin-slow,
+  .animate-fade-in {
+    animation: none;
+  }
 }
 
 /* Thin gold rules either side of a centred mark (e.g. a diamond icon), echoing the brand banner ornaments. */

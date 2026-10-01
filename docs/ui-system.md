@@ -29,7 +29,9 @@ Replaces the neutral slate palette in `globals.css` (same token names, so every 
 ## Responsive conventions (2026-09-25)
 - Product grids (`product-grid.tsx`, New Arrivals) are 2-up on phones (`grid-cols-2 gap-3`), and `ProductCardView` shrinks its padding and type below `sm`. Product carousels show 2 cards on phones (`basis-1/2`) and keep their arrows inside the edges (`left-2`/`right-2`); the shadcn default `-left-12` overflowed the viewport.
 - Below `xl`, the pinned nav row shows the hamburger plus `mobile-category-strip.tsx` (horizontally scrollable root-collection chips + New Arrivals).
-- Footer: 2 columns on phones, 3 on tablets, 5 on desktop; brand, contact and payment logos span the full row below `lg`.
+- Footer: 2 columns on phones, 3 on tablets and small laptops, 5 from `xl` (at `lg` the 5th column was too narrow for the phone/email); brand, contact and payment logos span the full row below `xl`. The Shop column hover flyout and its chevrons are hidden on `pointer-coarse` (touch) devices.
+- Page gutters: `container mx-auto px-4 md:px-6 lg:px-8` everywhere (header menu row, sections, routes). Use the same trio for new sections.
+- Two-column page grids (cart, checkout) use `grid grid-cols-1 lg:grid-cols-3`: without `grid-cols-1` the implicit track is `auto`, and fixed-width children (e.g. skeleton bars) push it past the phone viewport.
 - Verified with no horizontal overflow at 360/768/1024/1280 across home, collection, product, new arrivals, search and cart.
 
 ## Target direction
@@ -62,6 +64,8 @@ Redesigned 2026-08-31 (products-as-hero, editorial/merchandising structure). `pa
 ## Current PDP/PLP presentation (`src/features/products/`)
 `components/product-card.tsx` (PLP card), `product-carousel.tsx`, `product-image-carousel.tsx` (PDP gallery — bespoke prev/next, not using `ui/carousel`, no zoom), `product-info.tsx` (variant `RadioGroup` + add-to-cart + toast), `related-products.tsx`, `pagination.tsx`, `product-grid.tsx` (+ `product-grid-skeleton.tsx`), `featured-products.tsx`.
 
+PDP layout (2026-10-01, modelled on skclassical.com's product page, in our maroon/gold tokens): 7/5 grid on `lg`. Left: sticky gallery (`product-image-carousel.tsx`) with a vertical thumbnail rail on desktop, horizontal rail + dots and swipe on mobile, photos `object-contain` on white, fade between images. Right column, top to bottom: `product-info.tsx` (serif title + round `product-share-button.tsx`, maroon price + "inclusive of all taxes" note, `.ornament-divider`, one bordered card per option group, stock, Add to Cart + wishlist, and a mobile-only sticky buy bar that slides up when the main button leaves the viewport; its `pr-20` leaves room for the site's floating WhatsApp button), `product-trust-markers.tsx` (3 animated icon markers + dispatch strip; copy must restate only real store policy), `product-details-card.tsx` (SKU + Vendure facet rows via `product-attributes.ts`, then the description, collapsed to 230px with Read more), `product-contact-card.tsx` (WhatsApp "Start Chat", prefilled with the product name + URL). Looping icon animations live in `globals.css`: `.animate-slide-x` (1.2s), `.animate-pulse-scale` (1.4s), `.animate-spin-slow` (3.2s), plus `.animate-fade-in`; all off under `prefers-reduced-motion`. Not copied from the reference because there's no Vendure data for them: MRP/strike price/% off, "View Available Offers", ratings, COD, free delivery.
+
 ## Cart presentation (`src/features/cart/`)
 `routes/{cart,cart-items,order-summary,promotion-code}.tsx`, `components/cart-skeleton.tsx`. No dedicated cart-drawer component in this feature dir — `navbar-cart.tsx`/`cart-icon.tsx` are the trigger; a slide-over mini-cart (using `ui/sheet`) is a gap, not yet built.
 
@@ -74,7 +78,7 @@ Redesigned 2026-08-31 (products-as-hero, editorial/merchandising structure). `pa
 3. ~~No search overlay (command palette primitive sits unused).~~ Shipped 2026-08-31 — see "Current navigation" above.
 4. ~~Homepage is hero + one carousel — no promo/editorial/trust/newsletter blocks.~~ Shipped 2026-08-31 — see "Current homepage" above.
 5. PDP gallery is bespoke, no zoom/lightbox; doesn't reuse `ui/carousel`.
-6. No visible product badges (sale/new), no quick-add, no wishlist affordance.
+6. No visible product badges (sale/new), no quick-add. ~~No wishlist affordance.~~ Browser-saved wishlist shipped 2026-10-01 (`features/wishlist`).
 7. No dedicated cart-drawer/mini-cart component.
 8. Footer is one monolithic file, not decomposed.
 

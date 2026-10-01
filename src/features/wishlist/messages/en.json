@@ -1,0 +1,20 @@
+{
+  "Wishlist": {
+    "title": "Wishlist",
+    "add": "Add to wishlist",
+    "remove": "Remove from wishlist",
+    "empty": "Your wishlist is empty",
+    "emptyMessage": "Tap the heart on any product to save it here.",
+    "continueShopping": "Continue Shopping",
+    "note": "Saved on this device only.",
+    "addToCart": "Add to Cart",
+    "adding": "Adding...",
+    "addedToCart": "Added to Cart",
+    "outOfStock": "Out of Stock",
+    "selectOptions": "Select Options",
+    "addedToCartMessage": "Added to cart",
+    "addedToCartDescription": "{name} has been added to your cart",
+    "errorTitle": "Error",
+    "errorAddToCart": "Failed to add item to cart"
+  }
+}

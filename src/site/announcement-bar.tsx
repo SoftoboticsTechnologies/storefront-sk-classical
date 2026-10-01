@@ -2,17 +2,19 @@ import {Suspense} from "react";
 import {NavigationLink} from '@/site/navigation/navigation-link';
 import {BrandLogo} from '@/site/brand-logo';
 import {NavbarCart} from '@/site/navigation/navbar/navbar-cart';
+import {NavbarWishlist} from '@/site/navigation/navbar/navbar-wishlist';
 import {NavbarUser} from '@/site/navigation/navbar/navbar-user';
 import {CurrencyPickerWrapper} from '@/site/navigation/navbar/currency-picker-wrapper';
 import {NavbarUserSkeleton} from '@/site/navigation/skeletons/navbar-user-skeleton';
 import {SearchInput} from '@/site/navigation/search-input';
 import {SearchInputSkeleton} from '@/site/navigation/skeletons/search-input-skeleton';
+import {FindStoreLink} from '@/site/navigation/find-store-link';
 
 // Ghost buttons assume a light surface; recolour them for the primary-coloured bar.
 const onPrimaryButtons = "[&_[data-slot=button]]:text-primary-foreground [&_[data-slot=button]:hover]:bg-primary-foreground/15 [&_[data-slot=button]:hover]:text-primary-foreground [&_[data-slot=button][aria-expanded=true]]:bg-primary-foreground/15";
 
 /**
- * Top brand bar: logo, search and account/cart. Scrolls away with the page;
+ * Top brand bar: logo, find-store link, search and account/cart. Scrolls away with the page;
  * only the menu row in `navbar.tsx` stays pinned.
  */
 export function AnnouncementBar() {
@@ -24,7 +26,8 @@ export function AnnouncementBar() {
                     <BrandLogo className="h-12" priority onPrimary />
                 </NavigationLink>
 
-                <div className="flex justify-center min-w-0">
+                <div className="flex items-center justify-center gap-2 md:gap-4 min-w-0">
+                    <FindStoreLink/>
                     <Suspense fallback={<SearchInputSkeleton />}>
                         <SearchInput/>
                     </Suspense>
@@ -38,6 +41,9 @@ export function AnnouncementBar() {
                         <NavbarUser/>
                     </Suspense>
                     <span className="hidden md:block h-6 w-px bg-primary-foreground/25" aria-hidden="true" />
+                    <Suspense>
+                        <NavbarWishlist/>
+                    </Suspense>
                     <Suspense>
                         <NavbarCart/>
                     </Suspense>

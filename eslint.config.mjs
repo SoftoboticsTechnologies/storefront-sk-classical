@@ -11,6 +11,7 @@ const featureNames = [
   "pricing",
   "products",
   "search",
+  "wishlist",
 ];
 
 function privateFeatureImportPattern(owner) {

@@ -2,7 +2,7 @@ import type {Metadata, Viewport} from "next";
 import Script from "next/script";
 import {locale as rootLocale} from "next/root-params";
 import {hasLocale, NextIntlClientProvider} from "next-intl";
-import {Cormorant_Garamond, Geist, Geist_Mono} from "next/font/google";
+import {Cormorant_Garamond, Geist, Geist_Mono, Nunito_Sans} from "next/font/google";
 import {getMessages, getTranslations, setRequestLocale} from "next-intl/server";
 import {notFound} from "next/navigation";
 import {routing} from "@/platform/i18n/routing";
@@ -27,6 +27,12 @@ const cormorant = Cormorant_Garamond({
     subsets: ["latin"],
     weight: ["400", "500", "600", "700"],
     style: ["normal", "italic"],
+});
+
+// Product page buy box / details column (`.font-pdp` in globals.css).
+const nunitoSans = Nunito_Sans({
+    variable: "--font-nunito-sans",
+    subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
@@ -109,7 +115,7 @@ export default async function LocaleLayout({children}: {children: React.ReactNod
     return (
         <html lang={locale} data-scroll-behavior="smooth" suppressHydrationWarning>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} antialiased flex flex-col min-h-screen`}
+                className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} ${nunitoSans.variable} antialiased flex flex-col min-h-screen`}
             >
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <ThemeProvider>

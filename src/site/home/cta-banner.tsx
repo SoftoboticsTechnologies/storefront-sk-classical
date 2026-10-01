@@ -18,7 +18,7 @@ export async function CtaBanner() {
                 sizes="100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#4a0f16] via-[#4a0f16]/90 to-[#4a0f16]/30" />
-            <div className="relative container mx-auto px-4 py-16 md:py-24">
+            <div className="relative container mx-auto px-4 md:px-6 lg:px-8 py-16 md:py-24">
                 <div className="max-w-xl">
                     <p className="text-xs font-medium uppercase tracking-[0.25em] text-gold mb-3">
                         {t('ctaBanner.eyebrow')}

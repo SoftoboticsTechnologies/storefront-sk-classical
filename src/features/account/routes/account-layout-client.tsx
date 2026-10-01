@@ -43,7 +43,7 @@ export function AccountLayoutClient({children}: {children: ReactNode}) {
     }
 
     return (
-        <div className="container mx-auto px-4 py-30">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 py-30">
             {/* Mobile: horizontal tab bar */}
             <div className="md:hidden mb-6">
                 <AccountNavLinks items={navItems} layout="horizontal" />

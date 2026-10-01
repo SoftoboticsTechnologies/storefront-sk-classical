@@ -71,6 +71,28 @@ export const GetProductDetailQuery = graphql(`
                     id
                 }
             }
+            facetValues {
+                id
+                name
+                facet {
+                    id
+                    name
+                }
+            }
+        }
+    }
+`);
+
+// All images of one product, for the product card's hover slideshow. Fetched
+// lazily on first hover, since search results only carry one `productAsset`.
+export const GetProductAssetsQuery = graphql(`
+    query GetProductAssets($slug: String!) {
+        product(slug: $slug) {
+            id
+            assets {
+                id
+                preview
+            }
         }
     }
 `);

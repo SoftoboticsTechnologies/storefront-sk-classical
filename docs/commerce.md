@@ -47,3 +47,6 @@ Vendure integration map for `apps/storefront/src`. Treat everything here as prot
 
 ## Protected file list (do not change behavior, only presentation)
 `src/platform/vendure/**`, all `graphql.ts` files under `src/features/*`, all `routes/actions.ts` Server Actions, `src/features/currency/currency-server.ts`, `src/features/search/search-helpers.ts`, `src/features/checkout/routes/steps/stripe-payment-form.tsx`, `src/features/orders/routes/order-confirmation.tsx`.
+
+## Storefront offers (`publicPromotions`)
+The PDP offers strip/drawer reads promotions from a custom Shop API query that the stock Vendure doesn't have. See `docs/vendure-public-promotions.md` for the server plugin, which promotions are listed, and when a "Get this as low as" price is allowed. Never hardcode offer amounts in the storefront; if the query is missing, the UI must stay hidden.

@@ -29,7 +29,7 @@ export default async function SearchPage() {
     const t = await getTranslations({locale, namespace: 'Search'});
 
     return (
-        <div className="container mx-auto px-4 py-8 mt-16">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8 mt-16">
             <PageBanner
                 className="mb-8"
                 eyebrow={t('bannerEyebrow')}

@@ -19,7 +19,7 @@ export default async function OrderConfirmationPage() {
     const t = await getTranslations({locale, namespace: 'Common'});
 
     return (
-        <Suspense fallback={<div className="container mx-auto px-4 py-16 text-center">{t('loading')}</div>}>
+        <Suspense fallback={<div className="container mx-auto px-4 md:px-6 lg:px-8 py-16 text-center">{t('loading')}</div>}>
             <OrderConfirmation />
         </Suspense>
     );

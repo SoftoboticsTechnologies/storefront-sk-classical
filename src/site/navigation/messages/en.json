@@ -22,6 +22,8 @@
     "shop": "Shop",
     "more": "More",
     "newArrivals": "New Arrivals",
-    "allProducts": "All Products"
+    "allProducts": "All Products",
+    "wishlist": "Wishlist",
+    "findStore": "Find Store"
   }
 }

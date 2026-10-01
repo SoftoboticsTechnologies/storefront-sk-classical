@@ -13,7 +13,7 @@ export function Navbar() {
         // Sticky (not fixed) so the top bar above can scroll away. -mb-16
         // cancels its flow height, keeping the mt-16 offset pages already use.
         <header className="sticky top-0 z-50 -mb-16 border-b border-gold/30 backdrop-blur-md bg-background/85">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 md:px-6 lg:px-8">
                 <div className="relative flex items-center gap-2 xl:justify-center h-16">
                     <div className="flex shrink-0 items-center xl:absolute xl:left-0">
                         <Suspense>

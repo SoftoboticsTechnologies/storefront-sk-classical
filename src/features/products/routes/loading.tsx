@@ -2,51 +2,32 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function ProductLoading() {
     return (
-        <div className="container mx-auto px-4 py-8 mt-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-                {/* Left Column: Image Carousel Skeleton */}
-                <div className="lg:sticky lg:top-20 lg:self-start">
-                    <Skeleton className="aspect-square w-full rounded-lg" />
-                    <div className="flex gap-2 mt-4">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8 mt-16">
+            <Skeleton className="h-4 w-56 mb-6" />
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
+                {/* Gallery: vertical thumbnail rail (desktop) / row below (mobile) */}
+                <div className="relative flex flex-col lg:col-span-7 lg:block lg:pl-24">
+                    <div className="order-2 mt-3 flex gap-2 lg:absolute lg:inset-y-0 lg:left-0 lg:mt-0 lg:flex-col">
                         {Array.from({ length: 4 }).map((_, i) => (
-                            <Skeleton key={i} className="h-16 w-16 rounded-md" />
+                            <Skeleton key={i} className="size-16 lg:size-20 rounded-lg" />
                         ))}
                     </div>
+                    <Skeleton className="order-1 aspect-square w-full rounded-2xl" />
                 </div>
 
-                {/* Right Column: Product Info Skeleton */}
-                <div className="space-y-6">
-                    {/* Product Title */}
-                    <div>
-                        <Skeleton className="h-9 w-3/4" />
-                        <Skeleton className="h-8 w-24 mt-2" />
-                    </div>
-
-                    {/* Product Description */}
+                {/* Buy box, trust markers, details */}
+                <div className="space-y-5 lg:col-span-5">
+                    <Skeleton className="h-10 w-4/5" />
                     <div className="space-y-2">
-                        <Skeleton className="h-4 w-full" />
-                        <Skeleton className="h-4 w-full" />
-                        <Skeleton className="h-4 w-2/3" />
+                        <Skeleton className="h-9 w-32" />
+                        <Skeleton className="h-3 w-48" />
                     </div>
-
-                    {/* Option Groups */}
-                    <div className="space-y-4">
-                        <Skeleton className="h-5 w-16" />
-                        <div className="grid grid-cols-3 gap-3">
-                            {Array.from({ length: 3 }).map((_, i) => (
-                                <Skeleton key={i} className="h-12 w-full rounded-md" />
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Stock Status */}
+                    <Skeleton className="h-px w-full" />
+                    <Skeleton className="h-24 w-full rounded-2xl" />
                     <Skeleton className="h-4 w-20" />
-
-                    {/* Add to Cart Button */}
-                    <Skeleton className="h-12 w-full" />
-
-                    {/* SKU */}
-                    <Skeleton className="h-3 w-32" />
+                    <Skeleton className="h-12 w-full rounded-lg" />
+                    <Skeleton className="h-32 w-full rounded-2xl" />
+                    <Skeleton className="h-56 w-full rounded-2xl" />
                 </div>
             </div>
         </div>
