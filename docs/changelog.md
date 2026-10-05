@@ -2,6 +2,9 @@
 
 Concise history. Not a full commit log — one line per meaningful change.
 
+## 2026-10-05
+- Mobile category strip (`site/navigation/navbar/mobile-category-strip-list.tsx`, client): 32px chips, highlighted active category (`aria-current`) that scrolls into view, fade on whichever edge still hides chips, scroll snap. The hamburger sheet now opens with the same chips under "Shop by category" (`Navigation.shopByCategory`, en/de/hi/tel), above the existing accordion.
+
 ## 2026-10-01
 - About Us redesigned (`site/legal/pages/about-us.tsx`, bespoke layout, metadata still from `createLegalPage`): maroon kolam hero with the SK logo, arch-framed story image, three value cards, "Visit Our Store" card with `StoreLocatorIcon`, full address/contacts and a Find Store button (`BRAND.contact.mapsHref`), closing tagline band. Copy still sourced from `LEGAL_PAGES['about-us']`; English only like the other static pages.
 - Store address: added `BRAND.contact.storeName` ("Shri Kalaivani Costumes"), shown as the first line of the footer address (`<address>`) and in the FAQ contact answer.

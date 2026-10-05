@@ -15,6 +15,8 @@
     "addedToCartMessage": "In den Warenkorb gelegt",
     "addedToCartDescription": "{name} wurde Ihrem Warenkorb hinzugefügt",
     "errorTitle": "Fehler",
-    "errorAddToCart": "Artikel konnte nicht zum Warenkorb hinzugefügt werden"
+    "errorAddToCart": "Artikel konnte nicht zum Warenkorb hinzugefügt werden",
+    "addedToast": "Zur Wunschliste hinzugefügt",
+    "removedToast": "Von der Wunschliste entfernt"
   }
 }

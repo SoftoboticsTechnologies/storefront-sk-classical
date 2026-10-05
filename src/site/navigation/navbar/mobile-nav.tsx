@@ -1,8 +1,10 @@
 'use client';
 
 import {useState} from 'react';
-import { Link } from '@/platform/i18n/navigation';
-import {Menu, Search, ShoppingBag, Sparkles, User, Package, MapPin} from 'lucide-react';
+import {Link, usePathname} from '@/platform/i18n/navigation';
+import {cn} from '@/lib/utils';
+import {isCategoryActive} from '@/site/navigation/navbar/mobile-category-strip-list';
+import {ArrowRight, ChevronRight, Menu, Search, ShoppingBag, Sparkles, User, Package, MapPin} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {SearchOverlay} from '@/site/navigation/navbar/search-overlay';
 import {
@@ -37,6 +39,16 @@ export function MobileNav({collections}: MobileNavProps) {
     const t = useTranslations('Navigation');
     const [open, setOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
+    const pathname = usePathname();
+
+    const categoryChips = [
+        ...collections.map((collection) => ({
+            key: collection.id,
+            href: getCollectionHref(collection),
+            label: formatCollectionName(collection.name),
+        })),
+        {key: 'new-arrivals', href: '/new-arrivals', label: t('newArrivals')},
+    ];
 
     const handleLinkClick = () => {
         setOpen(false);
@@ -69,6 +81,40 @@ export function MobileNav({collections}: MobileNavProps) {
                         <Search className="mr-2 h-4 w-4 shrink-0" />
                         <span className="truncate">{t('searchProducts')}</span>
                     </button>
+
+                    {/* Category chips — mirrors the pinned mobile strip */}
+                    <div>
+                        <p className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                            {t('shopByCategory')}
+                        </p>
+                        <ul className="flex flex-wrap gap-2 px-1">
+                            {categoryChips.map((chip) => {
+                                const active = isCategoryActive(pathname, chip.href);
+                                return (
+                                    <li key={chip.key}>
+                                        <SheetClose
+                                            render={
+                                                <Link
+                                                    href={chip.href}
+                                                    aria-current={active ? 'page' : undefined}
+                                                    className={cn(
+                                                        'inline-flex h-9 items-center rounded-full border px-4 text-xs font-semibold uppercase tracking-[0.08em] no-underline transition-colors active:scale-[0.97]',
+                                                        active
+                                                            ? 'border-primary bg-primary text-primary-foreground'
+                                                            : 'border-gold/40 text-foreground/85 hover:border-primary hover:text-primary',
+                                                    )}
+                                                />
+                                            }
+                                            nativeButton={false}
+                                            onClick={handleLinkClick}
+                                        >
+                                            {chip.label}
+                                        </SheetClose>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
 
                     {/* Shop All */}
                     <div>
@@ -134,21 +180,22 @@ export function MobileNav({collections}: MobileNavProps) {
                                                 <AccordionTrigger className="px-3 py-2.5 hover:no-underline">
                                                     {formatCollectionName(collection.name)}
                                                 </AccordionTrigger>
-                                                <AccordionContent>
-                                                    <div className="flex flex-col gap-0.5 pl-3">
+                                                <AccordionContent className="pb-2 [&_a]:no-underline">
+                                                    <div className="ml-4 flex flex-col gap-0.5 border-l border-gold/40 pl-2">
                                                         {getCollectionPathSlug(collection) && (
                                                             <SheetClose
                                                                 render={
                                                                     <Link
                                                                         href={getCollectionHref(collection)}
                                                                         prefetch={false}
-                                                                        className="px-3 py-2 text-sm rounded-md hover:bg-accent transition-colors"
+                                                                        className="group/sub flex items-center justify-between rounded-md px-3 py-2 text-sm font-semibold text-primary transition-colors hover:bg-gold/10"
                                                                     />
                                                                 }
                                                                 nativeButton={false}
                                                                 onClick={handleLinkClick}
                                                             >
                                                                 {t('viewAll')}
+                                                                <ArrowRight className="size-4 text-gold transition-transform group-hover/sub:translate-x-0.5" />
                                                             </SheetClose>
                                                         )}
                                                         {children.filter((child) => child.slug).map((child) => (
@@ -158,13 +205,14 @@ export function MobileNav({collections}: MobileNavProps) {
                                                                     <Link
                                                                         href={`/collection/${child.slug}`}
                                                                         prefetch={false}
-                                                                        className="px-3 py-2 text-sm rounded-md hover:bg-accent transition-colors"
+                                                                        className="group/sub flex items-center justify-between rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-gold/10 hover:text-foreground"
                                                                     />
                                                                 }
                                                                 nativeButton={false}
                                                                 onClick={handleLinkClick}
                                                             >
                                                                 {formatCollectionName(child.name)}
+                                                                <ChevronRight className="size-4 text-gold/70 opacity-0 transition-all group-hover/sub:translate-x-0.5 group-hover/sub:opacity-100" />
                                                             </SheetClose>
                                                         ))}
                                                     </div>

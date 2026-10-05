@@ -15,6 +15,8 @@
     "addedToCartMessage": "కార్ట్‌కు జోడించబడింది",
     "addedToCartDescription": "{name} మీ కార్ట్‌కు జోడించబడింది",
     "errorTitle": "లోపం",
-    "errorAddToCart": "వస్తువును కార్ట్‌కు జోడించడంలో విఫలమైంది"
+    "errorAddToCart": "వస్తువును కార్ట్‌కు జోడించడంలో విఫలమైంది",
+    "addedToast": "విష్‌లిస్ట్‌కు జోడించబడింది",
+    "removedToast": "విష్‌లిస్ట్ నుండి తీసివేయబడింది"
   }
 }

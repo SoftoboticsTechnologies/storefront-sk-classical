@@ -2,6 +2,7 @@
 
 import {Heart} from 'lucide-react';
 import {useTranslations} from 'next-intl';
+import {toast} from 'sonner';
 import {cn} from '@/lib/utils';
 import {toggleWishlist, useWishlist} from '@/features/wishlist/wishlist-store';
 
@@ -27,7 +28,8 @@ export function WishlistButton({slug, variant = 'overlay', className}: WishlistB
                 // Cards sit next to a full-tile link; keep the click on the button.
                 event.preventDefault();
                 event.stopPropagation();
-                toggleWishlist(slug);
+                const nowSaved = toggleWishlist(slug);
+                toast.success(nowSaved ? t('addedToast') : t('removedToast'));
             }}
             className={cn(
                 'inline-flex shrink-0 items-center justify-center text-primary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold',

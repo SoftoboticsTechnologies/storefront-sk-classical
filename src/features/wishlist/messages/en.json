@@ -15,6 +15,8 @@
     "addedToCartMessage": "Added to cart",
     "addedToCartDescription": "{name} has been added to your cart",
     "errorTitle": "Error",
-    "errorAddToCart": "Failed to add item to cart"
+    "errorAddToCart": "Failed to add item to cart",
+    "addedToast": "Added to wishlist",
+    "removedToast": "Removed from wishlist"
   }
 }
