@@ -54,7 +54,10 @@ export default function CheckoutFlow() {
   useEffect(() => {
     const hasAddress = Boolean(order.shippingAddress?.streetLine1 && order.shippingAddress?.country);
     const method = shippingMethods[0];
-    if (!hasAddress || !method) return;
+    // Vendure only accepts shipping changes while the order is AddingItems; once a payment
+    // form has transitioned it to ArrangingPayment (or on revisiting checkout in that state),
+    // the method is already locked in.
+    if (!hasAddress || !method || order.state !== 'AddingItems') return;
 
     const key = `${order.id}:${method.id}:${order.subTotalWithTax}`;
     if (shippingAppliedRef.current === key) return;
@@ -68,7 +71,7 @@ export default function CheckoutFlow() {
         console.error('Error applying shipping method:', err);
       }
     })();
-  }, [order.id, order.shippingAddress?.streetLine1, order.shippingAddress?.country, order.subTotalWithTax, shippingMethods, refreshOrder]);
+  }, [order.id, order.state, order.shippingAddress?.streetLine1, order.shippingAddress?.country, order.subTotalWithTax, shippingMethods, refreshOrder]);
 
   const [currentStep, setCurrentStep] = useState<CheckoutStep>(initialState.current);
   const [completedSteps, setCompletedSteps] = useState<Set<CheckoutStep>>(initialState.completed);

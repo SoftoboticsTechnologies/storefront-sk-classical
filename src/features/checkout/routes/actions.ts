@@ -170,7 +170,20 @@ interface RazorpayPaymentMetadata extends Record<string, unknown> {
     razorpaySignature: string;
 }
 
-export async function placeRazorpayOrder(metadata: RazorpayPaymentMetadata): Promise<string> {
+/**
+ * The gateway webhook (payment.captured) can reach Vendure before addPaymentToOrder and
+ * settle the order first, after which it is no longer the session's active order. The
+ * payment already succeeded in that case, so the caller falls back to the known order
+ * code and the confirmation page polls for the settled state instead of showing a failure.
+ */
+function isSettledByWebhook(errorCode: string): boolean {
+    return errorCode === 'NO_ACTIVE_ORDER_ERROR';
+}
+
+export async function placeRazorpayOrder(
+    metadata: RazorpayPaymentMetadata,
+    orderCode: string
+): Promise<string> {
     const result = await mutate(
         AddPaymentToOrderMutation,
         {
@@ -184,16 +197,18 @@ export async function placeRazorpayOrder(metadata: RazorpayPaymentMetadata): Pro
 
     if (result.data.addPaymentToOrder.__typename !== 'Order') {
         const errorResult = result.data.addPaymentToOrder;
+        if (isSettledByWebhook(errorResult.errorCode)) {
+            dispatchCartChanged();
+            return orderCode;
+        }
         throw new Error(
             `Failed to place order: ${errorResult.errorCode} - ${errorResult.message}`
         );
     }
 
-    const orderCode = result.data.addPaymentToOrder.code;
-
     dispatchCartChanged();
 
-    return orderCode;
+    return result.data.addPaymentToOrder.code;
 }
 
 /**
@@ -229,7 +244,7 @@ export async function createCashfreeOrderAction(): Promise<{
     return {...cashfreeOrder, orderCode};
 }
 
-export async function placeCashfreeOrder(cfOrderId: string): Promise<string> {
+export async function placeCashfreeOrder(cfOrderId: string, orderCode: string): Promise<string> {
     const result = await mutate(
         AddPaymentToOrderMutation,
         {
@@ -243,16 +258,18 @@ export async function placeCashfreeOrder(cfOrderId: string): Promise<string> {
 
     if (result.data.addPaymentToOrder.__typename !== 'Order') {
         const errorResult = result.data.addPaymentToOrder;
+        if (isSettledByWebhook(errorResult.errorCode)) {
+            dispatchCartChanged();
+            return orderCode;
+        }
         throw new Error(
             `Failed to place order: ${errorResult.errorCode} - ${errorResult.message}`
         );
     }
 
-    const orderCode = result.data.addPaymentToOrder.code;
-
     dispatchCartChanged();
 
-    return orderCode;
+    return result.data.addPaymentToOrder.code;
 }
 
 export async function placeOrder(paymentMethodCode: string): Promise<string> {

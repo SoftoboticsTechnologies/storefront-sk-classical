@@ -48,7 +48,7 @@ export default function CashfreePaymentForm() {
 
         try {
             await openCashfreeCheckout(order);
-            const orderCode = await placeCashfreeOrder(order.orderId);
+            const orderCode = await placeCashfreeOrder(order.orderId, order.orderCode);
             router.push(`/order-confirmation?code=${orderCode}`);
         } catch (err) {
             setError(err instanceof Error ? err.message : t('paymentFailed'));

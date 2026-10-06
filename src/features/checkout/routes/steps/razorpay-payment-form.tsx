@@ -26,24 +26,17 @@ export default function RazorpayPaymentForm() {
     const startedRef = useRef(false);
 
     useEffect(() => {
+        // Only ever create one Razorpay order per mount. No cancellation flag: under
+        // StrictMode the first run's cleanup would discard the only in-flight result
+        // (the re-run is skipped by startedRef), leaving the spinner up forever.
         if (startedRef.current) return;
         startedRef.current = true;
 
-        let cancelled = false;
-
         createRazorpayOrderAction()
-            .then((result) => {
-                if (!cancelled) setOrder(result);
-            })
+            .then(setOrder)
             .catch((err: unknown) => {
-                if (!cancelled) {
-                    setError(err instanceof Error ? err.message : t('paymentFailed'));
-                }
+                setError(err instanceof Error ? err.message : t('paymentFailed'));
             });
-
-        return () => {
-            cancelled = true;
-        };
     }, [t]);
 
     const handlePay = async () => {
@@ -58,7 +51,7 @@ export default function RazorpayPaymentForm() {
                 razorpayOrderId: response.razorpay_order_id,
                 razorpayPaymentId: response.razorpay_payment_id,
                 razorpaySignature: response.razorpay_signature,
-            });
+            }, order.orderCode);
             router.push(`/order-confirmation?code=${orderCode}`);
         } catch (err) {
             setError(err instanceof Error ? err.message : t('paymentFailed'));

@@ -21,6 +21,7 @@ Vendure integration map for `apps/storefront/src`. Treat everything here as prot
 - Flow: contact → shipping-address → delivery → payment → review, driven by Server Actions in `routes/actions.ts`; `checkout-provider.tsx` holds client-side step state.
 - Stripe: `stripe-client.ts` (client `loadStripe` singleton), `routes/steps/stripe-payment-form.tsx` (Client Component, Stripe Elements, `confirmPayment`, client-side redirect to `/order-confirmation/[code]`).
 - **Gotcha (critical, do not "simplify")**: Stripe payment settles **asynchronously via webhook** (admin context). `placeOrder`/`addPaymentToOrder` is *not* called for Stripe — only `createStripePaymentIntentAction` creates the intent. `createStripePaymentIntentAction` checks `retrievePaymentIntent` status against terminal statuses (succeeded/canceled) before remounting Elements, to avoid re-using a dead intent.
+- **Gotcha**: Razorpay/Cashfree — the gateway webhook can settle the order before the storefront's `addPaymentToOrder` runs, which then returns `NO_ACTIVE_ORDER_ERROR`. `placeRazorpayOrder`/`placeCashfreeOrder` treat that as success and return the known `orderCode`, so the user lands on order-confirmation (which polls via `PaymentProcessingBanner`) instead of seeing a false failure.
 - **Gotcha**: `transitionToArrangingPayment` treats a no-op `fromState===toState==='ArrangingPayment'` transition error as success, not failure.
 
 ## Products — `src/features/products/`
