@@ -27,6 +27,83 @@ function loadProductImages(slug: string): Promise<string[]> {
     return pending;
 }
 
+// Backdrop fill per image URL, so the frame behind a contained photo matches
+// the photo's own background. `null` = couldn't sample (e.g. the asset host
+// sends no CORS header) — the frame keeps its default white.
+const backdropCache = new Map<string, Promise<string | null>>();
+
+/** Sampling grid; edge bands skip the outermost pixels (JPEG edge lines). */
+const SAMPLE = 100;
+const EDGE_FROM = 2;
+const EDGE_TO = 6;
+
+/** Per-channel median of the opaque pixels at the given coordinates. */
+function medianColor(data: Uint8ClampedArray, points: Array<[number, number]>): string | null {
+    const channels: number[][] = [[], [], []];
+    for (const [x, y] of points) {
+        const o = (y * SAMPLE + x) * 4;
+        if (data[o + 3] < 128) continue; // transparent PNG edge
+        channels[0].push(data[o]);
+        channels[1].push(data[o + 1]);
+        channels[2].push(data[o + 2]);
+    }
+    if (channels[0].length === 0) return null;
+    const [r, g, b] = channels.map((values) => values.sort((a, z) => a - z)[values.length >> 1]);
+    return `rgb(${r} ${g} ${b})`;
+}
+
+function loadBackdropColor(url: string): Promise<string | null> {
+    let pending = backdropCache.get(url);
+    if (!pending) {
+        pending = new Promise((resolve) => {
+            const img = new window.Image();
+            img.crossOrigin = 'anonymous';
+            img.decoding = 'async';
+            img.onload = () => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = SAMPLE;
+                    canvas.height = SAMPLE;
+                    const ctx = canvas.getContext('2d', {willReadFrequently: true});
+                    if (!ctx) return resolve(null);
+                    ctx.drawImage(img, 0, 0, SAMPLE, SAMPLE);
+                    const {data} = ctx.getImageData(0, 0, SAMPLE, SAMPLE);
+
+                    const rows = (y0: number, y1: number) => {
+                        const pts: Array<[number, number]> = [];
+                        for (let y = y0; y < y1; y++) for (let x = EDGE_FROM; x < SAMPLE - EDGE_FROM; x++) pts.push([x, y]);
+                        return pts;
+                    };
+                    const sides = (y0: number, y1: number) => {
+                        const pts: Array<[number, number]> = [];
+                        for (let y = y0; y < y1; y++) {
+                            for (let x = EDGE_FROM; x < EDGE_TO; x++) pts.push([x, y], [SAMPLE - 1 - x, y]);
+                        }
+                        return pts;
+                    };
+
+                    // Photo backdrops are often a soft vertical gradient (studio
+                    // light/shadow), so sample top, middle and bottom separately.
+                    const top = medianColor(data, rows(EDGE_FROM, EDGE_TO));
+                    const middle = medianColor(data, sides(35, 65));
+                    const bottom = medianColor(data, rows(SAMPLE - EDGE_TO, SAMPLE - EDGE_FROM));
+                    if (!top || !middle || !bottom) return resolve(null);
+
+                    // Stops line up with the photo box in the 4:5 frame (see
+                    // product-card.tsx): its top sits at ~28% and bottom at ~97%.
+                    resolve(`linear-gradient(to bottom, ${top} 0%, ${top} 28%, ${middle} 62%, ${bottom} 97%)`);
+                } catch {
+                    resolve(null); // tainted canvas
+                }
+            };
+            img.onerror = () => resolve(null);
+            img.src = url;
+        });
+        backdropCache.set(url, pending);
+    }
+    return pending;
+}
+
 interface ProductCardGalleryProps {
     slug: string;
     name: string;
@@ -80,6 +157,18 @@ export function ProductCardGallery({slug, name, imageUrl, preload, sizes}: Produ
     }, [slug, imageUrl]);
 
     const count = images.length;
+    const currentUrl = images[index] ?? imageUrl;
+    const [backdrops, setBackdrops] = useState<Record<string, string | null>>({});
+
+    useEffect(() => {
+        let cancelled = false;
+        loadBackdropColor(currentUrl).then((fill) => {
+            if (!cancelled) setBackdrops((prev) => (currentUrl in prev ? prev : {...prev, [currentUrl]: fill}));
+        });
+        return () => {
+            cancelled = true;
+        };
+    }, [currentUrl]);
 
     useEffect(() => {
         if (!hovered || count < 2) return;
@@ -100,6 +189,19 @@ export function ProductCardGallery({slug, name, imageUrl, preload, sizes}: Produ
 
     return (
         <div ref={rootRef} className="absolute inset-0">
+            {/* Fill the arch with each photo's own backdrop, cross-fading with the photo. */}
+            {images.map((url, i) =>
+                backdrops[url] ? (
+                    <div
+                        key={url}
+                        aria-hidden="true"
+                        className={`absolute inset-0 transition-opacity duration-500 ${
+                            i === index ? 'opacity-100' : 'opacity-0'
+                        }`}
+                        style={{backgroundImage: backdrops[url]!}}
+                    />
+                ) : null
+            )}
             {/* Square photo box: see the arch geometry note in product-card.tsx. */}
             <div className="absolute inset-x-[7%] bottom-[4%] aspect-square">
                 {images.map((url, i) => (
