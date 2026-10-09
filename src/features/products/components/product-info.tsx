@@ -388,20 +388,13 @@ export function ProductInfo({product, buildCurrencyCode, initialVariantId}: Prod
                 </div>
             ))}
 
-            {/* Stock Status */}
-            {displayVariant && (
+            {/* Stock Status: only flagged when the variant can't be bought. */}
+            {displayVariant && !isInStock && (
                 <div className="text-sm">
-                    {isInStock ? (
-                        <span className="inline-flex items-center gap-1.5 text-green-600 font-medium">
-                            <span className="h-2 w-2 rounded-full bg-green-600" />
-                            {t('inStock')}
-                        </span>
-                    ) : (
-                        <span className="inline-flex items-center gap-1.5 text-destructive font-medium">
-                            <span className="h-2 w-2 rounded-full bg-destructive" />
-                            {t('outOfStock')}
-                        </span>
-                    )}
+                    <span className="inline-flex items-center gap-1.5 text-destructive font-medium">
+                        <span className="h-2 w-2 rounded-full bg-destructive" />
+                        {t('outOfStock')}
+                    </span>
                 </div>
             )}
 

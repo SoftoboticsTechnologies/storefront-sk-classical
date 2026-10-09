@@ -67,6 +67,7 @@ export default async function NewArrivalsPage() {
                         return (
                             <ProductCardView
                                 key={product.id}
+                                productId={product.id}
                                 slug={product.slug}
                                 name={product.name}
                                 imageUrl={product.featuredAsset?.preview}

@@ -6,12 +6,19 @@ import {useTranslations} from 'next-intl';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {query} from '@/platform/vendure/client-api';
 import {GetProductAssetsQuery} from '@/features/products/graphql';
+import {
+    PORTRAIT_RATIO,
+    computeFraming,
+    detectProductBounds,
+    hasExtraZoom,
+    isFramingExcluded,
+    type Framing,
+    type ProductBounds,
+    type Rgb,
+} from '@/features/products/image-framing';
 
 /** How long each image shows while the card is hovered. */
 const SLIDE_INTERVAL_MS = 1700;
-
-/** Width/height below which a photo counts as portrait and fills the whole arch. */
-const PORTRAIT_RATIO = 0.9;
 
 // One request per product per page view, shared by every card showing it.
 const assetCache = new Map<string, Promise<string[]>>();
@@ -30,10 +37,16 @@ function loadProductImages(slug: string): Promise<string[]> {
     return pending;
 }
 
-// Backdrop fill per image URL, so the frame behind a contained photo matches
-// the photo's own background. `null` = couldn't sample (e.g. the asset host
-// sends no CORS header) — the frame keeps its default white.
-const backdropCache = new Map<string, Promise<string | null>>();
+// Per image URL: the photo's backdrop colours (so the frame behind a contained
+// photo matches its own background) and where the product sits in it (for
+// auto-framing, see image-framing.ts). `null` = couldn't sample (e.g. the asset
+// host sends no CORS header) — the frame keeps its default white and layout.
+interface ImageAnalysis {
+    backdrop: {top: Rgb; middle: Rgb; bottom: Rgb};
+    bounds: ProductBounds | null;
+    aspect: number;
+}
+const analysisCache = new Map<string, Promise<ImageAnalysis | null>>();
 
 /** Sampling grid; edge bands skip the outermost pixels (JPEG edge lines). */
 const SAMPLE = 100;
@@ -41,7 +54,7 @@ const EDGE_FROM = 2;
 const EDGE_TO = 6;
 
 /** Per-channel median of the opaque pixels at the given coordinates. */
-function medianColor(data: Uint8ClampedArray, points: Array<[number, number]>): string | null {
+function medianColor(data: Uint8ClampedArray, points: Array<[number, number]>): Rgb | null {
     const channels: number[][] = [[], [], []];
     for (const [x, y] of points) {
         const o = (y * SAMPLE + x) * 4;
@@ -52,11 +65,25 @@ function medianColor(data: Uint8ClampedArray, points: Array<[number, number]>): 
     }
     if (channels[0].length === 0) return null;
     const [r, g, b] = channels.map((values) => values.sort((a, z) => a - z)[values.length >> 1]);
-    return `rgb(${r} ${g} ${b})`;
+    return [r, g, b];
 }
 
-function loadBackdropColor(url: string): Promise<string | null> {
-    let pending = backdropCache.get(url);
+const rgb = ([r, g, b]: Rgb) => `rgb(${r} ${g} ${b})`;
+
+/**
+ * Backdrop gradient whose stops line up with where the photo sits in the 4:5
+ * frame: by default (see product-card.tsx) its top is at ~28% and bottom ~97%;
+ * an auto-framed photo passes its own placement.
+ */
+function backdropGradient({top, middle, bottom}: ImageAnalysis['backdrop'], framing: Framing | null) {
+    const start = framing ? Math.max(0, framing.top) : 28;
+    const end = framing ? Math.min(100, framing.top + framing.height) : 97;
+    const mid = framing ? (start + end) / 2 : 62;
+    return `linear-gradient(to bottom, ${rgb(top)} 0%, ${rgb(top)} ${start}%, ${rgb(middle)} ${mid}%, ${rgb(bottom)} ${end}%)`;
+}
+
+function loadImageAnalysis(url: string): Promise<ImageAnalysis | null> {
+    let pending = analysisCache.get(url);
     if (!pending) {
         pending = new Promise((resolve) => {
             const img = new window.Image();
@@ -92,9 +119,12 @@ function loadBackdropColor(url: string): Promise<string | null> {
                     const bottom = medianColor(data, rows(SAMPLE - EDGE_TO, SAMPLE - EDGE_FROM));
                     if (!top || !middle || !bottom) return resolve(null);
 
-                    // Stops line up with the photo box in the 4:5 frame (see
-                    // product-card.tsx): its top sits at ~28% and bottom at ~97%.
-                    resolve(`linear-gradient(to bottom, ${top} 0%, ${top} 28%, ${middle} 62%, ${bottom} 97%)`);
+                    const backdrop = {top, middle, bottom};
+                    resolve({
+                        backdrop,
+                        bounds: detectProductBounds(data, SAMPLE, backdrop),
+                        aspect: img.naturalHeight > 0 ? img.naturalWidth / img.naturalHeight : 1,
+                    });
                 } catch {
                     resolve(null); // tainted canvas
                 }
@@ -102,12 +132,14 @@ function loadBackdropColor(url: string): Promise<string | null> {
             img.onerror = () => resolve(null);
             img.src = url;
         });
-        backdropCache.set(url, pending);
+        analysisCache.set(url, pending);
     }
     return pending;
 }
 
 interface ProductCardGalleryProps {
+    /** Vendure product ID — used (with the slug) to honour auto-framing exclusions. */
+    productId?: string;
     slug: string;
     name: string;
     imageUrl: string;
@@ -123,7 +155,7 @@ interface ProductCardGalleryProps {
  *
  * Hover is tracked on the whole card (the enclosing link), not just the image.
  */
-export function ProductCardGallery({slug, name, imageUrl, preload, sizes}: ProductCardGalleryProps) {
+export function ProductCardGallery({productId, slug, name, imageUrl, preload, sizes}: ProductCardGalleryProps) {
     const t = useTranslations('Product');
     const rootRef = useRef<HTMLDivElement>(null);
     const [images, setImages] = useState<string[]>([imageUrl]);
@@ -161,13 +193,17 @@ export function ProductCardGallery({slug, name, imageUrl, preload, sizes}: Produ
 
     const count = images.length;
     const currentUrl = images[index] ?? imageUrl;
-    const [backdrops, setBackdrops] = useState<Record<string, string | null>>({});
+    const [analyses, setAnalyses] = useState<Record<string, ImageAnalysis | null>>({});
     const [portrait, setPortrait] = useState<Record<string, boolean>>({});
+    const framingExcluded = isFramingExcluded(productId, slug);
+    const squareZoom = hasExtraZoom(productId, slug)
+        ? 'scale-[1.25] group-hover:scale-[1.29]'
+        : 'scale-[1.15] group-hover:scale-[1.19]';
 
     useEffect(() => {
         let cancelled = false;
-        loadBackdropColor(currentUrl).then((fill) => {
-            if (!cancelled) setBackdrops((prev) => (currentUrl in prev ? prev : {...prev, [currentUrl]: fill}));
+        loadImageAnalysis(currentUrl).then((analysis) => {
+            if (!cancelled) setAnalyses((prev) => (currentUrl in prev ? prev : {...prev, [currentUrl]: analysis}));
         });
         return () => {
             cancelled = true;
@@ -191,53 +227,71 @@ export function ProductCardGallery({slug, name, imageUrl, preload, sizes}: Produ
         [count]
     );
 
+    // Auto-framed placement per image; null = default layout (see image-framing.ts).
+    const framingFor = (url: string): Framing | null => {
+        const analysis = analyses[url];
+        if (framingExcluded || !analysis?.bounds) return null;
+        return computeFraming(analysis.bounds, analysis.aspect);
+    };
+
     return (
         <div ref={rootRef} className="absolute inset-0">
             {/* Fill the arch with each photo's own backdrop, cross-fading with the photo. */}
             {images.map((url, i) =>
-                backdrops[url] ? (
+                analyses[url] ? (
                     <div
                         key={url}
                         aria-hidden="true"
                         className={`absolute inset-0 transition-opacity duration-500 ${
                             i === index ? 'opacity-100' : 'opacity-0'
                         }`}
-                        style={{backgroundImage: backdrops[url]!}}
+                        style={{backgroundImage: backdropGradient(analyses[url]!.backdrop, framingFor(url))}}
                     />
                 ) : null
             )}
-            {images.map((url, i) => (
-                // Square/landscape photos sit uncropped in the square photo box (see the
-                // arch geometry note in product-card.tsx). Portrait photos (people,
-                // sarees) would look tiny there, so they cover the whole arch instead.
-                <div
-                    key={url}
-                    className={
-                        portrait[url]
-                            ? 'absolute inset-0'
-                            : 'absolute inset-x-[7%] bottom-[4%] aspect-square'
-                    }
-                >
-                    <Image
-                        src={url}
-                        alt={i === 0 ? name : ''}
-                        aria-hidden={i === index ? undefined : true}
-                        fill
-                        preload={i === 0 ? preload : undefined}
-                        onLoad={(event) => {
-                            const {naturalWidth: w, naturalHeight: h} = event.currentTarget;
-                            const isPortrait = h > 0 && w / h < PORTRAIT_RATIO;
-                            setPortrait((prev) => (prev[url] === isPortrait ? prev : {...prev, [url]: isPortrait}));
-                        }}
-                        // Square photos are zoomed in a little so the product fills more of
-                        // the card; any overflow is clipped by the arch, over the matching backdrop.
-                        className={`${portrait[url] ? 'object-cover object-center group-hover:scale-[1.03]' : 'object-contain object-center scale-[1.15] group-hover:scale-[1.19]'} transition-[opacity,transform] duration-500 ${
-                            i === index ? 'opacity-100' : 'opacity-0'
-                        }`}
-                        sizes={sizes}
-                    />
-                </div>
-            ))}
+            {images.map((url, i) => {
+                const framing = framingFor(url);
+                return (
+                    // Auto-framed photos are placed so the product fills the arch (see
+                    // image-framing.ts). Otherwise square/landscape photos sit uncropped in
+                    // the square photo box (see the arch geometry note in product-card.tsx),
+                    // and portrait photos (people, sarees) cover the whole arch instead.
+                    <div
+                        key={url}
+                        className={
+                            framing
+                                ? 'absolute'
+                                : portrait[url]
+                                  ? 'absolute inset-0'
+                                  : 'absolute inset-x-[7%] bottom-[4%] aspect-square'
+                        }
+                        style={
+                            framing
+                                ? {left: `${framing.left}%`, top: `${framing.top}%`, width: `${framing.width}%`, height: `${framing.height}%`}
+                                : undefined
+                        }
+                    >
+                        <Image
+                            src={url}
+                            alt={i === 0 ? name : ''}
+                            aria-hidden={i === index ? undefined : true}
+                            fill
+                            preload={i === 0 ? preload : undefined}
+                            onLoad={(event) => {
+                                const {naturalWidth: w, naturalHeight: h} = event.currentTarget;
+                                const isPortrait = h > 0 && w / h < PORTRAIT_RATIO;
+                                setPortrait((prev) => (prev[url] === isPortrait ? prev : {...prev, [url]: isPortrait}));
+                            }}
+                            // Square photos are zoomed in a little so the product fills more of
+                            // the card; any overflow is clipped by the arch, over the matching backdrop.
+                            className={`${framing ? 'object-contain object-center group-hover:scale-[1.03] transition-[opacity,transform,scale]' : portrait[url] ? 'object-cover object-center group-hover:scale-[1.03] transition-[opacity,transform]' : `object-contain object-center ${squareZoom} transition-[opacity,transform]`} duration-500 ${
+                                i === index ? 'opacity-100' : 'opacity-0'
+                            }`}
+                            sizes={sizes}
+                        />
+                    </div>
+                );
+            })}
 
             {count > 1 && (
                 <>

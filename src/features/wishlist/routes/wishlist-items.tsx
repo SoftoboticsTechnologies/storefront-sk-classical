@@ -14,6 +14,7 @@ import {pruneWishlist, useWishlist} from '@/features/wishlist/wishlist-store';
 import {WishlistCartButton} from '@/features/wishlist/wishlist-cart-button';
 
 interface WishlistProduct {
+    id: string;
     slug: string;
     name: string;
     imageUrl?: string;
@@ -61,6 +62,7 @@ export function WishlistItems() {
                     if (!product) return [slug, null] as const;
                     const prices = product.variants.map((variant) => variant.priceWithTax);
                     return [slug, {
+                        id: product.id,
                         slug,
                         name: product.name,
                         imageUrl: product.assets[0]?.preview,
@@ -114,6 +116,7 @@ export function WishlistItems() {
             {loaded.map((product) => (
                 <ProductCardView
                     key={product.slug}
+                    productId={product.id}
                     slug={product.slug}
                     name={product.name}
                     imageUrl={product.imageUrl}

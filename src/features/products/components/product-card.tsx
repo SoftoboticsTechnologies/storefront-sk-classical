@@ -24,6 +24,7 @@ export function ProductCard({product: productProp, preload}: ProductCardProps) {
 
     return (
         <ProductCardView
+            productId={product.productId}
             slug={product.slug}
             name={product.productName}
             imageUrl={product.productAsset?.preview}
@@ -34,6 +35,8 @@ export function ProductCard({product: productProp, preload}: ProductCardProps) {
 }
 
 interface ProductCardViewProps {
+    /** Vendure product ID, when the caller has it (honours image auto-framing exclusions). */
+    productId?: string;
     slug: string;
     name: string;
     imageUrl?: string;
@@ -47,7 +50,7 @@ interface ProductCardViewProps {
 }
 
 /** Card markup shared by search-result cards and other product lists (e.g. New Arrivals). */
-export function ProductCardView({slug, name, imageUrl, initialPrice, preload, footer}: ProductCardViewProps) {
+export function ProductCardView({productId, slug, name, imageUrl, initialPrice, preload, footer}: ProductCardViewProps) {
     const t = useTranslations('Product');
 
     return (
@@ -71,10 +74,12 @@ export function ProductCardView({slug, name, imageUrl, initialPrice, preload, fo
                     are √(0.43² + 0.15²) ≈ 0.455 from the arch centre vs the 0.5 radius, so any
                     photo shape stays inside the curve. Keep these numbers (and
                     the small hover scale) in sync if the frame changes. Portrait photos instead
-                    cover the whole arch (see product-card-gallery.tsx). */}
+                    cover the whole arch (see product-card-gallery.tsx), and photos with lots of
+                    empty backdrop are auto-framed to fill it (see image-framing.ts). */}
                 <div className="relative aspect-4/5 overflow-hidden rounded-t-[999px] rounded-b-xl bg-white ring-1 ring-gold/45 transition-shadow duration-300 group-hover:ring-gold">
                     {imageUrl ? (
                         <ProductCardGallery
+                            productId={productId}
                             slug={slug}
                             name={name}
                             imageUrl={imageUrl}
