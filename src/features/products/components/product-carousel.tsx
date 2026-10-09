@@ -2,7 +2,7 @@
 
 import {ProductCard} from "@/features/products/components/product-card";
 import type {ReactNode} from "react";
-import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious,} from "@/components/ui/carousel";
+import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, useCarousel,} from "@/components/ui/carousel";
 import {FragmentOf, readFragment} from "@/platform/vendure/graphql";
 import {ProductCardFragment} from '@/features/products/graphql';
 
@@ -14,14 +14,27 @@ interface ProductCarouselClientProps {
     action?: ReactNode;
 }
 
+/**
+ * Prev/next sit in the heading row rather than over the cards, so they never
+ * stack on a card's own image arrows (product-card-gallery.tsx). Hidden when
+ * every product already fits and there is nothing to scroll.
+ */
+function CarouselNav() {
+    const {canScrollPrev, canScrollNext} = useCarousel();
+    if (!canScrollPrev && !canScrollNext) return null;
+
+    return (
+        <div className="hidden md:flex items-center gap-2">
+            <CarouselPrevious className="static translate-y-0 bg-background shadow-sm"/>
+            <CarouselNext className="static translate-y-0 bg-background shadow-sm"/>
+        </div>
+    );
+}
+
 export function ProductCarousel({title, products, preloadFirstProduct, action}: ProductCarouselClientProps) {
     return (
         <section className="py-12 md:py-16">
             <div className="container mx-auto px-4 md:px-6 lg:px-8">
-                <div className="mb-8 flex items-end justify-between gap-4">
-                    <h2 className="text-3xl md:text-4xl font-bold">{title}</h2>
-                    {action && <div className="shrink-0 pb-1">{action}</div>}
-                </div>
                 <Carousel
                     opts={{
                         align: "start",
@@ -29,6 +42,13 @@ export function ProductCarousel({title, products, preloadFirstProduct, action}: 
                     }}
                     className="w-full"
                 >
+                    <div className="mb-8 flex items-end justify-between gap-4">
+                        <h2 className="text-3xl md:text-4xl font-bold">{title}</h2>
+                        <div className="flex shrink-0 items-center gap-4 pb-1">
+                            {action}
+                            <CarouselNav/>
+                        </div>
+                    </div>
                     <CarouselContent className="-ml-3 md:-ml-4">
                         {products.map((product, index) => (
                             <CarouselItem key={readFragment(ProductCardFragment, product).productId}
@@ -37,11 +57,6 @@ export function ProductCarousel({title, products, preloadFirstProduct, action}: 
                             </CarouselItem>
                         ))}
                     </CarouselContent>
-                    {/* Inside the edges: the shadcn default (-left/-right-12) sits past the
-                        viewport whenever the carousel spans the full container, causing
-                        horizontal page scroll. */}
-                    <CarouselPrevious className="hidden md:flex left-2 bg-background/90 shadow-md"/>
-                    <CarouselNext className="hidden md:flex right-2 bg-background/90 shadow-md"/>
                 </Carousel>
             </div>
         </section>

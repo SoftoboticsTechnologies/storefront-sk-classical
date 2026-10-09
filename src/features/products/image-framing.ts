@@ -44,18 +44,27 @@ export function isFramingExcluded(productId: string | undefined, slug: string): 
     return FRAMING_EXCLUSIONS.some((p) => p.id === productId || p.slug === slug);
 }
 
+/** Zoom levels a default-layout square photo can use (each has classes in product-card-gallery.tsx). */
+export type SquareZoom = 1.15 | 1.22 | 1.25 | 1.3;
+
+/** Zoom for default-layout square photos when a product has no override. */
+export const DEFAULT_SQUARE_ZOOM: SquareZoom = 1.15;
+
 /**
- * Products whose default-layout square photos get a stronger zoom (1.25 instead
- * of 1.15), on request — checked against the real photos so nothing important
- * is cropped. Auto-framed photos are unaffected. Matched like the exclusions.
+ * Per-product zoom for default-layout square photos, on request. Each value is
+ * the largest that was checked against the real photos without cropping the
+ * product (e.g. the 5-line anklet photo spans its full height, so 1.25 is its
+ * limit). Auto-framed photos are unaffected. Matched like the exclusions.
  */
-const EXTRA_ZOOM_PRODUCTS: ReadonlyArray<{id: string; slug: string}> = [
-    {id: '1426', slug: 'brass-3-line-ghungroo-ankle-bells-maroon-velvet-pad-adjustable-strap'},
-    {id: '1427', slug: 'maroon-brass-velvet-5-line-ghungroo-anklet-with-adjustable-strap'},
+const SQUARE_ZOOM_OVERRIDES: ReadonlyArray<{id: string; slug: string; zoom: SquareZoom}> = [
+    {id: '1426', slug: 'brass-3-line-ghungroo-ankle-bells-maroon-velvet-pad-adjustable-strap', zoom: 1.3},
+    {id: '1427', slug: 'maroon-brass-velvet-5-line-ghungroo-anklet-with-adjustable-strap', zoom: 1.25},
+    {id: '1425', slug: 'gold-alloy-red-green-stone-pearl-jhumka-earrings-for-women', zoom: 1.22},
+    {id: '1424', slug: 'gold-white-alloy-pearl-lattice-jhumka-earrings-for-women', zoom: 1.22},
 ];
 
-export function hasExtraZoom(productId: string | undefined, slug: string): boolean {
-    return EXTRA_ZOOM_PRODUCTS.some((p) => p.id === productId || p.slug === slug);
+export function getSquareZoom(productId: string | undefined, slug: string): SquareZoom {
+    return SQUARE_ZOOM_OVERRIDES.find((p) => p.id === productId || p.slug === slug)?.zoom ?? DEFAULT_SQUARE_ZOOM;
 }
 
 const ARCH_HEIGHT = 1.25;

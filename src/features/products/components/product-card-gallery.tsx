@@ -10,12 +10,21 @@ import {
     PORTRAIT_RATIO,
     computeFraming,
     detectProductBounds,
-    hasExtraZoom,
+    getSquareZoom,
     isFramingExcluded,
     type Framing,
     type ProductBounds,
     type Rgb,
+    type SquareZoom,
 } from '@/features/products/image-framing';
+
+// Literal classes per zoom level (Tailwind only generates classes it finds in source).
+const SQUARE_ZOOM_CLASSES: Record<SquareZoom, string> = {
+    1.15: 'scale-[1.15] group-hover:scale-[1.19]',
+    1.22: 'scale-[1.22] group-hover:scale-[1.26]',
+    1.25: 'scale-[1.25] group-hover:scale-[1.29]',
+    1.3: 'scale-[1.3] group-hover:scale-[1.34]',
+};
 
 /** How long each image shows while the card is hovered. */
 const SLIDE_INTERVAL_MS = 1700;
@@ -196,9 +205,7 @@ export function ProductCardGallery({productId, slug, name, imageUrl, preload, si
     const [analyses, setAnalyses] = useState<Record<string, ImageAnalysis | null>>({});
     const [portrait, setPortrait] = useState<Record<string, boolean>>({});
     const framingExcluded = isFramingExcluded(productId, slug);
-    const squareZoom = hasExtraZoom(productId, slug)
-        ? 'scale-[1.25] group-hover:scale-[1.29]'
-        : 'scale-[1.15] group-hover:scale-[1.19]';
+    const squareZoom = SQUARE_ZOOM_CLASSES[getSquareZoom(productId, slug)];
 
     useEffect(() => {
         let cancelled = false;
