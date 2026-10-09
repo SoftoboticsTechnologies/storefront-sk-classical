@@ -229,7 +229,9 @@ export function ProductCardGallery({slug, name, imageUrl, preload, sizes}: Produ
                             const isPortrait = h > 0 && w / h < PORTRAIT_RATIO;
                             setPortrait((prev) => (prev[url] === isPortrait ? prev : {...prev, [url]: isPortrait}));
                         }}
-                        className={`${portrait[url] ? 'object-cover object-center' :'object-contain object-center'} transition-[opacity,transform] duration-500 group-hover:scale-[1.03] ${
+                        // Square photos are zoomed in a little so the product fills more of
+                        // the card; any overflow is clipped by the arch, over the matching backdrop.
+                        className={`${portrait[url] ? 'object-cover object-center group-hover:scale-[1.03]' : 'object-contain object-center scale-[1.15] group-hover:scale-[1.19]'} transition-[opacity,transform] duration-500 ${
                             i === index ? 'opacity-100' : 'opacity-0'
                         }`}
                         sizes={sizes}
