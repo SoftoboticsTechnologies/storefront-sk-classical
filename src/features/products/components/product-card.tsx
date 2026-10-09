@@ -65,13 +65,14 @@ export function ProductCardView({slug, name, imageUrl, initialPrice, preload, fo
                 prefetch={false}
                 className={`group relative flex h-full flex-col rounded-2xl border border-gold/25 bg-card p-1.5 sm:p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_22px_40px_-24px_rgb(74_15_22/0.55)] ${footer ? 'pb-14 sm:pb-16' : ''}`}
             >
-                {/* Temple-arch frame (semicircular top) with an inset gold hairline. The photo
-                    is never cropped: it's contained in a square box 86% of the frame width,
+                {/* Temple-arch frame (semicircular top) with a gold hairline on its edge. A square or
+                    landscape photo is never cropped: it's contained in a square box 86% of the frame width,
                     sitting 4% above the bottom. In a 4:5 frame (width 1) that box's top corners
                     are √(0.43² + 0.15²) ≈ 0.455 from the arch centre vs the 0.5 radius, so any
-                    photo shape stays inside the curve and the hairline. Keep these numbers (and
-                    the small hover scale) in sync if the frame changes. */}
-                <div className="relative aspect-4/5 overflow-hidden rounded-t-[999px] rounded-b-xl bg-white ring-1 ring-gold/30">
+                    photo shape stays inside the curve. Keep these numbers (and
+                    the small hover scale) in sync if the frame changes. Portrait photos instead
+                    cover the whole arch (see product-card-gallery.tsx). */}
+                <div className="relative aspect-4/5 overflow-hidden rounded-t-[999px] rounded-b-xl bg-white ring-1 ring-gold/45 transition-shadow duration-300 group-hover:ring-gold">
                     {imageUrl ? (
                         <ProductCardGallery
                             slug={slug}
@@ -85,10 +86,6 @@ export function ProductCardView({slug, name, imageUrl, initialPrice, preload, fo
                             {t('noImage')}
                         </div>
                     )}
-                    <span
-                        aria-hidden="true"
-                        className="pointer-events-none absolute inset-1.5 sm:inset-2 rounded-t-[999px] rounded-b-lg border border-gold/45 transition-colors duration-300 group-hover:border-gold"
-                    />
                 </div>
                 <div className="flex flex-1 flex-col items-center px-1.5 pt-3 pb-2 sm:px-3 sm:pt-4 sm:pb-3 text-center">
                     <h3 className="font-serif text-base sm:text-lg font-semibold leading-snug line-clamp-2 transition-colors group-hover:text-primary">

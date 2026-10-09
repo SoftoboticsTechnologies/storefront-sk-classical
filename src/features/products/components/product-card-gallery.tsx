@@ -10,6 +10,9 @@ import {GetProductAssetsQuery} from '@/features/products/graphql';
 /** How long each image shows while the card is hovered. */
 const SLIDE_INTERVAL_MS = 1700;
 
+/** Width/height below which a photo counts as portrait and fills the whole arch. */
+const PORTRAIT_RATIO = 0.9;
+
 // One request per product per page view, shared by every card showing it.
 const assetCache = new Map<string, Promise<string[]>>();
 
@@ -159,6 +162,7 @@ export function ProductCardGallery({slug, name, imageUrl, preload, sizes}: Produ
     const count = images.length;
     const currentUrl = images[index] ?? imageUrl;
     const [backdrops, setBackdrops] = useState<Record<string, string | null>>({});
+    const [portrait, setPortrait] = useState<Record<string, boolean>>({});
 
     useEffect(() => {
         let cancelled = false;
@@ -202,23 +206,36 @@ export function ProductCardGallery({slug, name, imageUrl, preload, sizes}: Produ
                     />
                 ) : null
             )}
-            {/* Square photo box: see the arch geometry note in product-card.tsx. */}
-            <div className="absolute inset-x-[7%] bottom-[4%] aspect-square">
-                {images.map((url, i) => (
+            {images.map((url, i) => (
+                // Square/landscape photos sit uncropped in the square photo box (see the
+                // arch geometry note in product-card.tsx). Portrait photos (people,
+                // sarees) would look tiny there, so they cover the whole arch instead.
+                <div
+                    key={url}
+                    className={
+                        portrait[url]
+                            ? 'absolute inset-0'
+                            : 'absolute inset-x-[7%] bottom-[4%] aspect-square'
+                    }
+                >
                     <Image
-                        key={url}
                         src={url}
                         alt={i === 0 ? name : ''}
                         aria-hidden={i === index ? undefined : true}
                         fill
                         preload={i === 0 ? preload : undefined}
-                        className={`object-contain object-center transition-[opacity,transform] duration-500 group-hover:scale-[1.03] ${
+                        onLoad={(event) => {
+                            const {naturalWidth: w, naturalHeight: h} = event.currentTarget;
+                            const isPortrait = h > 0 && w / h < PORTRAIT_RATIO;
+                            setPortrait((prev) => (prev[url] === isPortrait ? prev : {...prev, [url]: isPortrait}));
+                        }}
+                        className={`${portrait[url] ? 'object-cover object-center' :'object-contain object-center'} transition-[opacity,transform] duration-500 group-hover:scale-[1.03] ${
                             i === index ? 'opacity-100' : 'opacity-0'
                         }`}
                         sizes={sizes}
                     />
-                ))}
-            </div>
+                </div>
+            ))}
 
             {count > 1 && (
                 <>

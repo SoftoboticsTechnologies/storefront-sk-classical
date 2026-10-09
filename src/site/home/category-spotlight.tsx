@@ -54,8 +54,8 @@ export async function CategorySpotlight({collectionSlug, messageKey, image, bann
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#4a0f16] from-30% via-[#4a0f16]/80 via-55% to-transparent to-90%" aria-hidden="true"/>
                     <div className="kolam-pattern absolute inset-0 opacity-20" aria-hidden="true"/>
-                    {/* Gold temple-arch outline framing the photo. */}
-                    <div className="absolute inset-3 sm:inset-4 rounded-t-[999px] rounded-b-xl border border-gold/70" aria-hidden="true"/>
+                    {/* Gold rectangular outline framing the photo. */}
+                    <div className="absolute inset-3 sm:inset-4 rounded-xl border border-gold/70" aria-hidden="true"/>
                     <Diamond className="absolute top-1.5 sm:top-2.5 left-1/2 size-3.5 -translate-x-1/2 fill-gold text-gold" aria-hidden="true"/>
 
                     <div className="absolute inset-x-6 bottom-7 sm:inset-x-10 sm:bottom-10 flex flex-col items-center text-center">
