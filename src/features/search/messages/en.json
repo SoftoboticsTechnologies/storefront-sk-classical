@@ -21,6 +21,13 @@
     "allProducts": "All Products",
     "bannerEyebrow": "Shop",
     "bannerCta": "Browse products",
-    "bannerDescription": "Costumes, ghungroo, temple jewellery and accessories — everything for the classical stage in one place."
+    "bannerDescription": "Costumes, ghungroo, temple jewellery and accessories — everything for the classical stage in one place.",
+    "noResultsTitle": "No results for \"{query}\"",
+    "noResultsFilteredTitle": "No products match these filters",
+    "noProducts": "No products found",
+    "noResultsDescription": "Check the spelling, try a more general word, or browse the full catalogue.",
+    "noResultsFilteredDescription": "Try removing some filters to see more products.",
+    "clearFilters": "Clear filters",
+    "browseAll": "Browse all products"
   }
 }

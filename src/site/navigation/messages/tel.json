@@ -25,6 +25,11 @@
     "allProducts": "అన్ని ఉత్పత్తులు",
     "wishlist": "విష్‌లిస్ట్",
     "findStore": "స్టోర్ కనుగొనండి",
-    "shopByCategory": "వర్గం వారీగా కొనండి"
+    "shopByCategory": "వర్గం వారీగా కొనండి",
+    "searchFor": "\"{term}\" కోసం వెతకండి",
+    "searchViewAll": "మొత్తం {count} ఫలితాలు చూడండి",
+    "searchRecent": "ఇటీవలి శోధనలు",
+    "searchClearRecent": "ఇటీవలి శోధనలను తొలగించండి",
+    "searchHint": "దుస్తులు, గజ్జెలు, ఆభరణాలు మరియు మరిన్ని వెతకండి"
   }
 }

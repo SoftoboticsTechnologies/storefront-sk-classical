@@ -1,6 +1,6 @@
 'use client';
 
-import {use} from 'react';
+import {use, type ReactNode} from 'react';
 import {useTranslations} from 'next-intl';
 import {ResultOf} from '@/platform/vendure/graphql';
 import {ProductCard} from './components/product-card';
@@ -21,9 +21,11 @@ interface ProductGridProps {
      * this component (see search-params-sync.tsx).
      */
     searchParamsString: string;
+    /** Rendered instead of the default "No products found" line when there are no results. */
+    emptyState?: ReactNode;
 }
 
-export function ProductGrid({productDataPromise, currentPage, take, searchParamsString}: ProductGridProps) {
+export function ProductGrid({productDataPromise, currentPage, take, searchParamsString, emptyState}: ProductGridProps) {
     const t = useTranslations('Product');
     const result = use(productDataPromise);
 
@@ -31,6 +33,7 @@ export function ProductGrid({productDataPromise, currentPage, take, searchParams
     const totalPages = Math.ceil(searchResult.totalItems / take);
 
     if (!searchResult.items.length) {
+        if (emptyState) return <>{emptyState}</>;
         return (
             <div className="text-center py-12">
                 <p className="text-muted-foreground">{t('noProductsFound')}</p>

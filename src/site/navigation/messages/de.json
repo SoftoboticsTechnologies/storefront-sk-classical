@@ -25,6 +25,11 @@
     "allProducts": "Alle Produkte",
     "wishlist": "Wunschliste",
     "findStore": "Filiale finden",
-    "shopByCategory": "Nach Kategorie"
+    "shopByCategory": "Nach Kategorie",
+    "searchFor": "Nach „{term}“ suchen",
+    "searchViewAll": "Alle {count} Ergebnisse anzeigen",
+    "searchRecent": "Letzte Suchen",
+    "searchClearRecent": "Letzte Suchen löschen",
+    "searchHint": "Kostüme, Ghungroo, Schmuck und mehr suchen"
   }
 }

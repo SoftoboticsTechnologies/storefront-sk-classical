@@ -25,6 +25,11 @@
     "allProducts": "All Products",
     "wishlist": "Wishlist",
     "findStore": "Find Store",
-    "shopByCategory": "Shop by category"
+    "shopByCategory": "Shop by category",
+    "searchFor": "Search for \"{term}\"",
+    "searchViewAll": "View all {count} results",
+    "searchRecent": "Recent searches",
+    "searchClearRecent": "Clear recent searches",
+    "searchHint": "Search costumes, ghungroo, jewellery and more"
   }
 }

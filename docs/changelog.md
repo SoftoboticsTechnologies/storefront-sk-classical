@@ -2,6 +2,9 @@
 
 Concise history. Not a full commit log — one line per meaningful change.
 
+## 2026-10-09
+- Search improvements. Overlay suggestions (`features/search/suggest.ts`) now pass the UI locale and the viewer's active currency, matching the results page (previously channel defaults). They use Vendure relevance order instead of A–Z, and stale responses are dropped so a slow earlier request can't overwrite newer suggestions. Overlay (`site/navigation/navbar/search-overlay.tsx`): the first item is always "Search for "term"", so Enter opens `/search?q=`; it also has a loading spinner, highlights the matched text, offers "View all N results", and no longer flashes "No products found" during the debounce. Recent searches (`features/search/recent-searches.ts`, localStorage, last 5, clearable) show when the input is empty. Ctrl/⌘+K or "/" opens search (`search-input.tsx`; no visible hint in the pill). `/search` zero-results state (`features/search/components/search-empty-state.tsx`) offers "Clear filters" / "Browse all products" through the new optional `ProductGrid` `emptyState` prop; collection pages are unchanged. New `Navigation.search*`/`Search.noResults*` keys for en/de/hi/tel. No GraphQL changes.
+
 ## 2026-10-05
 - Mobile category strip (`site/navigation/navbar/mobile-category-strip-list.tsx`, client): 32px chips, highlighted active category (`aria-current`) that scrolls into view, fade on whichever edge still hides chips, scroll snap. The hamburger sheet now opens with the same chips under "Shop by category" (`Navigation.shopByCategory`, en/de/hi/tel), above the existing accordion.
 

@@ -11,6 +11,7 @@ import {ProductGrid} from '@/features/products/product-grid';
 import {SearchParamsSync} from '@/features/search/search-params-sync';
 import {buildSearchInput, getCurrentPage} from '@/features/search/search-helpers';
 import {SearchProductsQuery} from '@/features/search/graphql';
+import {SearchEmptyState} from '@/features/search/components/search-empty-state';
 
 type SearchProductsResult = {
     data: ResultOf<typeof SearchProductsQuery>;
@@ -86,7 +87,8 @@ export function SearchResults() {
                     {/* Product Grid */}
                     <div className="lg:col-span-3">
                         <Suspense fallback={<ProductGridSkeleton/>}>
-                            <ProductGrid productDataPromise={resultPromise} currentPage={page} take={12} searchParamsString={searchParamsString}/>
+                            <ProductGrid productDataPromise={resultPromise} currentPage={page} take={12} searchParamsString={searchParamsString}
+                                emptyState={<SearchEmptyState searchParamsString={searchParamsString}/>}/>
                         </Suspense>
                     </div>
                 </div>

@@ -21,6 +21,13 @@
     "allProducts": "Alle Produkte",
     "bannerEyebrow": "Shop",
     "bannerCta": "Produkte ansehen",
-    "bannerDescription": "Kostüme, Ghungroo, Tempelschmuck und Accessoires – alles für die klassische Bühne an einem Ort."
+    "bannerDescription": "Kostüme, Ghungroo, Tempelschmuck und Accessoires – alles für die klassische Bühne an einem Ort.",
+    "noResultsTitle": "Keine Ergebnisse für „{query}“",
+    "noResultsFilteredTitle": "Keine Produkte entsprechen diesen Filtern",
+    "noProducts": "Keine Produkte gefunden",
+    "noResultsDescription": "Prüfen Sie die Schreibweise, versuchen Sie einen allgemeineren Begriff oder stöbern Sie im gesamten Sortiment.",
+    "noResultsFilteredDescription": "Entfernen Sie einige Filter, um mehr Produkte zu sehen.",
+    "clearFilters": "Filter zurücksetzen",
+    "browseAll": "Alle Produkte ansehen"
   }
 }

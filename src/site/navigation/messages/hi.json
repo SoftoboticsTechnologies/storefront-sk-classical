@@ -25,6 +25,11 @@
     "allProducts": "सभी उत्पाद",
     "wishlist": "विशलिस्ट",
     "findStore": "स्टोर खोजें",
-    "shopByCategory": "श्रेणी के अनुसार खरीदें"
+    "shopByCategory": "श्रेणी के अनुसार खरीदें",
+    "searchFor": "\"{term}\" खोजें",
+    "searchViewAll": "सभी {count} परिणाम देखें",
+    "searchRecent": "हाल की खोजें",
+    "searchClearRecent": "हाल की खोजें हटाएँ",
+    "searchHint": "पोशाक, घुंघरू, आभूषण और बहुत कुछ खोजें"
   }
 }
